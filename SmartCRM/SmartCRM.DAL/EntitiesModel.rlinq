@@ -1,0 +1,999 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DomainModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="2.0.0.0" name="SmartCRMEntitiesModel" namespace="SmartCRM.DAL" showPropertiesCompartment="true" xmlns="http://www.telerik.com/ORM">
+  <orm:orm name="SmartCRMEntitiesModel" backend="mysql" xmlns:orm="http://tempuri.org/ORM">
+    <orm:namespace name="SmartCRM.DAL" default="true">
+      <orm:class name="User" uniqueId="ad4a5a38-ed76-42ab-8424-9490eb94d205">
+        <orm:table name="users" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="UserID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_userID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_userPassword" property="UserPassword" behavior="readwrite" uniqueId="f345b56e-cdc4-4acd-add9-ec4dce328447" type="System.String">
+          <orm:column name="UserPassword" sql-type="nvarchar" nullable="false" length="30" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_userName" property="UserName" behavior="readwrite" uniqueId="72fcd219-4441-44cb-9077-107bb3137c85" type="System.String">
+          <orm:column name="UserName" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_userID" property="UserID" behavior="readwrite" uniqueId="85fb7c33-7756-420c-aa50-fe6015debfa1" type="System.UInt32">
+          <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_personID" property="PersonID" behavior="readwrite" uniqueId="65eee092-ec34-4967-af45-44f0918a8729" type="System.UInt32">
+          <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_isEnabled" property="IsEnabled" behavior="readwrite" uniqueId="df69e43b-9217-4671-9163-d362a18e447a" type="System.Boolean">
+          <orm:column name="IsEnabled" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_isAdmin" property="IsAdmin" behavior="readwrite" uniqueId="8357e2c9-b9f8-4706-8ee6-a867b1e5d435" type="System.Boolean">
+          <orm:column name="IsAdmin" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_person" property="Person" behavior="readwrite" uniqueId="16a8d8f7-31d5-459b-955e-adeb655515df" type="SmartCRM.DAL.Person">
+          <orm:reference uniqueId="0ae317bd-5179-4de2-a2db-6179b79288e5" association-name="UserHasPerson">
+            <orm:sharedfield name="_personID" target-class="SmartCRM.DAL.Person" target-field="_personID" />
+            <orm:constraint name="FK_users_persons_PersonID" delete-action="dbdefaultrule" destination-table="persons" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_logs" property="Logs" behavior="readwrite" uniqueId="388c95ca-7dc6-4e5c-baf0-35bd6cc47fce" type="SmartCRM.DAL.Log">
+          <orm:collection element-class="SmartCRM.DAL.Log" inverse-field="_user" order-by="" uniqueId="93d88adc-6919-41ea-980f-8e91e8f10ba2" />
+        </orm:field>
+        <orm:field name="_companies" property="Companies" behavior="readwrite" uniqueId="95c2bf2f-8cbd-4235-be75-4c737a5ecf53" type="SmartCRM.DAL.Company">
+          <orm:collection element-class="SmartCRM.DAL.Company" inverse-field="_user" order-by="" uniqueId="70e28014-db7d-421a-972e-05d588a51794" />
+        </orm:field>
+        <orm:index name="UserName" unique="true">
+          <orm:columnMapping>
+            <orm:column name="UserName" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_users_PersonID">
+          <orm:columnMapping>
+            <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="Report" uniqueId="8a652fed-5dd6-4089-aee7-e61ac3449bbd">
+        <orm:table name="reports" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="ReportID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_reportID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_reportName" property="ReportName" behavior="readwrite" uniqueId="4dc98fae-ed4f-4ac0-82b6-642d98c204e7" type="System.String">
+          <orm:column name="ReportName" sql-type="nvarchar" nullable="false" length="200" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_reportID" property="ReportID" behavior="readwrite" uniqueId="73281486-ceb9-4532-b5fc-fdb286a001fd" type="System.UInt32">
+          <orm:column name="ReportID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_reportExtension" property="ReportExtension" behavior="readwrite" uniqueId="9683a178-e3ea-477e-adbe-cc4d38717317" type="System.String">
+          <orm:column name="ReportExtension" sql-type="nvarchar" nullable="false" length="10" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_reportContain" property="ReportContain" behavior="readwrite" uniqueId="919dc898-e604-4a79-bc22-e346e3ca6362" type="System.Byte[]">
+          <orm:column name="ReportContain" sql-type="longblob" nullable="false" length="0" scale="0" ado-type="LongVarBinary" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Product" uniqueId="daafe3c0-1e2b-4d4f-af17-b01cba533aca">
+        <orm:table name="products" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="ProductID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_productID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_productPosition" property="ProductPosition" behavior="readwrite" uniqueId="aab1f72c-c8b2-408e-9bc9-8a6a181595c5" type="System.UInt32">
+          <orm:column name="ProductPosition" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_productName" property="ProductName" behavior="readwrite" uniqueId="1c192ab2-a905-4f30-9124-23be3ae3efb6" type="System.String">
+          <orm:column name="ProductName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_productID" property="ProductID" behavior="readwrite" uniqueId="6b810e4a-5704-4548-9e5b-ce24ae6bbb23" type="System.UInt32">
+          <orm:column name="ProductID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_productTypeID" property="ProductTypeID" behavior="readwrite" uniqueId="5b24d589-b052-4aa2-a287-7fb70ed7217e" type="System.UInt32">
+          <orm:column name="ProductTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_contsProductsType" property="ContsProductsType" behavior="readwrite" uniqueId="3f4ff211-4d1c-4e79-97a1-b1e80573dd52" type="SmartCRM.DAL.ContsProductsType">
+          <orm:reference uniqueId="e461cd65-7605-40a3-876b-18424bec866e" association-name="ProductHasContsProductsType">
+            <orm:sharedfield name="_productTypeID" target-class="SmartCRM.DAL.ContsProductsType" target-field="_productTypeID" />
+            <orm:constraint name="FK_products_conts_products_types_ProductTypeID" delete-action="dbdefaultrule" destination-table="conts_products_types" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="ProductName" unique="true">
+          <orm:columnMapping>
+            <orm:column name="ProductName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_products_ProductTypeID">
+          <orm:columnMapping>
+            <orm:column name="ProductTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="Person" uniqueId="5edfa0ef-1e4a-493d-844d-dd3514504ff0">
+        <orm:table name="persons" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="PersonID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_personID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_personSecondName" property="PersonSecondName" behavior="readwrite" uniqueId="57628071-3472-42f7-8cb0-8f6611213936" type="System.String">
+          <orm:column name="PersonSecondName" sql-type="nvarchar" nullable="true" length="80" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_personPhone" property="PersonPhone" behavior="readwrite" uniqueId="460b9553-e230-482c-a132-74ac916e72ce" type="System.String">
+          <orm:column name="PersonPhone" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_personName" property="PersonName" behavior="readwrite" uniqueId="bb720321-0177-4009-978d-58708cc3a681" type="System.String">
+          <orm:column name="PersonName" sql-type="nvarchar" nullable="false" length="80" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_personLastName" property="PersonLastName" behavior="readwrite" uniqueId="3b0987d4-ac09-49c7-bc11-7b8a50497a11" type="System.String">
+          <orm:column name="PersonLastName" sql-type="nvarchar" nullable="false" length="99" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_personID" property="PersonID" behavior="readwrite" uniqueId="ed1de7db-cd5c-494d-bf68-949e62efeb2b" type="System.UInt32">
+          <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_personEmail" property="PersonEmail" behavior="readwrite" uniqueId="e7795254-5d5b-429c-9143-103915a13dd8" type="System.String">
+          <orm:column name="PersonEmail" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_personAddress" property="PersonAddress" behavior="readwrite" uniqueId="7b6f0f8f-419e-4f4c-a86a-6498da354443" type="System.String">
+          <orm:column name="PersonAddress" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_users" property="Users" behavior="readwrite" uniqueId="51383d56-bfa5-4707-89cc-483ef0b780c6" type="SmartCRM.DAL.User">
+          <orm:collection element-class="SmartCRM.DAL.User" inverse-field="_person" order-by="" uniqueId="0ae317bd-5179-4de2-a2db-6179b79288e5" />
+        </orm:field>
+        <orm:field name="_companies" property="Companies" behavior="readwrite" uniqueId="ab1b959f-73e3-4d5d-8034-f4d0cc04f5a0" type="SmartCRM.DAL.Company">
+          <orm:collection element-class="SmartCRM.DAL.Company" inverse-field="_people" order-by="" uniqueId="f8373564-372b-4bc1-8aaf-2d7178fe80bb" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="Log" uniqueId="f3f5698e-8aab-48f9-a70d-992ea07aaca6">
+        <orm:table name="logs" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="LogID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_logID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_userID" property="UserID" behavior="readwrite" uniqueId="195b9d70-7173-4bd9-8d9f-e3d090af57e4" type="System.UInt32">
+          <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_logID" property="LogID" behavior="readwrite" uniqueId="c475dccd-7899-4d14-841e-7e985c6d2ab9" type="System.UInt32">
+          <orm:column name="LogID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_logDescription" property="LogDescription" behavior="readwrite" uniqueId="41fc3719-7c41-49f2-8663-041694ab0790" type="System.String">
+          <orm:column name="LogDescription" sql-type="text" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_logCreateDate" property="LogCreateDate" behavior="readwrite" uniqueId="328e07c4-ff31-4291-aad9-ebd1068e8804" type="System.DateTime">
+          <orm:column name="LogCreateDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_logActionType" property="LogActionType" behavior="readwrite" uniqueId="d59cfd05-27a5-479d-b112-e380d52c6d11" type="System.Byte">
+          <orm:column name="LogActionType" sql-type="tinyint unsigned" nullable="false" length="0" scale="0" ado-type="Byte" />
+        </orm:field>
+        <orm:field name="_logActionDetail" property="LogActionDetail" behavior="readwrite" uniqueId="b005b65a-1047-49d6-8970-31e287e1d36f" type="System.String">
+          <orm:column name="LogActionDetail" sql-type="text" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_user" property="User" behavior="readwrite" uniqueId="67e6c884-7ac0-4aa2-b5a9-cd9df2a8d445" type="SmartCRM.DAL.User">
+          <orm:reference uniqueId="93d88adc-6919-41ea-980f-8e91e8f10ba2" association-name="LogHasUser">
+            <orm:sharedfield name="_userID" target-class="SmartCRM.DAL.User" target-field="_userID" />
+            <orm:constraint name="FK_logs_users_UserID" delete-action="dbdefaultrule" destination-table="users" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="idx_logs_UserID">
+          <orm:columnMapping>
+            <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="Invoice" uniqueId="85a19e3b-ea17-48ea-afa3-ddeb7418a421">
+        <orm:table name="invoices" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="InvoiceId" />
+          </orm:key-generator>
+          <orm:single-field field-name="_invoiceId" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_invoiceId" property="InvoiceId" behavior="readwrite" uniqueId="0ce6e57f-3b89-4de9-ba89-451cbff68dbf" type="System.UInt32">
+          <orm:column name="InvoiceId" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_invoiceNumber" property="InvoiceNumber" behavior="readwrite" uniqueId="deb06f1d-c32c-4eed-990f-5c5f48c76c5d" type="System.UInt64">
+          <orm:column name="InvoiceNumber" sql-type="bigint unsigned" nullable="false" length="0" scale="0" ado-type="UInt64" />
+        </orm:field>
+        <orm:field name="_personId" property="PersonId" behavior="readwrite" uniqueId="75e1d07d-12d3-46e8-b3b2-111ae81894ee" type="System.UInt32">
+          <orm:column name="PersonId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_fromCompanyId" property="FromCompanyId" behavior="readwrite" uniqueId="b474548b-ba80-4ba0-b13b-c7377f6b95e2" type="System.UInt32">
+          <orm:column name="FromCompanyId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="GlobalSetting" uniqueId="ec78a4f7-f451-4a01-a163-70b5856ef81a">
+        <orm:table name="global_settings" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="SettingID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_settingID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_settingValue" property="SettingValue" behavior="readwrite" uniqueId="256e4996-6db8-4ce0-b484-762160431530" type="System.String">
+          <orm:column name="SettingValue" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_settingID" property="SettingID" behavior="readwrite" uniqueId="97a88a21-278b-445c-96c9-11cf70485b5c" type="System.UInt32">
+          <orm:column name="SettingID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_settingDescription" property="SettingDescription" behavior="readwrite" uniqueId="311bdfe0-52a8-4321-8739-ddceaff0f008" type="System.String">
+          <orm:column name="SettingDescription" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="ContsProductsType" uniqueId="cb1dc243-c7af-43bf-8f8a-27507608b705">
+        <orm:table name="conts_products_types" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="ProductTypeID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_productTypeID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_productTypeName" property="ProductTypeName" behavior="readwrite" uniqueId="76697c25-a274-4663-a967-0b76b3502d76" type="System.String">
+          <orm:column name="ProductTypeName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_productTypeID" property="ProductTypeID" behavior="readwrite" uniqueId="34ed308f-523f-4d89-afaa-7c5fd494c80d" type="System.UInt32">
+          <orm:column name="ProductTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_products" property="Products" behavior="readwrite" uniqueId="e3c55204-13d6-4c8f-bbed-ac3abbbab671" type="SmartCRM.DAL.Product">
+          <orm:collection element-class="SmartCRM.DAL.Product" inverse-field="_contsProductsType" order-by="" uniqueId="e461cd65-7605-40a3-876b-18424bec866e" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="ConstValueType" uniqueId="bc923fc4-a7ef-4157-bf9b-6e265bd32461">
+        <orm:table name="const_value_types" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="ValueTypeID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_valueTypeID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_valueTypePosition" property="ValueTypePosition" behavior="readwrite" uniqueId="7c1b6dd0-d8ed-4f75-ac9a-bbcc1ce5b5fe" type="System.Int32">
+          <orm:column name="ValueTypePosition" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_valueTypeName" property="ValueTypeName" behavior="readwrite" uniqueId="9fd6d67b-8261-40c3-b693-6a16d9bfbb20" type="System.String">
+          <orm:column name="ValueTypeName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_valueTypeID" property="ValueTypeID" behavior="readwrite" uniqueId="98762c4d-a11c-40c3-9c26-d76965348f1b" type="System.UInt32">
+          <orm:column name="ValueTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_companiesValues" property="CompaniesValues" behavior="readwrite" uniqueId="650335a1-438c-49b6-881c-8301bf652935" type="SmartCRM.DAL.CompaniesValue">
+          <orm:collection element-class="SmartCRM.DAL.CompaniesValue" inverse-field="_constValueType" order-by="" uniqueId="dea1af46-abbd-4cc4-bed7-8523996e2a95" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="ConstPaymentType" uniqueId="c529cbf5-297d-417b-bb7f-48b60b1499b0">
+        <orm:table name="const_payment_types" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="PaymentTypeID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_paymentTypeID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_paymentTypePosition" property="PaymentTypePosition" behavior="readwrite" uniqueId="02bcc951-2c0c-4357-bc37-5ad5d1d90b09" type="System.UInt32">
+          <orm:column name="PaymentTypePosition" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_paymentTypeName" property="PaymentTypeName" behavior="readwrite" uniqueId="bf86ff80-5a5b-4c46-8c66-5ed15be80084" type="System.String">
+          <orm:column name="PaymentTypeName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_paymentTypeID" property="PaymentTypeID" behavior="readwrite" uniqueId="a6c29b65-7140-4a8b-98e6-c1cc8bf654af" type="System.UInt32">
+          <orm:column name="PaymentTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+      </orm:class>
+      <orm:class name="CompanyFile" uniqueId="98e4ba39-5852-4943-a13d-f0e99f65585b">
+        <orm:table name="company_files" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="FileID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_fileID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_isDeleted" property="IsDeleted" behavior="readwrite" uniqueId="d4d2ad09-8924-4e82-b061-08e62fc8280b" type="System.Boolean">
+          <orm:column name="IsDeleted" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_fileName" property="FileName" behavior="readwrite" uniqueId="619b294e-1dc8-4335-9885-4b7c1d966c71" type="System.String">
+          <orm:column name="FileName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_fileID" property="FileID" behavior="readwrite" uniqueId="9628bf4b-96bf-43ed-b637-d1be14c03a8b" type="System.UInt32">
+          <orm:column name="FileID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_fileExtension" property="FileExtension" behavior="readwrite" uniqueId="0cbf4439-f5a7-497f-84d9-fa6803cc8215" type="System.String">
+          <orm:column name="FileExtension" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_fileCreateDate" property="FileCreateDate" behavior="readwrite" uniqueId="4d6d80ac-9e5c-43a9-83c5-b9c2f44dddf6" type="System.DateTime">
+          <orm:column name="FileCreateDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_fileContent" property="FileContent" behavior="readwrite" uniqueId="61f88c3c-005c-42eb-adf1-71b879803cfd" type="System.Byte[]">
+          <orm:column name="FileContent" sql-type="longblob" nullable="false" length="0" scale="0" ado-type="LongVarBinary" />
+        </orm:field>
+        <orm:field name="_companyID" property="CompanyID" behavior="readwrite" uniqueId="4a84bf9a-0930-4aa9-9785-50876a1399f1" type="System.UInt32">
+          <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_company" property="Company" behavior="readwrite" uniqueId="6f7b2c06-f9e9-447e-a6ba-2b0e6a4bdbae" type="SmartCRM.DAL.Company">
+          <orm:reference uniqueId="1c6ebe1a-6f29-474e-890d-3ec7c1151ac4" association-name="CompanyFileHasCompany">
+            <orm:sharedfield name="_companyID" target-class="SmartCRM.DAL.Company" target-field="_companyID" />
+            <orm:constraint name="FK_const_company_files_companies_CompanyID" delete-action="dbdefaultrule" destination-table="companies" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="idx_company_files_CompanyID">
+          <orm:columnMapping>
+            <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="CompaniesValue" uniqueId="382c1e32-545c-407c-8a7f-a063fa18bd42">
+        <orm:table name="companies_values" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="KeyValueID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_keyValueID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_valueName" property="ValueName" behavior="readwrite" uniqueId="4cd8d96e-0dae-4897-892d-feb4fccbae05" type="System.String">
+          <orm:column name="ValueName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_valueDescription" property="ValueDescription" behavior="readwrite" uniqueId="6fb95722-1cef-4ef8-b1ff-0852ee3a0ab7" type="System.String">
+          <orm:column name="ValueDescription" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_valueData" property="ValueData" behavior="readwrite" uniqueId="6d696ae0-a2eb-4b86-9308-1b186fdbb69a" type="System.String">
+          <orm:column name="ValueData" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_keyValueID" property="KeyValueID" behavior="readwrite" uniqueId="446b4433-ec65-4aba-b15c-3020a9f6f998" type="System.UInt32">
+          <orm:column name="KeyValueID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_valueTypeID" property="ValueTypeID" behavior="readwrite" uniqueId="ce37be09-f7c2-42ed-bef8-bf50a50668e4" type="System.UInt32">
+          <orm:column name="ValueTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_companyID" property="CompanyID" behavior="readwrite" uniqueId="7a87d3d3-fe6d-4ea2-ba41-897922f40a26" type="System.UInt32">
+          <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_company" property="Company" behavior="readwrite" uniqueId="867f6d5d-d325-4eb0-b91b-e0408c6ca08a" type="SmartCRM.DAL.Company">
+          <orm:reference uniqueId="62b926d2-c550-42e6-ac4e-a58b0d4175fc" association-name="CompaniesValueHasCompany">
+            <orm:sharedfield name="_companyID" target-class="SmartCRM.DAL.Company" target-field="_companyID" />
+            <orm:constraint name="FK_companies_values_companies_CompanyID" delete-action="dbdefaultrule" destination-table="companies" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_constValueType" property="ConstValueType" behavior="readwrite" uniqueId="ea449d04-1e86-409b-9671-ddc39122cb51" type="SmartCRM.DAL.ConstValueType">
+          <orm:reference uniqueId="dea1af46-abbd-4cc4-bed7-8523996e2a95" association-name="CompaniesValueHasConstValueType">
+            <orm:sharedfield name="_valueTypeID" target-class="SmartCRM.DAL.ConstValueType" target-field="_valueTypeID" />
+            <orm:constraint name="FK_companies_values_const_value_types_ValueTypeID" delete-action="dbdefaultrule" destination-table="const_value_types" />
+          </orm:reference>
+        </orm:field>
+        <orm:index name="idx_companies_values_CompanyID">
+          <orm:columnMapping>
+            <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_companies_values_ValueTypeID">
+          <orm:columnMapping>
+            <orm:column name="ValueTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+      <orm:class name="Company" uniqueId="2c0f50e2-e5a2-4b93-a823-325012c3250b">
+        <orm:table name="companies" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="CompanyID" />
+          </orm:key-generator>
+          <orm:single-field field-name="_companyID" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_userID" property="UserID" behavior="readwrite" uniqueId="665cfe69-6dcc-4e6f-bc50-b6fa321d8c7a" type="System.UInt32">
+          <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_lastUpdateTime" property="LastUpdateTime" behavior="readwrite" uniqueId="c6100bf1-042a-49c0-a33f-27e0a9b8c777" type="System.DateTime">
+          <orm:column name="LastUpdateTime" sql-type="timestamp" nullable="false" length="0" scale="0" has-default-value="true" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_companyNotes" property="CompanyNotes" behavior="readwrite" uniqueId="fca1afcd-d821-4fc7-82d4-2080e278bde2" type="System.String">
+          <orm:column name="CompanyNotes" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyName" property="CompanyName" behavior="readwrite" uniqueId="5706884e-f2f3-43b8-b50a-f51e5d20c59a" type="System.String">
+          <orm:column name="CompanyName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyMol" property="CompanyMol" behavior="readwrite" uniqueId="f4b1e62f-59a2-4f15-abeb-59fc9ba2597f" type="System.String">
+          <orm:column name="CompanyMol" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyMobile" property="CompanyMobile" behavior="readwrite" uniqueId="be8f218c-f2c5-4d7b-aa95-4d8c3b8e5294" type="System.String">
+          <orm:column name="CompanyMobile" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyLogo" property="CompanyLogo" behavior="readwrite" uniqueId="9d165294-211e-4b86-a531-276c410bfb29" type="System.Byte[]">
+          <orm:column name="CompanyLogo" sql-type="mediumblob" nullable="true" length="0" scale="0" ado-type="LongVarBinary" />
+        </orm:field>
+        <orm:field name="_companyID" property="CompanyID" behavior="readwrite" uniqueId="f89d345d-c21c-4797-b2cf-a55851296541" type="System.UInt32">
+          <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_companyIBAN" property="CompanyIBAN" behavior="readwrite" uniqueId="5a3c203c-f8d2-419d-913e-27972f7c489e" type="System.String">
+          <orm:column name="CompanyIBAN" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyEmail" property="CompanyEmail" behavior="readwrite" uniqueId="c30f88ec-6b15-4b70-9894-88c69b3e8a83" type="System.String">
+          <orm:column name="CompanyEmail" sql-type="nvarchar" nullable="false" length="65" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyCity" property="CompanyCity" behavior="readwrite" uniqueId="b7c7becb-3b69-4066-bf06-4697ee51b0ef" type="System.String">
+          <orm:column name="CompanyCity" sql-type="nvarchar" nullable="false" length="150" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyBank" property="CompanyBank" behavior="readwrite" uniqueId="b1b3052d-f37d-4a6c-be31-67cd91fc3c39" type="System.String">
+          <orm:column name="CompanyBank" sql-type="nvarchar" nullable="false" length="150" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyBIC" property="CompanyBIC" behavior="readwrite" uniqueId="e01d053f-1323-499a-b842-a9f06ae603b5" type="System.String">
+          <orm:column name="CompanyBIC" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyAddress" property="CompanyAddress" behavior="readwrite" uniqueId="ecdc510d-a2fb-4ddd-8a6f-f7f12463eb74" type="System.String">
+          <orm:column name="CompanyAddress" sql-type="nvarchar" nullable="false" length="256" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_bulstat" property="Bulstat" behavior="readwrite" uniqueId="a7d1e08a-7810-436e-8237-9ae954131560" type="System.String">
+          <orm:column name="Bulstat" sql-type="nvarchar" nullable="false" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_companyFiles" property="CompanyFiles" behavior="readwrite" uniqueId="a63bef9b-7db8-485d-8af3-4bf321fbd0d5" type="SmartCRM.DAL.CompanyFile">
+          <orm:collection element-class="SmartCRM.DAL.CompanyFile" inverse-field="_company" order-by="" uniqueId="1c6ebe1a-6f29-474e-890d-3ec7c1151ac4" />
+        </orm:field>
+        <orm:field name="_companiesValues" property="CompaniesValues" behavior="readwrite" uniqueId="60d206e9-99ae-4c5c-a6fe-ba8b8f31098f" type="SmartCRM.DAL.CompaniesValue">
+          <orm:collection element-class="SmartCRM.DAL.CompaniesValue" inverse-field="_company" order-by="" uniqueId="62b926d2-c550-42e6-ac4e-a58b0d4175fc" />
+        </orm:field>
+        <orm:field name="_user" property="User" behavior="readwrite" uniqueId="f6c73274-3416-4781-a316-f55fd43586a7" type="SmartCRM.DAL.User">
+          <orm:reference uniqueId="70e28014-db7d-421a-972e-05d588a51794" association-name="CompanyHasUser">
+            <orm:sharedfield name="_userID" target-class="SmartCRM.DAL.User" target-field="_userID" />
+            <orm:constraint name="FK_companies_users_UserID" delete-action="dbdefaultrule" destination-table="users" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_people" property="People" behavior="readwrite" uniqueId="d8e33368-09b1-4a6d-aeb3-796b35150cbf" type="SmartCRM.DAL.Person">
+          <orm:join-table uniqueId="f8373564-372b-4bc1-8aaf-2d7178fe80bb" association-name="CompaniesHavePeople">
+            <orm:table name="companies_persons" join-table="true" />
+            <orm:owner>
+              <orm:constraint name="FK_companies_persons_companies_CompanyID" delete-action="dbdefaultrule" destination-table="companies">
+                <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="SmartCRM.DAL.Company" target-field="_companyID" />
+              </orm:constraint>
+            </orm:owner>
+            <orm:value>
+              <orm:constraint name="FK_companies_persons_persons_PersonID" delete-action="dbdefaultrule" destination-table="persons">
+                <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="SmartCRM.DAL.Person" target-field="_personID" />
+              </orm:constraint>
+            </orm:value>
+          </orm:join-table>
+        </orm:field>
+        <orm:index name="CompanyName" unique="true">
+          <orm:columnMapping>
+            <orm:column name="CompanyName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_companies_UserID">
+          <orm:columnMapping>
+            <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+      </orm:class>
+    </orm:namespace>
+    <orm:schema schema="">
+      <orm:table name="users">
+        <orm:column name="UserPassword" sql-type="nvarchar" nullable="false" length="30" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="UserName" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="IsEnabled" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="IsAdmin" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:index name="UserName" unique="true">
+          <orm:columnMapping>
+            <orm:column name="UserName" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_users_PersonID">
+          <orm:columnMapping>
+            <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_users_persons_PersonID" delete-action="dbdefaultrule" destination-table="persons">
+          <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="reports">
+        <orm:column name="ReportName" sql-type="nvarchar" nullable="false" length="200" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="ReportID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="ReportExtension" sql-type="nvarchar" nullable="false" length="10" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="ReportContain" sql-type="longblob" nullable="false" length="0" scale="0" ado-type="LongVarBinary" />
+      </orm:table>
+      <orm:table name="products">
+        <orm:column name="ProductPosition" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="ProductName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="ProductID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="ProductTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:index name="ProductName" unique="true">
+          <orm:columnMapping>
+            <orm:column name="ProductName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_products_ProductTypeID">
+          <orm:columnMapping>
+            <orm:column name="ProductTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_products_conts_products_types_ProductTypeID" delete-action="dbdefaultrule" destination-table="conts_products_types">
+          <orm:column name="ProductTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="persons">
+        <orm:column name="PersonSecondName" sql-type="nvarchar" nullable="true" length="80" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="PersonPhone" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="PersonName" sql-type="nvarchar" nullable="false" length="80" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="PersonLastName" sql-type="nvarchar" nullable="false" length="99" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="PersonEmail" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="PersonAddress" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+      <orm:table name="logs">
+        <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="LogID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="LogDescription" sql-type="text" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="LogCreateDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="LogActionType" sql-type="tinyint unsigned" nullable="false" length="0" scale="0" ado-type="Byte" />
+        <orm:column name="LogActionDetail" sql-type="text" nullable="false" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:index name="idx_logs_UserID">
+          <orm:columnMapping>
+            <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_logs_users_UserID" delete-action="dbdefaultrule" destination-table="users">
+          <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="invoices">
+        <orm:column name="InvoiceId" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="InvoiceNumber" sql-type="bigint unsigned" nullable="false" length="0" scale="0" ado-type="UInt64" />
+        <orm:column name="PersonId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="FromCompanyId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+      </orm:table>
+      <orm:table name="global_settings">
+        <orm:column name="SettingValue" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="SettingID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="SettingDescription" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
+      <orm:table name="conts_products_types">
+        <orm:column name="ProductTypeName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="ProductTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+      </orm:table>
+      <orm:table name="const_value_types">
+        <orm:column name="ValueTypePosition" sql-type="integer" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="ValueTypeName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="ValueTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+      </orm:table>
+      <orm:table name="const_payment_types">
+        <orm:column name="PaymentTypePosition" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="PaymentTypeName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="PaymentTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+      </orm:table>
+      <orm:table name="company_files">
+        <orm:column name="IsDeleted" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="FileName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="FileID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="FileExtension" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="FileCreateDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="FileContent" sql-type="longblob" nullable="false" length="0" scale="0" ado-type="LongVarBinary" />
+        <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:index name="idx_company_files_CompanyID">
+          <orm:columnMapping>
+            <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_const_company_files_companies_CompanyID" delete-action="dbdefaultrule" destination-table="companies">
+          <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="companies_values">
+        <orm:column name="ValueName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="ValueDescription" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="ValueData" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="KeyValueID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="ValueTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:index name="idx_companies_values_CompanyID">
+          <orm:columnMapping>
+            <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_companies_values_ValueTypeID">
+          <orm:columnMapping>
+            <orm:column name="ValueTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_companies_values_companies_CompanyID" delete-action="dbdefaultrule" destination-table="companies">
+          <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_companies_values_const_value_types_ValueTypeID" delete-action="dbdefaultrule" destination-table="const_value_types">
+          <orm:column name="ValueTypeID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="companies_persons" join-table="true">
+        <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:index name="idx_companies_persons_PersonID">
+          <orm:columnMapping>
+            <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_companies_persons_companies_CompanyID" delete-action="dbdefaultrule" destination-table="companies">
+          <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_companies_persons_persons_PersonID" delete-action="dbdefaultrule" destination-table="persons">
+          <orm:column name="PersonID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="companies">
+        <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="LastUpdateTime" sql-type="timestamp" nullable="false" length="0" scale="0" has-default-value="true" ado-type="DateTime" />
+        <orm:column name="CompanyNotes" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="CompanyName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="CompanyMol" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="CompanyMobile" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="CompanyLogo" sql-type="mediumblob" nullable="true" length="0" scale="0" ado-type="LongVarBinary" />
+        <orm:column name="CompanyID" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="CompanyIBAN" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="CompanyEmail" sql-type="nvarchar" nullable="false" length="65" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="CompanyCity" sql-type="nvarchar" nullable="false" length="150" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="CompanyBank" sql-type="nvarchar" nullable="false" length="150" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="CompanyBIC" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="CompanyAddress" sql-type="nvarchar" nullable="false" length="256" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="Bulstat" sql-type="nvarchar" nullable="false" length="15" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:index name="CompanyName" unique="true">
+          <orm:columnMapping>
+            <orm:column name="CompanyName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:index name="idx_companies_UserID">
+          <orm:columnMapping>
+            <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+          </orm:columnMapping>
+        </orm:index>
+        <orm:constraint name="FK_companies_users_UserID" delete-action="dbdefaultrule" destination-table="users">
+          <orm:column name="UserID" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+    </orm:schema>
+    <orm:relational-naming-settings>
+      <orm:source-strategy>Property</orm:source-strategy>
+      <orm:remove-camel-case>False</orm:remove-camel-case>
+    </orm:relational-naming-settings>
+  </orm:orm>
+  <ModelSettings xmlns="">
+    <AppConfigConnectionPropertyName>SmartCRMConnection</AppConfigConnectionPropertyName>
+    <AppConfigConnectionString>server=localhost;User Id=root;password=root;Persist Security Info=True;database=smart_crm;port=3306;</AppConfigConnectionString>
+    <NamingSettings>
+      <ClassRules>
+        <CaseMode>PascalCase</CaseMode>
+        <PluralizationMode>Singularize</PluralizationMode>
+        <RemoveUnderscore>true</RemoveUnderscore>
+        <UnderscoreAsWordDelimiter>true</UnderscoreAsWordDelimiter>
+      </ClassRules>
+      <FieldRules>
+        <AddPrefix>_</AddPrefix>
+        <CaseMode>CamelCase</CaseMode>
+      </FieldRules>
+      <PropertyRules>
+        <CaseMode>PascalCase</CaseMode>
+      </PropertyRules>
+      <NavigationPropertyRules>
+        <IsPrefixSuffixEnabled>false</IsPrefixSuffixEnabled>
+      </NavigationPropertyRules>
+    </NamingSettings>
+    <CodeGenerationSettings>
+      <ImplementINotifyPropertyChanging>true</ImplementINotifyPropertyChanging>
+      <ImplementINotifyPropertyChanged>true</ImplementINotifyPropertyChanged>
+      <MappingDefinitionType>Attributes</MappingDefinitionType>
+    </CodeGenerationSettings>
+    <SchemaUpdateSettings />
+    <BackendConfigurationSettings>
+      <BackendConfiguration>
+        <Backend>MySql</Backend>
+        <ProviderName>MySql.Data.MySqlClient</ProviderName>
+      </BackendConfiguration>
+    </BackendConfigurationSettings>
+  </ModelSettings>
+  <Types>
+    <DomainClass Id="ad4a5a38-ed76-42ab-8424-9490eb94d205" name="User" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="UserID">
+      <Property Id="85fb7c33-7756-420c-aa50-fe6015debfa1" name="UserID" type="UInt32" label="UserID : UInt32" kind="Persistent" identity="true" fieldName="_userID" />
+      <Property Id="8357e2c9-b9f8-4706-8ee6-a867b1e5d435" name="IsAdmin" type="Boolean" label="IsAdmin : Boolean" kind="Persistent" fieldName="_isAdmin" />
+      <Property Id="df69e43b-9217-4671-9163-d362a18e447a" name="IsEnabled" type="Boolean" label="IsEnabled : Boolean" kind="Persistent" fieldName="_isEnabled" />
+      <Property Id="65eee092-ec34-4967-af45-44f0918a8729" name="PersonID" type="UInt32" label="PersonID : UInt32" kind="Persistent" fieldName="_personID" />
+      <Property Id="72fcd219-4441-44cb-9077-107bb3137c85" name="UserName" label="UserName : String" kind="Persistent" fieldName="_userName" />
+      <Property Id="f345b56e-cdc4-4acd-add9-ec4dce328447" name="UserPassword" label="UserPassword : String" kind="Persistent" fieldName="_userPassword" />
+      <AssociationTargets>
+        <Association Id="0ae317bd-5179-4de2-a2db-6179b79288e5" SourceMultiplicity="One" name="UserHasPerson">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/Person" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="106a771f-487d-45d1-94bb-fc12f6112f2e">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Person/Users" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="78d325aa-7987-4523-be1b-da0b9f9b698e">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/User/Person" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="78a19b87-0543-4f7f-b469-3acf27db2e87">
+          <NavigationalProperty Id="16a8d8f7-31d5-459b-955e-adeb655515df" name="Person" type="Person" label="Person : Person" nullable="true" kind="Persistent" fieldName="_person" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="d7e01055-ce79-4284-bee2-648473cbcda1">
+          <NavigationalProperty Id="388c95ca-7dc6-4e5c-baf0-35bd6cc47fce" name="Logs" type="IList&lt;Log&gt;" label="Logs : IList&lt;Log&gt;" nullable="true" kind="Persistent" fieldName="_logs" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="a1eed91f-b282-4b19-a032-cc39088bfb12">
+          <NavigationalProperty Id="95c2bf2f-8cbd-4235-be75-4c737a5ecf53" name="Companies" type="IList&lt;Company&gt;" label="Companies : IList&lt;Company&gt;" nullable="true" kind="Persistent" fieldName="_companies" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="8a652fed-5dd6-4089-aee7-e61ac3449bbd" name="Report" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ReportID">
+      <Property Id="73281486-ceb9-4532-b5fc-fdb286a001fd" name="ReportID" type="UInt32" label="ReportID : UInt32" kind="Persistent" identity="true" fieldName="_reportID" />
+      <Property Id="919dc898-e604-4a79-bc22-e346e3ca6362" name="ReportContain" type="Byte[]" label="ReportContain : Byte[]" kind="Persistent" fieldName="_reportContain" />
+      <Property Id="9683a178-e3ea-477e-adbe-cc4d38717317" name="ReportExtension" label="ReportExtension : String" kind="Persistent" fieldName="_reportExtension" />
+      <Property Id="4dc98fae-ed4f-4ac0-82b6-642d98c204e7" name="ReportName" label="ReportName : String" kind="Persistent" fieldName="_reportName" />
+    </DomainClass>
+    <DomainClass Id="daafe3c0-1e2b-4d4f-af17-b01cba533aca" name="Product" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ProductID">
+      <Property Id="6b810e4a-5704-4548-9e5b-ce24ae6bbb23" name="ProductID" type="UInt32" label="ProductID : UInt32" kind="Persistent" identity="true" fieldName="_productID" />
+      <Property Id="1c192ab2-a905-4f30-9124-23be3ae3efb6" name="ProductName" label="ProductName : String" kind="Persistent" fieldName="_productName" />
+      <Property Id="aab1f72c-c8b2-408e-9bc9-8a6a181595c5" name="ProductPosition" type="UInt32" label="ProductPosition : UInt32" kind="Persistent" fieldName="_productPosition" />
+      <Property Id="5b24d589-b052-4aa2-a287-7fb70ed7217e" name="ProductTypeID" type="UInt32" label="ProductTypeID : UInt32" kind="Persistent" fieldName="_productTypeID" />
+      <AssociationTargets>
+        <Association Id="e461cd65-7605-40a3-876b-18424bec866e" SourceMultiplicity="One" name="ProductHasContsProductsType">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/ContsProductsType" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="331f733a-6914-408f-a0b0-1d175399d6d6">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/ContsProductsType/Products" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="0b1674e4-0bbc-4e4c-ad56-1dbcd4752421">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Product/ContsProductsType" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="5a5a9afa-ce38-49db-b2f8-bea9335dd2e4">
+          <NavigationalProperty Id="3f4ff211-4d1c-4e79-97a1-b1e80573dd52" name="ContsProductsType" type="ContsProductsType" label="ContsProductsType : ContsProductsType" nullable="true" kind="Persistent" fieldName="_contsProductsType" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="5edfa0ef-1e4a-493d-844d-dd3514504ff0" name="Person" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="PersonID">
+      <Property Id="ed1de7db-cd5c-494d-bf68-949e62efeb2b" name="PersonID" type="UInt32" label="PersonID : UInt32" kind="Persistent" identity="true" fieldName="_personID" />
+      <Property Id="7b6f0f8f-419e-4f4c-a86a-6498da354443" name="PersonAddress" label="PersonAddress : String" kind="Persistent" fieldName="_personAddress" />
+      <Property Id="e7795254-5d5b-429c-9143-103915a13dd8" name="PersonEmail" label="PersonEmail : String" kind="Persistent" fieldName="_personEmail" />
+      <Property Id="3b0987d4-ac09-49c7-bc11-7b8a50497a11" name="PersonLastName" label="PersonLastName : String" kind="Persistent" fieldName="_personLastName" />
+      <Property Id="bb720321-0177-4009-978d-58708cc3a681" name="PersonName" label="PersonName : String" kind="Persistent" fieldName="_personName" />
+      <Property Id="460b9553-e230-482c-a132-74ac916e72ce" name="PersonPhone" label="PersonPhone : String" kind="Persistent" fieldName="_personPhone" />
+      <Property Id="57628071-3472-42f7-8cb0-8f6611213936" name="PersonSecondName" label="PersonSecondName : String" kind="Persistent" fieldName="_personSecondName" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="dd15c7bb-1461-476f-8d2b-df78c548a552">
+          <NavigationalProperty Id="51383d56-bfa5-4707-89cc-483ef0b780c6" name="Users" type="IList&lt;User&gt;" label="Users : IList&lt;User&gt;" nullable="true" kind="Persistent" fieldName="_users" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="0f7091bc-9b5c-4d11-925d-71e153d3ed77">
+          <NavigationalProperty Id="ab1b959f-73e3-4d5d-8034-f4d0cc04f5a0" name="Companies" type="IList&lt;Company&gt;" label="Companies : IList&lt;Company&gt;" nullable="true" kind="Persistent" fieldName="_companies" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="f3f5698e-8aab-48f9-a70d-992ea07aaca6" name="Log" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="LogID">
+      <Property Id="c475dccd-7899-4d14-841e-7e985c6d2ab9" name="LogID" type="UInt32" label="LogID : UInt32" kind="Persistent" identity="true" fieldName="_logID" />
+      <Property Id="b005b65a-1047-49d6-8970-31e287e1d36f" name="LogActionDetail" label="LogActionDetail : String" kind="Persistent" fieldName="_logActionDetail" />
+      <Property Id="d59cfd05-27a5-479d-b112-e380d52c6d11" name="LogActionType" type="Byte" label="LogActionType : Byte" kind="Persistent" fieldName="_logActionType" />
+      <Property Id="328e07c4-ff31-4291-aad9-ebd1068e8804" name="LogCreateDate" type="DateTime" label="LogCreateDate : DateTime" kind="Persistent" fieldName="_logCreateDate" />
+      <Property Id="41fc3719-7c41-49f2-8663-041694ab0790" name="LogDescription" label="LogDescription : String" kind="Persistent" fieldName="_logDescription" />
+      <Property Id="195b9d70-7173-4bd9-8d9f-e3d090af57e4" name="UserID" type="UInt32" label="UserID : UInt32" kind="Persistent" fieldName="_userID" />
+      <AssociationTargets>
+        <Association Id="93d88adc-6919-41ea-980f-8e91e8f10ba2" SourceMultiplicity="One" name="LogHasUser">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/User" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="a55f8af7-1973-4c17-9be0-91eecc67f9de">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/User/Logs" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="2c27c6cb-e9fc-4bc7-bd08-65f8b9051b1a">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Log/User" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="3f9c97ff-d2e1-4347-a3e9-9f92d6574ba8">
+          <NavigationalProperty Id="67e6c884-7ac0-4aa2-b5a9-cd9df2a8d445" name="User" type="User" label="User : User" nullable="true" kind="Persistent" fieldName="_user" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="85a19e3b-ea17-48ea-afa3-ddeb7418a421" name="Invoice" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="InvoiceId">
+      <Property Id="0ce6e57f-3b89-4de9-ba89-451cbff68dbf" name="InvoiceId" type="UInt32" label="InvoiceId : UInt32" kind="Persistent" identity="true" fieldName="_invoiceId" />
+      <Property Id="b474548b-ba80-4ba0-b13b-c7377f6b95e2" name="FromCompanyId" type="UInt32" label="FromCompanyId : UInt32" kind="Persistent" fieldName="_fromCompanyId" />
+      <Property Id="deb06f1d-c32c-4eed-990f-5c5f48c76c5d" name="InvoiceNumber" type="UInt64" label="InvoiceNumber : UInt64" kind="Persistent" fieldName="_invoiceNumber" />
+      <Property Id="75e1d07d-12d3-46e8-b3b2-111ae81894ee" name="PersonId" type="UInt32" label="PersonId : UInt32" kind="Persistent" fieldName="_personId" />
+    </DomainClass>
+    <DomainClass Id="ec78a4f7-f451-4a01-a163-70b5856ef81a" name="GlobalSetting" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="SettingID">
+      <Property Id="97a88a21-278b-445c-96c9-11cf70485b5c" name="SettingID" type="UInt32" label="SettingID : UInt32" kind="Persistent" identity="true" fieldName="_settingID" />
+      <Property Id="311bdfe0-52a8-4321-8739-ddceaff0f008" name="SettingDescription" label="SettingDescription : String" kind="Persistent" fieldName="_settingDescription" />
+      <Property Id="256e4996-6db8-4ce0-b484-762160431530" name="SettingValue" label="SettingValue : String" kind="Persistent" fieldName="_settingValue" />
+    </DomainClass>
+    <DomainClass Id="cb1dc243-c7af-43bf-8f8a-27507608b705" name="ContsProductsType" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ProductTypeID">
+      <Property Id="34ed308f-523f-4d89-afaa-7c5fd494c80d" name="ProductTypeID" type="UInt32" label="ProductTypeID : UInt32" kind="Persistent" identity="true" fieldName="_productTypeID" />
+      <Property Id="76697c25-a274-4663-a967-0b76b3502d76" name="ProductTypeName" label="ProductTypeName : String" kind="Persistent" fieldName="_productTypeName" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="4653d7b7-d0e0-470b-9ac6-05742844d8df">
+          <NavigationalProperty Id="e3c55204-13d6-4c8f-bbed-ac3abbbab671" name="Products" type="IList&lt;Product&gt;" label="Products : IList&lt;Product&gt;" nullable="true" kind="Persistent" fieldName="_products" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="bc923fc4-a7ef-4157-bf9b-6e265bd32461" name="ConstValueType" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ValueTypeID">
+      <Property Id="98762c4d-a11c-40c3-9c26-d76965348f1b" name="ValueTypeID" type="UInt32" label="ValueTypeID : UInt32" kind="Persistent" identity="true" fieldName="_valueTypeID" />
+      <Property Id="9fd6d67b-8261-40c3-b693-6a16d9bfbb20" name="ValueTypeName" label="ValueTypeName : String" kind="Persistent" fieldName="_valueTypeName" />
+      <Property Id="7c1b6dd0-d8ed-4f75-ac9a-bbcc1ce5b5fe" name="ValueTypePosition" type="Int32" label="ValueTypePosition : Int32" kind="Persistent" fieldName="_valueTypePosition" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="ae582c11-cdac-4eca-ba20-6abcba48785d">
+          <NavigationalProperty Id="650335a1-438c-49b6-881c-8301bf652935" name="CompaniesValues" type="IList&lt;CompaniesValue&gt;" label="CompaniesValues : IList&lt;CompaniesValue&gt;" nullable="true" kind="Persistent" fieldName="_companiesValues" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="c529cbf5-297d-417b-bb7f-48b60b1499b0" name="ConstPaymentType" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="PaymentTypeID">
+      <Property Id="a6c29b65-7140-4a8b-98e6-c1cc8bf654af" name="PaymentTypeID" type="UInt32" label="PaymentTypeID : UInt32" kind="Persistent" identity="true" fieldName="_paymentTypeID" />
+      <Property Id="bf86ff80-5a5b-4c46-8c66-5ed15be80084" name="PaymentTypeName" label="PaymentTypeName : String" kind="Persistent" fieldName="_paymentTypeName" />
+      <Property Id="02bcc951-2c0c-4357-bc37-5ad5d1d90b09" name="PaymentTypePosition" type="UInt32" label="PaymentTypePosition : UInt32" kind="Persistent" fieldName="_paymentTypePosition" />
+    </DomainClass>
+    <DomainClass Id="98e4ba39-5852-4943-a13d-f0e99f65585b" name="CompanyFile" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="FileID">
+      <Property Id="9628bf4b-96bf-43ed-b637-d1be14c03a8b" name="FileID" type="UInt32" label="FileID : UInt32" kind="Persistent" identity="true" fieldName="_fileID" />
+      <Property Id="4a84bf9a-0930-4aa9-9785-50876a1399f1" name="CompanyID" type="UInt32" label="CompanyID : UInt32" kind="Persistent" fieldName="_companyID" />
+      <Property Id="61f88c3c-005c-42eb-adf1-71b879803cfd" name="FileContent" type="Byte[]" label="FileContent : Byte[]" kind="Persistent" fieldName="_fileContent" />
+      <Property Id="4d6d80ac-9e5c-43a9-83c5-b9c2f44dddf6" name="FileCreateDate" type="DateTime" label="FileCreateDate : DateTime" kind="Persistent" fieldName="_fileCreateDate" />
+      <Property Id="0cbf4439-f5a7-497f-84d9-fa6803cc8215" name="FileExtension" label="FileExtension : String" kind="Persistent" fieldName="_fileExtension" />
+      <Property Id="619b294e-1dc8-4335-9885-4b7c1d966c71" name="FileName" label="FileName : String" kind="Persistent" fieldName="_fileName" />
+      <Property Id="d4d2ad09-8924-4e82-b061-08e62fc8280b" name="IsDeleted" type="Boolean" label="IsDeleted : Boolean" kind="Persistent" fieldName="_isDeleted" />
+      <AssociationTargets>
+        <Association Id="1c6ebe1a-6f29-474e-890d-3ec7c1151ac4" SourceMultiplicity="One" name="CompanyFileHasCompany">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/Company" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="ed6ad6f3-f6ab-4733-8444-1e0bc2da7269">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Company/CompanyFiles" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="8979dd38-e39b-434a-a7c6-473f5a09a8c9">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/CompanyFile/Company" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="d01a33fb-ee4a-434a-a1b2-f6c778d80126">
+          <NavigationalProperty Id="6f7b2c06-f9e9-447e-a6ba-2b0e6a4bdbae" name="Company" type="Company" label="Company : Company" nullable="true" kind="Persistent" fieldName="_company" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="382c1e32-545c-407c-8a7f-a063fa18bd42" name="CompaniesValue" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="KeyValueID">
+      <Property Id="446b4433-ec65-4aba-b15c-3020a9f6f998" name="KeyValueID" type="UInt32" label="KeyValueID : UInt32" kind="Persistent" identity="true" fieldName="_keyValueID" />
+      <Property Id="7a87d3d3-fe6d-4ea2-ba41-897922f40a26" name="CompanyID" type="UInt32" label="CompanyID : UInt32" kind="Persistent" fieldName="_companyID" />
+      <Property Id="6d696ae0-a2eb-4b86-9308-1b186fdbb69a" name="ValueData" label="ValueData : String" kind="Persistent" fieldName="_valueData" />
+      <Property Id="6fb95722-1cef-4ef8-b1ff-0852ee3a0ab7" name="ValueDescription" label="ValueDescription : String" kind="Persistent" fieldName="_valueDescription" />
+      <Property Id="4cd8d96e-0dae-4897-892d-feb4fccbae05" name="ValueName" label="ValueName : String" kind="Persistent" fieldName="_valueName" />
+      <Property Id="ce37be09-f7c2-42ed-bef8-bf50a50668e4" name="ValueTypeID" type="UInt32" label="ValueTypeID : UInt32" kind="Persistent" fieldName="_valueTypeID" />
+      <AssociationTargets>
+        <Association Id="62b926d2-c550-42e6-ac4e-a58b0d4175fc" SourceMultiplicity="One" name="CompaniesValueHasCompany">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/Company" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="d788a5a2-ce8f-4c13-8448-f439e97018ad">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Company/CompaniesValues" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="8c88ef3e-07d3-462f-9381-daac6d29ad0a">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/CompaniesValue/Company" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="dea1af46-abbd-4cc4-bed7-8523996e2a95" SourceMultiplicity="One" name="CompaniesValueHasConstValueType">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/ConstValueType" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="dfa3386a-26aa-4feb-9585-ae6b21bf2866">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/ConstValueType/CompaniesValues" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="e51abcf1-3f4f-4147-b1c5-32ae214b82eb">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/CompaniesValue/ConstValueType" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="f6a23fdc-1159-4de6-8beb-b15dc69c7de9">
+          <NavigationalProperty Id="867f6d5d-d325-4eb0-b91b-e0408c6ca08a" name="Company" type="Company" label="Company : Company" nullable="true" kind="Persistent" fieldName="_company" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="da985a60-095f-4ba7-9115-29157c92abc4">
+          <NavigationalProperty Id="ea449d04-1e86-409b-9671-ddc39122cb51" name="ConstValueType" type="ConstValueType" label="ConstValueType : ConstValueType" nullable="true" kind="Persistent" fieldName="_constValueType" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="2c0f50e2-e5a2-4b93-a823-325012c3250b" name="Company" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="CompanyID">
+      <Property Id="f89d345d-c21c-4797-b2cf-a55851296541" name="CompanyID" type="UInt32" label="CompanyID : UInt32" kind="Persistent" identity="true" fieldName="_companyID" />
+      <Property Id="a7d1e08a-7810-436e-8237-9ae954131560" name="Bulstat" label="Bulstat : String" kind="Persistent" fieldName="_bulstat" />
+      <Property Id="ecdc510d-a2fb-4ddd-8a6f-f7f12463eb74" name="CompanyAddress" label="CompanyAddress : String" kind="Persistent" fieldName="_companyAddress" />
+      <Property Id="b1b3052d-f37d-4a6c-be31-67cd91fc3c39" name="CompanyBank" label="CompanyBank : String" kind="Persistent" fieldName="_companyBank" />
+      <Property Id="e01d053f-1323-499a-b842-a9f06ae603b5" name="CompanyBIC" label="CompanyBIC : String" kind="Persistent" fieldName="_companyBIC" />
+      <Property Id="b7c7becb-3b69-4066-bf06-4697ee51b0ef" name="CompanyCity" label="CompanyCity : String" kind="Persistent" fieldName="_companyCity" />
+      <Property Id="c30f88ec-6b15-4b70-9894-88c69b3e8a83" name="CompanyEmail" label="CompanyEmail : String" kind="Persistent" fieldName="_companyEmail" />
+      <Property Id="5a3c203c-f8d2-419d-913e-27972f7c489e" name="CompanyIBAN" label="CompanyIBAN : String" kind="Persistent" fieldName="_companyIBAN" />
+      <Property Id="9d165294-211e-4b86-a531-276c410bfb29" name="CompanyLogo" type="Byte[]" label="CompanyLogo : Byte[]" kind="Persistent" fieldName="_companyLogo" />
+      <Property Id="be8f218c-f2c5-4d7b-aa95-4d8c3b8e5294" name="CompanyMobile" label="CompanyMobile : String" kind="Persistent" fieldName="_companyMobile" />
+      <Property Id="f4b1e62f-59a2-4f15-abeb-59fc9ba2597f" name="CompanyMol" label="CompanyMol : String" kind="Persistent" fieldName="_companyMol" />
+      <Property Id="5706884e-f2f3-43b8-b50a-f51e5d20c59a" name="CompanyName" label="CompanyName : String" kind="Persistent" fieldName="_companyName" />
+      <Property Id="fca1afcd-d821-4fc7-82d4-2080e278bde2" name="CompanyNotes" label="CompanyNotes : String" kind="Persistent" fieldName="_companyNotes" />
+      <Property Id="c6100bf1-042a-49c0-a33f-27e0a9b8c777" name="LastUpdateTime" type="DateTime" label="LastUpdateTime : DateTime" kind="Persistent" fieldName="_lastUpdateTime" />
+      <Property Id="665cfe69-6dcc-4e6f-bc50-b6fa321d8c7a" name="UserID" type="UInt32" label="UserID : UInt32" kind="Persistent" fieldName="_userID" />
+      <AssociationTargets>
+        <Association Id="70e28014-db7d-421a-972e-05d588a51794" SourceMultiplicity="One" name="CompanyHasUser">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/User" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="e53e339b-802b-4f5c-8631-ecdcc7730c43">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/User/Companies" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="6977dff9-2ab2-477b-ae6d-1c6a8ab8ac18">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Company/User" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="f8373564-372b-4bc1-8aaf-2d7178fe80bb" name="CompaniesHavePeople">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/Person" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="79f503ba-ed25-413b-833f-7b5c468dca00">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Person/Companies" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="9ed89ebe-7fea-4ac3-8f84-0541f440dcf2">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Company/People" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="3ffced39-52cf-4f63-928a-f8ba92d6a49a">
+          <NavigationalProperty Id="a63bef9b-7db8-485d-8af3-4bf321fbd0d5" name="CompanyFiles" type="IList&lt;CompanyFile&gt;" label="CompanyFiles : IList&lt;CompanyFile&gt;" nullable="true" kind="Persistent" fieldName="_companyFiles" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="aa72f74b-afc3-4454-bf79-3d8fcebb5b19">
+          <NavigationalProperty Id="60d206e9-99ae-4c5c-a6fe-ba8b8f31098f" name="CompaniesValues" type="IList&lt;CompaniesValue&gt;" label="CompaniesValues : IList&lt;CompaniesValue&gt;" nullable="true" kind="Persistent" fieldName="_companiesValues" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="c724be5e-dfcf-49dd-89c0-ecfa5eeee43c">
+          <NavigationalProperty Id="f6c73274-3416-4781-a316-f55fd43586a7" name="User" type="User" label="User : User" nullable="true" kind="Persistent" fieldName="_user" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="c18215bd-5aa4-4cea-bbb8-e401a0a41505">
+          <NavigationalProperty Id="d8e33368-09b1-4a6d-aeb3-796b35150cbf" name="People" type="IList&lt;Person&gt;" label="People : IList&lt;Person&gt;" nullable="true" kind="Persistent" fieldName="_people" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+  </Types>
+  <domainContext>
+    <domainModelHasDomainContext Id="b09cccf0-2c9a-49bc-877a-150f9c8a6d70">
+      <domainContainer name="SmartCRMEntitiesModel" namespace="SmartCRM.DAL" showPropertiesCompartment="true">
+        <entitySetProperty name="Users" namespace="SmartCRM.DAL" type="User" label="Users : IQueryable&lt;SmartCRM.DAL.User&gt;" />
+        <entitySetProperty name="Reports" namespace="SmartCRM.DAL" type="Report" label="Reports : IQueryable&lt;SmartCRM.DAL.Report&gt;" />
+        <entitySetProperty name="Products" namespace="SmartCRM.DAL" type="Product" label="Products : IQueryable&lt;SmartCRM.DAL.Product&gt;" />
+        <entitySetProperty name="People" namespace="SmartCRM.DAL" type="Person" label="People : IQueryable&lt;SmartCRM.DAL.Person&gt;" />
+        <entitySetProperty name="Logs" namespace="SmartCRM.DAL" type="Log" label="Logs : IQueryable&lt;SmartCRM.DAL.Log&gt;" />
+        <entitySetProperty name="Invoices" namespace="SmartCRM.DAL" type="Invoice" label="Invoices : IQueryable&lt;SmartCRM.DAL.Invoice&gt;" />
+        <entitySetProperty name="GlobalSettings" namespace="SmartCRM.DAL" type="GlobalSetting" label="GlobalSettings : IQueryable&lt;SmartCRM.DAL.GlobalSetting&gt;" />
+        <entitySetProperty name="ContsProductsTypes" namespace="SmartCRM.DAL" type="ContsProductsType" label="ContsProductsTypes : IQueryable&lt;SmartCRM.DAL.ContsProductsType&gt;" />
+        <entitySetProperty name="ConstValueTypes" namespace="SmartCRM.DAL" type="ConstValueType" label="ConstValueTypes : IQueryable&lt;SmartCRM.DAL.ConstValueType&gt;" />
+        <entitySetProperty name="ConstPaymentTypes" namespace="SmartCRM.DAL" type="ConstPaymentType" label="ConstPaymentTypes : IQueryable&lt;SmartCRM.DAL.ConstPaymentType&gt;" />
+        <entitySetProperty name="CompanyFiles" namespace="SmartCRM.DAL" type="CompanyFile" label="CompanyFiles : IQueryable&lt;SmartCRM.DAL.CompanyFile&gt;" />
+        <entitySetProperty name="CompaniesValues" namespace="SmartCRM.DAL" type="CompaniesValue" label="CompaniesValues : IQueryable&lt;SmartCRM.DAL.CompaniesValue&gt;" />
+        <entitySetProperty name="Companies" namespace="SmartCRM.DAL" type="Company" label="Companies : IQueryable&lt;SmartCRM.DAL.Company&gt;" />
+      </domainContainer>
+    </domainModelHasDomainContext>
+  </domainContext>
+</DomainModel>
