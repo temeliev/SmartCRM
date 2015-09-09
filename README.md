@@ -1,2 +1,2 @@
 # SmartCRM
-.NET based customer relationship management program
+.NET based customer relationship management system
