@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCRM.DAL", "SmartCRM.DA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCRM.Tests", "SmartCRM.Tests\SmartCRM.Tests.csproj", "{5BBE1D55-3B71-40F1-BF41-07E015086A44}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartCRM.BOL", "SmartCRM.BOL\SmartCRM.BOL.csproj", "{38B89508-D66C-461B-B878-D915DB602574}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -31,6 +33,10 @@ Global
 		{5BBE1D55-3B71-40F1-BF41-07E015086A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BBE1D55-3B71-40F1-BF41-07E015086A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BBE1D55-3B71-40F1-BF41-07E015086A44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38B89508-D66C-461B-B878-D915DB602574}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38B89508-D66C-461B-B878-D915DB602574}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38B89508-D66C-461B-B878-D915DB602574}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38B89508-D66C-461B-B878-D915DB602574}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -131,9 +131,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SmartCRM.DAL\SmartCRM.DAL.csproj">
-      <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
-      <Name>SmartCRM.DAL</Name>
+    <ProjectReference Include="..\SmartCRM.BOL\SmartCRM.BOL.csproj">
+      <Project>{38b89508-d66c-461b-b878-d915db602574}</Project>
+      <Name>SmartCRM.BOL</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
