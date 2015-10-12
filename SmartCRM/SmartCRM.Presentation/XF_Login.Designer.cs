@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
@@ -40,6 +41,9 @@
             this.txtPassword = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlPassword = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
+            this.lblMissingUser = new DevExpress.XtraEditors.LabelControl();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
@@ -52,6 +56,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlPassword)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControlGroup1
@@ -80,6 +86,7 @@
             // 
             // layoutControl1
             // 
+            this.layoutControl1.Controls.Add(this.lblMissingUser);
             this.layoutControl1.Controls.Add(this.txtPassword);
             this.layoutControl1.Controls.Add(this.txtUsername);
             this.layoutControl1.Controls.Add(this.btnEnter);
@@ -101,7 +108,8 @@
             this.layoutControlEnter,
             this.layoutControlUsername,
             this.layoutControlPassword,
-            this.emptySpaceItem1});
+            this.emptySpaceItem1,
+            this.layoutControlItem2});
             this.layoutControlGroup3.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroup3.Name = "Root";
             this.layoutControlGroup3.Padding = new DevExpress.XtraLayout.Utils.Padding(3, 3, 3, 3);
@@ -123,9 +131,9 @@
             // 
             this.btnEnter.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.btnEnter.Appearance.Options.UseFont = true;
-            this.btnEnter.Location = new System.Drawing.Point(5, 84);
+            this.btnEnter.Location = new System.Drawing.Point(5, 82);
             this.btnEnter.Name = "btnEnter";
-            this.btnEnter.Size = new System.Drawing.Size(344, 53);
+            this.btnEnter.Size = new System.Drawing.Size(344, 55);
             this.btnEnter.StyleController = this.layoutControl1;
             this.btnEnter.TabIndex = 4;
             this.btnEnter.Text = "LOGIN";
@@ -135,10 +143,10 @@
             this.layoutControlEnter.Control = this.btnEnter;
             this.layoutControlEnter.CustomizationFormText = "layoutControlEnter";
             this.layoutControlEnter.ImageToTextDistance = 20;
-            this.layoutControlEnter.Location = new System.Drawing.Point(0, 79);
+            this.layoutControlEnter.Location = new System.Drawing.Point(0, 77);
             this.layoutControlEnter.MinSize = new System.Drawing.Size(82, 26);
             this.layoutControlEnter.Name = "layoutControlEnter";
-            this.layoutControlEnter.Size = new System.Drawing.Size(348, 57);
+            this.layoutControlEnter.Size = new System.Drawing.Size(348, 59);
             this.layoutControlEnter.SizeConstraintsType = DevExpress.XtraLayout.SizeConstraintsType.Custom;
             this.layoutControlEnter.Text = "layoutControlEnter";
             this.layoutControlEnter.TextSize = new System.Drawing.Size(0, 0);
@@ -151,6 +159,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtUsername.Properties.Appearance.Options.UseFont = true;
+            this.txtUsername.Properties.MaxLength = 30;
             this.txtUsername.Size = new System.Drawing.Size(288, 26);
             this.txtUsername.StyleController = this.layoutControl1;
             this.txtUsername.TabIndex = 5;
@@ -174,6 +183,8 @@
             this.txtPassword.Name = "txtPassword";
             this.txtPassword.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtPassword.Properties.Appearance.Options.UseFont = true;
+            this.txtPassword.Properties.MaxLength = 15;
+            this.txtPassword.Properties.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(288, 26);
             this.txtPassword.StyleController = this.layoutControl1;
             this.txtPassword.TabIndex = 6;
@@ -195,11 +206,35 @@
             // 
             this.emptySpaceItem1.AllowHotTrack = false;
             this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 60);
+            this.emptySpaceItem1.Location = new System.Drawing.Point(338, 60);
             this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(348, 19);
+            this.emptySpaceItem1.Size = new System.Drawing.Size(10, 17);
             this.emptySpaceItem1.Text = "emptySpaceItem1";
             this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // dxErrorProvider1
+            // 
+            this.dxErrorProvider1.ContainerControl = this;
+            // 
+            // lblMissingUser
+            // 
+            this.lblMissingUser.Location = new System.Drawing.Point(5, 65);
+            this.lblMissingUser.Name = "lblMissingUser";
+            this.lblMissingUser.Size = new System.Drawing.Size(334, 13);
+            this.lblMissingUser.StyleController = this.layoutControl1;
+            this.lblMissingUser.TabIndex = 7;
+            // 
+            // layoutControlItem2
+            // 
+            this.layoutControlItem2.Control = this.lblMissingUser;
+            this.layoutControlItem2.CustomizationFormText = "layoutControlItem2";
+            this.layoutControlItem2.Location = new System.Drawing.Point(0, 60);
+            this.layoutControlItem2.Name = "layoutControlItem2";
+            this.layoutControlItem2.Size = new System.Drawing.Size(338, 17);
+            this.layoutControlItem2.Text = "layoutControlItem2";
+            this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
+            this.layoutControlItem2.TextToControlDistance = 0;
+            this.layoutControlItem2.TextVisible = false;
             // 
             // XF_Login
             // 
@@ -224,6 +259,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlPassword)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -242,5 +279,8 @@
         private DevExpress.XtraLayout.LayoutControlItem layoutControlUsername;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlPassword;
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
+        private DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
+        private DevExpress.XtraEditors.LabelControl lblMissingUser;
+        private DevExpress.XtraLayout.LayoutControlItem layoutControlItem2;
     }
 }

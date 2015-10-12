@@ -4,6 +4,8 @@
     using System.Windows.Forms;
     using DevExpress.LookAndFeel;
 
+    using SmartCRM.BOL.Controllers;
+
     static class Program
     {
         /// <summary>
@@ -19,7 +21,7 @@
             DevExpress.UserSkins.BonusSkins.Register();
             UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
 
-            Application.Run(new XF_Main());
+            XF_Login.ShowForm(LoginController.CreateIntance());
         }
     }
 }

@@ -1,7 +1,15 @@
 ﻿namespace SmartCRM.BOL.Repositories
 {
+    using SmartCRM.BOL.Utilities;
+
     public interface IRepository
     {
-        bool Save();
+        CheckResult Save();
+
+        void Insert();
+
+        void Update();
+
+        CheckResult Delete();
     }
 }

@@ -28,46 +28,6 @@ namespace SmartCRM.DAL
 	[KeyGenerator(KeyGenerator.Autoinc)]
 	public partial class User : INotifyPropertyChanging, INotifyPropertyChanged
 	{
-		private string _userPassword;
-		[Column("UserPassword", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 30, Scale = 0, SqlType = "nvarchar")]
-		[Storage("_userPassword")]
-		public virtual string UserPassword
-		{
-			get
-			{
-				return this._userPassword;
-			}
-			set
-			{
-				if(this._userPassword != value)
-				{
-					this.OnPropertyChanging("UserPassword");
-					this._userPassword = value;
-					this.OnPropertyChanged("UserPassword");
-				}
-			}
-		}
-		
-		private string _userName;
-		[Column("UserName", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 50, Scale = 0, SqlType = "nvarchar")]
-		[Storage("_userName")]
-		public virtual string UserName
-		{
-			get
-			{
-				return this._userName;
-			}
-			set
-			{
-				if(this._userName != value)
-				{
-					this.OnPropertyChanging("UserName");
-					this._userName = value;
-					this.OnPropertyChanged("UserName");
-				}
-			}
-		}
-		
 		private uint _userID;
 		[Column("UserID", OpenAccessType = OpenAccessType.Int32, IsBackendCalculated = true, IsPrimaryKey = true, Length = 0, Scale = 0, SqlType = "integer unsigned")]
 		[Storage("_userID")]
@@ -144,6 +104,46 @@ namespace SmartCRM.DAL
 					this.OnPropertyChanging("IsAdmin");
 					this._isAdmin = value;
 					this.OnPropertyChanged("IsAdmin");
+				}
+			}
+		}
+		
+		private string _username;
+		[Column("Username", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 50, Scale = 0, SqlType = "nvarchar")]
+		[Storage("_username")]
+		public virtual string Username
+		{
+			get
+			{
+				return this._username;
+			}
+			set
+			{
+				if(this._username != value)
+				{
+					this.OnPropertyChanging("Username");
+					this._username = value;
+					this.OnPropertyChanged("Username");
+				}
+			}
+		}
+		
+		private string _password;
+		[Column("Password", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 30, Scale = 0, SqlType = "nvarchar")]
+		[Storage("_password")]
+		public virtual string Password
+		{
+			get
+			{
+				return this._password;
+			}
+			set
+			{
+				if(this._password != value)
+				{
+					this.OnPropertyChanging("Password");
+					this._password = value;
+					this.OnPropertyChanged("Password");
 				}
 			}
 		}
