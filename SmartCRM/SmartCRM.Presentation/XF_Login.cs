@@ -66,7 +66,7 @@
             {
                 this.Close();
                 this.Hide();
-                RF_Test.ShowForm(MainController.CreateInstance());
+                RF_Main.ShowForm(MainController.CreateInstance());
             }
         }
 

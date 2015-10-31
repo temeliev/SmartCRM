@@ -7,14 +7,14 @@
     using SmartCRM.BOL.Controllers;
     using SmartCRM.BOL.Models;
 
-    public partial class RF_Test : DevExpress.XtraBars.Ribbon.RibbonForm
+    public partial class RF_Main : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         private MainController mainController;
 
         private UC_Users ucUsers;
         private UC_User ucUser;
 
-        public RF_Test()
+        public RF_Main()
         {
             this.InitializeComponent();
 
@@ -241,7 +241,7 @@
 
         public static DialogResult ShowForm(MainController controller)
         {
-            using (RF_Test form = new RF_Test())
+            using (RF_Main form = new RF_Main())
             {
                 form.mainController = controller;
                 return form.ShowDialog();

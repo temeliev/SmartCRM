@@ -1,6 +1,6 @@
 ﻿namespace SmartCRM.Presentation
 {
-    partial class RF_Test
+    partial class RF_Main
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RF_Test));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RF_Main));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barLinkContainerItem1 = new DevExpress.XtraBars.BarLinkContainerItem();
             this.barBtnAdd = new DevExpress.XtraBars.BarButtonItem();
@@ -443,7 +443,7 @@
             this.barBtnClose.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnClose.LargeGlyph")));
             this.barBtnClose.Name = "barBtnClose";
             // 
-            // RF_Test
+            // RF_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -451,7 +451,7 @@
             this.Controls.Add(this.layoutControl1);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
-            this.Name = "RF_Test";
+            this.Name = "RF_Main";
             this.Ribbon = this.ribbon;
             this.StatusBar = this.ribbonStatusBar;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
