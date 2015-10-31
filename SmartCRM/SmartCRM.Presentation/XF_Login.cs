@@ -66,8 +66,7 @@
             {
                 this.Close();
                 this.Hide();
-                XF_Main main = new XF_Main();
-                main.ShowDialog();
+                RF_Test.ShowForm(MainController.CreateInstance());
             }
         }
 
@@ -93,9 +92,9 @@
         private void BindModel()
         {
             BindingSource bs = new BindingSource();
-            bs.DataSource = this.loginController.Model;
-            this.txtUsername.DataBindings.Add("EditValue", bs, StaticReflection.GetMemberName<LoginModel>(x => x.Username), true, DataSourceUpdateMode.OnPropertyChanged);
-            this.txtPassword.DataBindings.Add("EditValue", bs, StaticReflection.GetMemberName<LoginModel>(x => x.Password), true, DataSourceUpdateMode.OnPropertyChanged);
+            bs.DataSource = this.loginController.CurrentLogin;
+            this.txtUsername.DataBindings.Add("EditValue", bs, StaticReflection.GetMemberName<UserModel>(x => x.Username), true, DataSourceUpdateMode.OnPropertyChanged);
+            this.txtPassword.DataBindings.Add("EditValue", bs, StaticReflection.GetMemberName<UserModel>(x => x.Password), true, DataSourceUpdateMode.OnPropertyChanged);
         }
     }
 }

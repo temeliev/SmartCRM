@@ -75,14 +75,6 @@ namespace SmartCRM.DAL
 			}
 		}
 		
-		public IQueryable<Person> People 
-		{
-			get
-			{
-				return this.GetAll<Person>();
-			}
-		}
-		
 		public IQueryable<Log> Logs 
 		{
 			get
@@ -104,6 +96,14 @@ namespace SmartCRM.DAL
 			get
 			{
 				return this.GetAll<GlobalSetting>();
+			}
+		}
+		
+		public IQueryable<Employee> Employees 
+		{
+			get
+			{
+				return this.GetAll<Employee>();
 			}
 		}
 		
@@ -144,6 +144,14 @@ namespace SmartCRM.DAL
 			get
 			{
 				return this.GetAll<CompaniesValue>();
+			}
+		}
+		
+		public IQueryable<CompaniesEmployee> CompaniesEmployees 
+		{
+			get
+			{
+				return this.GetAll<CompaniesEmployee>();
 			}
 		}
 		
@@ -188,10 +196,6 @@ namespace SmartCRM.DAL
 		{
 			get;
 		}
-		IQueryable<Person> People
-		{
-			get;
-		}
 		IQueryable<Log> Logs
 		{
 			get;
@@ -201,6 +205,10 @@ namespace SmartCRM.DAL
 			get;
 		}
 		IQueryable<GlobalSetting> GlobalSettings
+		{
+			get;
+		}
+		IQueryable<Employee> Employees
 		{
 			get;
 		}
@@ -221,6 +229,10 @@ namespace SmartCRM.DAL
 			get;
 		}
 		IQueryable<CompaniesValue> CompaniesValues
+		{
+			get;
+		}
+		IQueryable<CompaniesEmployee> CompaniesEmployees
 		{
 			get;
 		}

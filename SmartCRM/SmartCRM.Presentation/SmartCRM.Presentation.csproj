@@ -63,6 +63,7 @@
     <Reference Include="DevExpress.XtraBars.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraCharts.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraEditors.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraGrid.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraLayout.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraNavBar.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.XtraPrinting.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -81,6 +82,24 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="RF_Test.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RF_Test.Designer.cs">
+      <DependentUpon>RF_Test.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_User.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_User.Designer.cs">
+      <DependentUpon>UC_User.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UC_Users.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UC_Users.Designer.cs">
+      <DependentUpon>UC_Users.cs</DependentUpon>
+    </Compile>
     <Compile Include="XF_Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +125,15 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="RF_Test.resx">
+      <DependentUpon>RF_Test.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_User.resx">
+      <DependentUpon>UC_User.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UC_Users.resx">
+      <DependentUpon>UC_Users.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="XF_Login.resx">
       <DependentUpon>XF_Login.cs</DependentUpon>
     </EmbeddedResource>
@@ -144,6 +172,15 @@
       <Project>{38b89508-d66c-461b-b878-d915db602574}</Project>
       <Name>SmartCRM.BOL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\previous_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next_16x16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\next_32x32.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

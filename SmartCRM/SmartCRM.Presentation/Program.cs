@@ -20,7 +20,6 @@
             DevExpress.Skins.SkinManager.EnableFormSkins();
             DevExpress.UserSkins.BonusSkins.Register();
             UserLookAndFeel.Default.SetSkinStyle("DevExpress Style");
-
             XF_Login.ShowForm(LoginController.CreateIntance());
         }
     }
