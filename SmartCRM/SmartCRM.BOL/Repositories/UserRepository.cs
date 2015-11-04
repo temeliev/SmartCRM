@@ -35,8 +35,9 @@
             var modelUsers = new BindingList<UserModel>();
             foreach (var poco in pocoUsers)
             {
-                UserModel model = UserModel.CreateInstance();
+                UserModel model = UserModel.Create();
                 Mapper.Map(poco, model);
+                model.AcceptChanges();
                 modelUsers.Add(model);
             }
 

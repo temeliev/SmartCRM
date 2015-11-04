@@ -51,6 +51,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BLToolkit.4, Version=4.1.9.2120, Culture=neutral, PublicKeyToken=b1d3f6ab3aadaca3, processorArchitecture=MSIL">
+      <HintPath>..\packages\BLToolkit.4.1.0.0\lib\net40\BLToolkit.4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="DevExpress.BonusSkins.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Charts.v14.1.Core, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="DevExpress.Data.v14.1, Version=14.1.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
@@ -82,11 +86,11 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="RF_Test.cs">
+    <Compile Include="RF_Main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="RF_Test.Designer.cs">
-      <DependentUpon>RF_Test.cs</DependentUpon>
+    <Compile Include="RF_Main.Designer.cs">
+      <DependentUpon>RF_Main.cs</DependentUpon>
     </Compile>
     <Compile Include="UC_User.cs">
       <SubType>UserControl</SubType>
@@ -119,8 +123,8 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="RF_Test.resx">
-      <DependentUpon>RF_Test.cs</DependentUpon>
+    <EmbeddedResource Include="RF_Main.resx">
+      <DependentUpon>RF_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UC_User.resx">
       <DependentUpon>UC_User.cs</DependentUpon>
@@ -131,6 +135,7 @@
     <EmbeddedResource Include="XF_Login.resx">
       <DependentUpon>XF_Login.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

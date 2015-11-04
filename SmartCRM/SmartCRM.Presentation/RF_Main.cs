@@ -1,11 +1,13 @@
 ﻿namespace SmartCRM.Presentation
 {
+    using System.Linq;
     using System.Windows.Forms;
 
     using DevExpress.XtraGrid.Views.Grid;
 
     using SmartCRM.BOL.Controllers;
     using SmartCRM.BOL.Models;
+    using SmartCRM.BOL.Utilities;
 
     public partial class RF_Main : DevExpress.XtraBars.Ribbon.RibbonForm
     {
@@ -44,7 +46,7 @@
             if (DialogResult.OK == MessageBox.Show(
                     "Are You sure that you want to delete this record?",
                     "Attention",
-                    MessageBoxButtons.OKCancel, 
+                    MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Warning))
             {
                 var focusedUser = (UserModel)this.ucUsers.gridViewUsers.GetFocusedRow();
@@ -88,6 +90,14 @@
         {
             if (this.ucUser != null)
             {
+                if (this.CheckUCUserForChanges())
+                {
+                    if (!this.SaveUser())
+                    {
+                        return;
+                    }
+                }
+
                 this.ucUsers.LoadUsers();
                 this.ShowUsers();
             }
@@ -97,7 +107,12 @@
         {
             if (this.ucUser != null)
             {
-                this.mainController.UserController.SaveUser();
+                if (!this.SaveUser())
+                {
+                    return;
+                }
+
+                this.ucUsers.LoadUsers();
                 this.ShowUsers();
             }
         }
@@ -106,9 +121,41 @@
         {
             if (this.ucUser != null)
             {
-                this.mainController.UserController.SaveUser();
+                if (!this.SaveUser())
+                {
+                    return;
+                }
+
                 this.ucUsers.LoadUsers();
             }
+        }
+
+        private bool SaveUser()
+        {
+            this.ucUser.ClearErrors();
+            var check = this.mainController.UserController.SaveUser();
+            if (!check.Success)
+            {
+                this.ucUser.ShowErrors(check);
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckUCUserForChanges()
+        {
+            if (this.mainController.UserController.CurrentUser.IsDirty)
+            {
+                if (DialogResult.Yes == MessageBox.Show("Changes were made!\nDo You want to save?", "Attention", MessageBoxButtons.YesNo))
+                {
+                    return true;
+                }
+
+                this.mainController.UserController.CurrentUser.RejectChanges();
+            }
+
+            return false;
         }
 
         #endregion Group Main
@@ -117,31 +164,15 @@
 
         void navBarUsers_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            this.ShowUsers();
-        }
-
-        private void ShowUsers()
-        {
-            this.layoutControl2.Controls.Clear();
-
-            if (this.ucUsers == null)
+            if (this.ucUsers != null && this.CheckUCUserForChanges())
             {
-                this.ucUsers = UC_Users.GetUserControl(this.mainController.UserController);
-                this.ucUsers.Size = this.layoutControl2.Size;
-                this.ucUsers.gridViewUsers.FocusedRowChanged += this.gridViewUsers_FocusedRowChanged;
-                this.ucUsers.gridViewUsers.RowCellClick += this.gridViewUsers_RowCellClick;
+                if (!this.SaveUser())
+                {
+                    return;
+                }
             }
 
-            this.layoutControl2.Controls.Add(this.ucUsers);
-
-            this.ribbonPageGroupCRUD.Text = "Users Management";
-            this.ribbonPageGroupCRUD.Visible = true;
-
-            this.ribbonPageGroupNavigation.Visible = true;
-
-            this.ribbonPageGroupHome.Visible = false;
-
-            this.ribbonPageGroupMain.Visible = false;
+            this.ShowUsers();
         }
 
         void gridViewUsers_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -202,6 +233,30 @@
             this.ribbonPageGroupMain.Visible = true;
         }
 
+        private void ShowUsers()
+        {
+            this.layoutControl2.Controls.Clear();
+
+            if (this.ucUsers == null)
+            {
+                this.ucUsers = UC_Users.GetUserControl(this.mainController.UserController);
+                this.ucUsers.Size = this.layoutControl2.Size;
+                this.ucUsers.gridViewUsers.FocusedRowChanged += this.gridViewUsers_FocusedRowChanged;
+                this.ucUsers.gridViewUsers.RowCellClick += this.gridViewUsers_RowCellClick;
+            }
+
+            this.layoutControl2.Controls.Add(this.ucUsers);
+
+            this.ribbonPageGroupCRUD.Text = "Users Management";
+            this.ribbonPageGroupCRUD.Visible = true;
+
+            this.ribbonPageGroupNavigation.Visible = true;
+
+            this.ribbonPageGroupHome.Visible = false;
+
+            this.ribbonPageGroupMain.Visible = false;
+        }
+
         #endregion UC_Users
 
         #region Navigation
@@ -220,13 +275,21 @@
 
         void barBtnList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (this.ucUser != null)
-            {
-                this.ucUser = null;
-            }
-
             if (this.ucUsers != null)
             {
+                if (this.CheckUCUserForChanges())
+                {
+                    if (!this.SaveUser())
+                    {
+                        return;
+                    }
+                }
+
+                if (this.ucUser != null)
+                {
+                    this.ucUser = null;
+                }
+
                 this.ShowUsers();
             }
         }

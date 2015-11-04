@@ -1,5 +1,7 @@
 ﻿namespace SmartCRM.Presentation
 {
+    using System.Linq;
+
     using SmartCRM.BOL.Controllers;
     using System.Windows.Forms;
 
@@ -27,11 +29,25 @@
             this.IsEnabled.DataBindings.Add("Checked", bs, StaticReflection.GetMemberName<UserModel>(x => x.IsEnabled), true, DataSourceUpdateMode.OnPropertyChanged);
         }
 
+        public void ShowErrors(CheckResult result)
+        {
+            var passwordError = result.Details.FirstOrDefault(x => x.PropertyName == "Password");
+            if (passwordError != null)
+            {
+                this.dxErrorProvider1.SetError(this.txtPassword, passwordError.Message);
+            }
+        }
+
         public static UC_User GetUserControl(UserController userController)
         {
             UC_User uc = new UC_User();
             uc.controller = userController;
             return uc;
+        }
+
+        public void ClearErrors()
+        {
+            this.dxErrorProvider1.ClearErrors();
         }
     }
 }

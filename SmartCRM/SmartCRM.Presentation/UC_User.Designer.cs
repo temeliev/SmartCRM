@@ -28,19 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.IsEnabled = new DevExpress.XtraEditors.CheckEdit();
             this.IsAdmin = new DevExpress.XtraEditors.CheckEdit();
             this.txtPassword = new DevExpress.XtraEditors.TextEdit();
             this.txtUsername = new DevExpress.XtraEditors.TextEdit();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             this.layoutControlGroup2 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem3 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlGroup3 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem4 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.layoutControlItem5 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.dxErrorProvider1 = new DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IsEnabled.Properties)).BeginInit();
@@ -48,13 +50,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // layoutControl1
@@ -106,6 +109,7 @@
             this.txtUsername.Name = "txtUsername";
             this.txtUsername.Properties.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.txtUsername.Properties.Appearance.Options.UseFont = true;
+            this.txtUsername.Properties.ReadOnly = true;
             this.txtUsername.Size = new System.Drawing.Size(350, 22);
             this.txtUsername.StyleController = this.layoutControl1;
             this.txtUsername.TabIndex = 5;
@@ -124,6 +128,28 @@
             this.layoutControlGroup1.Size = new System.Drawing.Size(453, 223);
             this.layoutControlGroup1.Text = "Root";
             this.layoutControlGroup1.TextVisible = false;
+            // 
+            // emptySpaceItem1
+            // 
+            this.emptySpaceItem1.AllowHotTrack = false;
+            this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
+            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 142);
+            this.emptySpaceItem1.Name = "emptySpaceItem1";
+            this.emptySpaceItem1.Size = new System.Drawing.Size(433, 61);
+            this.emptySpaceItem1.Text = "emptySpaceItem1";
+            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
+            // 
+            // layoutControlGroup2
+            // 
+            this.layoutControlGroup2.CustomizationFormText = "layoutControlGroup2";
+            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem2,
+            this.layoutControlItem3});
+            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlGroup2.Name = "layoutControlGroup2";
+            this.layoutControlGroup2.Size = new System.Drawing.Size(433, 76);
+            this.layoutControlGroup2.Text = "layoutControlGroup2";
+            this.layoutControlGroup2.TextVisible = false;
             // 
             // layoutControlItem2
             // 
@@ -144,6 +170,17 @@
             this.layoutControlItem3.Size = new System.Drawing.Size(409, 26);
             this.layoutControlItem3.Text = "Password:";
             this.layoutControlItem3.TextSize = new System.Drawing.Size(52, 13);
+            // 
+            // layoutControlGroup3
+            // 
+            this.layoutControlGroup3.CustomizationFormText = "Roles";
+            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
+            this.layoutControlItem4,
+            this.layoutControlItem5});
+            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 76);
+            this.layoutControlGroup3.Name = "layoutControlGroup3";
+            this.layoutControlGroup3.Size = new System.Drawing.Size(433, 66);
+            this.layoutControlGroup3.Text = "Roles";
             // 
             // layoutControlItem4
             // 
@@ -169,38 +206,9 @@
             this.layoutControlItem5.TextToControlDistance = 0;
             this.layoutControlItem5.TextVisible = false;
             // 
-            // emptySpaceItem1
+            // dxErrorProvider1
             // 
-            this.emptySpaceItem1.AllowHotTrack = false;
-            this.emptySpaceItem1.CustomizationFormText = "emptySpaceItem1";
-            this.emptySpaceItem1.Location = new System.Drawing.Point(0, 142);
-            this.emptySpaceItem1.Name = "emptySpaceItem1";
-            this.emptySpaceItem1.Size = new System.Drawing.Size(433, 61);
-            this.emptySpaceItem1.Text = "emptySpaceItem1";
-            this.emptySpaceItem1.TextSize = new System.Drawing.Size(0, 0);
-            // 
-            // layoutControlGroup2
-            // 
-            this.layoutControlGroup2.CustomizationFormText = "layoutControlGroup2";
-            this.layoutControlGroup2.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem2,
-            this.layoutControlItem3});
-            this.layoutControlGroup2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControlGroup2.Name = "layoutControlGroup2";
-            this.layoutControlGroup2.Size = new System.Drawing.Size(433, 76);
-            this.layoutControlGroup2.Text = "layoutControlGroup2";
-            this.layoutControlGroup2.TextVisible = false;
-            // 
-            // layoutControlGroup3
-            // 
-            this.layoutControlGroup3.CustomizationFormText = "Roles";
-            this.layoutControlGroup3.Items.AddRange(new DevExpress.XtraLayout.BaseLayoutItem[] {
-            this.layoutControlItem4,
-            this.layoutControlItem5});
-            this.layoutControlGroup3.Location = new System.Drawing.Point(0, 76);
-            this.layoutControlGroup3.Name = "layoutControlGroup3";
-            this.layoutControlGroup3.Size = new System.Drawing.Size(433, 66);
-            this.layoutControlGroup3.Text = "Roles";
+            this.dxErrorProvider1.ContainerControl = this;
             // 
             // UC_User
             // 
@@ -216,13 +224,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtPassword.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtUsername.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dxErrorProvider1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -242,5 +251,6 @@
         private DevExpress.XtraLayout.EmptySpaceItem emptySpaceItem1;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup2;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroup3;
+        public DevExpress.XtraEditors.DXErrorProvider.DXErrorProvider dxErrorProvider1;
     }
 }

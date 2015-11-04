@@ -1,22 +1,22 @@
 ﻿namespace SmartCRM.BOL.Models
 {
-    public class UserModel
+    using BLToolkit.EditableObjects;
+
+    public abstract class UserModel : EditableObject<UserModel>
     {
-        private UserModel() { }
+        public abstract uint UserId { get; set; }
 
-        public uint UserId { get; set; }
+        public abstract string Username { get; set; }
 
-        public string Username { get; set; }
+        public abstract string Password { get; set; }
 
-        public string Password { get; set; }
+        public abstract bool IsEnabled { get; set; }
 
-        public bool IsEnabled { get; set; }
+        public abstract bool IsAdmin { get; set; }
 
-        public bool IsAdmin { get; set; }
-
-        public static UserModel CreateInstance()
+        public static UserModel Create()
         {
-            return new UserModel();
+            return UserModel.CreateInstance();
         }
     }
 }
