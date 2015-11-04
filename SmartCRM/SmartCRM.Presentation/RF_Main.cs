@@ -4,6 +4,7 @@
     using System.Windows.Forms;
 
     using DevExpress.XtraGrid.Views.Grid;
+    using DevExpress.XtraNavBar;
 
     using SmartCRM.BOL.Controllers;
     using SmartCRM.BOL.Models;
@@ -22,7 +23,7 @@
 
             this.navBarUsers.LinkClicked += this.navBarUsers_LinkClicked;
 
-            this.layoutControl2.Resize += this.layoutControl2_Resize;
+            this.layoutControlUC.Resize += this.layoutControl2_Resize;
 
             this.barBtnRefresh.ItemClick += this.barBtnRefresh_ItemClick;
             this.barBtnAdd.ItemClick += this.barBtnAdd_ItemClick;
@@ -37,6 +38,22 @@
             this.barBtnSave.ItemClick += this.barBtnSave_ItemClick;
             this.barBtnSaveAndClose.ItemClick += this.barBtnSaveAndClose_ItemClick;
             this.barBtnClose.ItemClick += this.barBtnClose_ItemClick;
+            
+            this.navBarControlLeftBar.MouseDown += this.navBarControlLeftBar_MouseDown;
+
+            this.ribbon.Minimized = true;
+        }
+
+        void navBarControlLeftBar_MouseDown(object sender, MouseEventArgs e)
+        {
+            NavBarHitInfo hitInfo = this.navBarControlLeftBar.CalcHitInfo(e.Location);
+            if (hitInfo.InGroupCaption && hitInfo.Group != this.navBarControlLeftBar.ActiveGroup)
+            {
+                this.layoutControlUC.Controls.Clear();
+                this.ribbonPageGroupCRUD.Visible = false;
+                this.ribbonPageGroupNavigation.Visible = false;
+                this.ribbon.Minimized = true;
+            }
         }
 
         #region Group CRUD
@@ -164,7 +181,7 @@
 
         void navBarUsers_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            if (this.ucUsers != null && this.CheckUCUserForChanges())
+            if (this.ucUsers != null && this.ucUser != null && this.CheckUCUserForChanges())
             {
                 if (!this.SaveUser())
                 {
@@ -173,6 +190,7 @@
             }
 
             this.ShowUsers();
+            this.ribbon.Minimized = false;
         }
 
         void gridViewUsers_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
@@ -225,8 +243,8 @@
         private void LoadUCUser()
         {
             this.ucUser = UC_User.GetUserControl(this.mainController.UserController);
-            this.layoutControl2.Controls.Clear();
-            this.layoutControl2.Controls.Add(this.ucUser);
+            this.layoutControlUC.Controls.Clear();
+            this.layoutControlUC.Controls.Add(this.ucUser);
             this.ribbonPageGroupCRUD.Visible = false;
             this.ribbonPageGroupNavigation.Visible = false;
             this.ribbonPageGroupHome.Visible = true;
@@ -235,17 +253,17 @@
 
         private void ShowUsers()
         {
-            this.layoutControl2.Controls.Clear();
+            this.layoutControlUC.Controls.Clear();
 
             if (this.ucUsers == null)
             {
                 this.ucUsers = UC_Users.GetUserControl(this.mainController.UserController);
-                this.ucUsers.Size = this.layoutControl2.Size;
+                this.ucUsers.Size = this.layoutControlUC.Size;
                 this.ucUsers.gridViewUsers.FocusedRowChanged += this.gridViewUsers_FocusedRowChanged;
                 this.ucUsers.gridViewUsers.RowCellClick += this.gridViewUsers_RowCellClick;
             }
 
-            this.layoutControl2.Controls.Add(this.ucUsers);
+            this.layoutControlUC.Controls.Add(this.ucUsers);
 
             this.ribbonPageGroupCRUD.Text = "Users Management";
             this.ribbonPageGroupCRUD.Visible = true;
@@ -298,7 +316,7 @@
         {
             if (this.ucUsers != null)
             {
-                this.ucUsers.Size = this.layoutControl2.Size;
+                this.ucUsers.Size = this.layoutControlUC.Size;
             }
         }
 

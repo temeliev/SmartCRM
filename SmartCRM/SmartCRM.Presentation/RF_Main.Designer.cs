@@ -41,39 +41,39 @@
             this.barBtnChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnAccountInfo = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnList = new DevExpress.XtraBars.BarButtonItem();
-            this.ribbonPageHomeCRUD = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroupCRUD = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroupNavigation = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroupHome = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
-            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
-            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.navBarControl1 = new DevExpress.XtraNavBar.NavBarControl();
-            this.navBarGroup2 = new DevExpress.XtraNavBar.NavBarGroup();
-            this.navBarUsers = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarGroup1 = new DevExpress.XtraNavBar.NavBarGroup();
-            this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
-            this.layoutControl2 = new DevExpress.XtraLayout.LayoutControl();
-            this.layoutControlGroupUC = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
-            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
-            this.ribbonPageGroupMain = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.barBtnSave = new DevExpress.XtraBars.BarButtonItem();
             this.barBtnSaveAndClose = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonGroup1 = new DevExpress.XtraBars.BarButtonGroup();
             this.barButtonGroup2 = new DevExpress.XtraBars.BarButtonGroup();
             this.barBtnClose = new DevExpress.XtraBars.BarButtonItem();
+            this.ribbonPageHomeCRUD = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroupCRUD = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroupNavigation = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroupHome = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroupMain = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage2 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.navBarControlLeftBar = new DevExpress.XtraNavBar.NavBarControl();
+            this.navBarGroupAdministration = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarUsers = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarGroupCustomers = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
+            this.layoutControlUC = new DevExpress.XtraLayout.LayoutControl();
+            this.layoutControlGroupUC = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
+            this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
+            this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.navBarControlLeftBar)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlUC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupUC)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
@@ -194,6 +194,42 @@
             this.barBtnList.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnList.LargeGlyph")));
             this.barBtnList.Name = "barBtnList";
             // 
+            // barBtnSave
+            // 
+            this.barBtnSave.Caption = "Save";
+            this.barBtnSave.Glyph = ((System.Drawing.Image)(resources.GetObject("barBtnSave.Glyph")));
+            this.barBtnSave.Id = 14;
+            this.barBtnSave.Name = "barBtnSave";
+            // 
+            // barBtnSaveAndClose
+            // 
+            this.barBtnSaveAndClose.Caption = "Save and Close";
+            this.barBtnSaveAndClose.Glyph = ((System.Drawing.Image)(resources.GetObject("barBtnSaveAndClose.Glyph")));
+            this.barBtnSaveAndClose.Id = 15;
+            this.barBtnSaveAndClose.Name = "barBtnSaveAndClose";
+            // 
+            // barButtonGroup1
+            // 
+            this.barButtonGroup1.Caption = "barButtonGroup1";
+            this.barButtonGroup1.Id = 16;
+            this.barButtonGroup1.Name = "barButtonGroup1";
+            // 
+            // barButtonGroup2
+            // 
+            this.barButtonGroup2.Caption = "Close";
+            this.barButtonGroup2.Glyph = ((System.Drawing.Image)(resources.GetObject("barButtonGroup2.Glyph")));
+            this.barButtonGroup2.Id = 17;
+            this.barButtonGroup2.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonGroup2.LargeGlyph")));
+            this.barButtonGroup2.Name = "barButtonGroup2";
+            // 
+            // barBtnClose
+            // 
+            this.barBtnClose.Caption = "Close";
+            this.barBtnClose.Glyph = ((System.Drawing.Image)(resources.GetObject("barBtnClose.Glyph")));
+            this.barBtnClose.Id = 18;
+            this.barBtnClose.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnClose.LargeGlyph")));
+            this.barBtnClose.Name = "barBtnClose";
+            // 
             // ribbonPageHomeCRUD
             // 
             this.ribbonPageHomeCRUD.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -233,6 +269,17 @@
             this.ribbonPageGroupHome.Text = "Home";
             this.ribbonPageGroupHome.Visible = false;
             // 
+            // ribbonPageGroupMain
+            // 
+            this.ribbonPageGroupMain.AllowTextClipping = false;
+            this.ribbonPageGroupMain.ItemLinks.Add(this.barBtnSave);
+            this.ribbonPageGroupMain.ItemLinks.Add(this.barBtnSaveAndClose);
+            this.ribbonPageGroupMain.ItemLinks.Add(this.barBtnClose, true);
+            this.ribbonPageGroupMain.Name = "ribbonPageGroupMain";
+            this.ribbonPageGroupMain.ShowCaptionButton = false;
+            this.ribbonPageGroupMain.Text = "Main";
+            this.ribbonPageGroupMain.Visible = false;
+            // 
             // ribbonPage2
             // 
             this.ribbonPage2.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -271,45 +318,44 @@
             // 
             this.splitContainerControl1.Location = new System.Drawing.Point(5, 5);
             this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Controls.Add(this.navBarControl1);
+            this.splitContainerControl1.Panel1.Controls.Add(this.navBarControlLeftBar);
             this.splitContainerControl1.Panel1.Text = "Panel1";
-            this.splitContainerControl1.Panel2.Controls.Add(this.layoutControl2);
+            this.splitContainerControl1.Panel2.Controls.Add(this.layoutControlUC);
             this.splitContainerControl1.Panel2.Text = "Panel2";
             this.splitContainerControl1.Size = new System.Drawing.Size(1044, 495);
             this.splitContainerControl1.SplitterPosition = 219;
             this.splitContainerControl1.TabIndex = 4;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
-            // navBarControl1
+            // navBarControlLeftBar
             // 
-            this.navBarControl1.ActiveGroup = this.navBarGroup2;
-            this.navBarControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.navBarControl1.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
-            this.navBarGroup1,
-            this.navBarGroup2});
-            this.navBarControl1.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
+            this.navBarControlLeftBar.ActiveGroup = this.navBarGroupCustomers;
+            this.navBarControlLeftBar.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.navBarControlLeftBar.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
+            this.navBarGroupCustomers,
+            this.navBarGroupAdministration});
+            this.navBarControlLeftBar.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.navBarItem1,
             this.navBarItem2,
             this.navBarUsers});
-            this.navBarControl1.Location = new System.Drawing.Point(0, 0);
-            this.navBarControl1.Name = "navBarControl1";
-            this.navBarControl1.OptionsNavPane.ExpandedWidth = 219;
-            this.navBarControl1.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.navBarControl1.Size = new System.Drawing.Size(219, 495);
-            this.navBarControl1.TabIndex = 0;
-            this.navBarControl1.Text = "navBarControl1";
+            this.navBarControlLeftBar.Location = new System.Drawing.Point(0, 0);
+            this.navBarControlLeftBar.Name = "navBarControlLeftBar";
+            this.navBarControlLeftBar.OptionsNavPane.ExpandedWidth = 219;
+            this.navBarControlLeftBar.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
+            this.navBarControlLeftBar.Size = new System.Drawing.Size(219, 495);
+            this.navBarControlLeftBar.TabIndex = 0;
+            this.navBarControlLeftBar.Text = "navBarControl1";
             // 
-            // navBarGroup2
+            // navBarGroupAdministration
             // 
-            this.navBarGroup2.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.navBarGroup2.Appearance.Options.UseFont = true;
-            this.navBarGroup2.Caption = "Administration";
-            this.navBarGroup2.Expanded = true;
-            this.navBarGroup2.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsList;
-            this.navBarGroup2.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            this.navBarGroupAdministration.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.navBarGroupAdministration.Appearance.Options.UseFont = true;
+            this.navBarGroupAdministration.Caption = "Administration";
+            this.navBarGroupAdministration.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsList;
+            this.navBarGroupAdministration.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarUsers)});
-            this.navBarGroup2.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarGroup2.LargeImage")));
-            this.navBarGroup2.Name = "navBarGroup2";
+            this.navBarGroupAdministration.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarGroupAdministration.LargeImage")));
+            this.navBarGroupAdministration.Name = "navBarGroupAdministration";
             // 
             // navBarUsers
             // 
@@ -318,17 +364,18 @@
             this.navBarUsers.Name = "navBarUsers";
             this.navBarUsers.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarUsers.SmallImage")));
             // 
-            // navBarGroup1
+            // navBarGroupCustomers
             // 
-            this.navBarGroup1.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.navBarGroup1.Appearance.Options.UseFont = true;
-            this.navBarGroup1.Caption = "Customers";
-            this.navBarGroup1.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsList;
-            this.navBarGroup1.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            this.navBarGroupCustomers.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.navBarGroupCustomers.Appearance.Options.UseFont = true;
+            this.navBarGroupCustomers.Caption = "Customers";
+            this.navBarGroupCustomers.Expanded = true;
+            this.navBarGroupCustomers.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsList;
+            this.navBarGroupCustomers.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem1),
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem2)});
-            this.navBarGroup1.Name = "navBarGroup1";
-            this.navBarGroup1.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarGroup1.SmallImage")));
+            this.navBarGroupCustomers.Name = "navBarGroupCustomers";
+            this.navBarGroupCustomers.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarGroupCustomers.SmallImage")));
             // 
             // navBarItem1
             // 
@@ -344,16 +391,16 @@
             this.navBarItem2.Name = "navBarItem2";
             this.navBarItem2.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItem2.SmallImage")));
             // 
-            // layoutControl2
+            // layoutControlUC
             // 
-            this.layoutControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.layoutControl2.Location = new System.Drawing.Point(0, 0);
-            this.layoutControl2.Name = "layoutControl2";
-            this.layoutControl2.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(814, 415, 250, 350);
-            this.layoutControl2.Root = this.layoutControlGroupUC;
-            this.layoutControl2.Size = new System.Drawing.Size(820, 495);
-            this.layoutControl2.TabIndex = 0;
-            this.layoutControl2.Text = "layoutControl2";
+            this.layoutControlUC.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.layoutControlUC.Location = new System.Drawing.Point(0, 0);
+            this.layoutControlUC.Name = "layoutControlUC";
+            this.layoutControlUC.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(780, 415, 250, 350);
+            this.layoutControlUC.Root = this.layoutControlGroupUC;
+            this.layoutControlUC.Size = new System.Drawing.Size(820, 495);
+            this.layoutControlUC.TabIndex = 0;
+            this.layoutControlUC.Text = "layoutControl2";
             // 
             // layoutControlGroupUC
             // 
@@ -396,53 +443,6 @@
             this.ribbonPageCategory1.Name = "ribbonPageCategory1";
             this.ribbonPageCategory1.Text = "ribbonPageCategory1";
             // 
-            // ribbonPageGroupMain
-            // 
-            this.ribbonPageGroupMain.AllowTextClipping = false;
-            this.ribbonPageGroupMain.ItemLinks.Add(this.barBtnSave);
-            this.ribbonPageGroupMain.ItemLinks.Add(this.barBtnSaveAndClose);
-            this.ribbonPageGroupMain.ItemLinks.Add(this.barBtnClose, true);
-            this.ribbonPageGroupMain.Name = "ribbonPageGroupMain";
-            this.ribbonPageGroupMain.ShowCaptionButton = false;
-            this.ribbonPageGroupMain.Text = "Main";
-            this.ribbonPageGroupMain.Visible = false;
-            // 
-            // barBtnSave
-            // 
-            this.barBtnSave.Caption = "Save";
-            this.barBtnSave.Glyph = ((System.Drawing.Image)(resources.GetObject("barBtnSave.Glyph")));
-            this.barBtnSave.Id = 14;
-            this.barBtnSave.Name = "barBtnSave";
-            // 
-            // barBtnSaveAndClose
-            // 
-            this.barBtnSaveAndClose.Caption = "Save and Close";
-            this.barBtnSaveAndClose.Glyph = ((System.Drawing.Image)(resources.GetObject("barBtnSaveAndClose.Glyph")));
-            this.barBtnSaveAndClose.Id = 15;
-            this.barBtnSaveAndClose.Name = "barBtnSaveAndClose";
-            // 
-            // barButtonGroup1
-            // 
-            this.barButtonGroup1.Caption = "barButtonGroup1";
-            this.barButtonGroup1.Id = 16;
-            this.barButtonGroup1.Name = "barButtonGroup1";
-            // 
-            // barButtonGroup2
-            // 
-            this.barButtonGroup2.Caption = "Close";
-            this.barButtonGroup2.Glyph = ((System.Drawing.Image)(resources.GetObject("barButtonGroup2.Glyph")));
-            this.barButtonGroup2.Id = 17;
-            this.barButtonGroup2.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barButtonGroup2.LargeGlyph")));
-            this.barButtonGroup2.Name = "barButtonGroup2";
-            // 
-            // barBtnClose
-            // 
-            this.barBtnClose.Caption = "Close";
-            this.barBtnClose.Glyph = ((System.Drawing.Image)(resources.GetObject("barBtnClose.Glyph")));
-            this.barBtnClose.Id = 18;
-            this.barBtnClose.LargeGlyph = ((System.Drawing.Image)(resources.GetObject("barBtnClose.LargeGlyph")));
-            this.barBtnClose.Name = "barBtnClose";
-            // 
             // RF_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -459,8 +459,8 @@
             this.layoutControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.navBarControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.layoutControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.navBarControlLeftBar)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.layoutControlUC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroupUC)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
@@ -480,12 +480,12 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage2;
         private DevExpress.XtraBars.Ribbon.RibbonPageCategory ribbonPageCategory1;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
-        private DevExpress.XtraNavBar.NavBarControl navBarControl1;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup1;
+        private DevExpress.XtraNavBar.NavBarControl navBarControlLeftBar;
+        private DevExpress.XtraNavBar.NavBarGroup navBarGroupCustomers;
         private DevExpress.XtraNavBar.NavBarItem navBarItem1;
         private DevExpress.XtraNavBar.NavBarItem navBarItem2;
         private DevExpress.XtraLayout.LayoutControlItem layoutControlItem1;
-        private DevExpress.XtraNavBar.NavBarGroup navBarGroup2;
+        private DevExpress.XtraNavBar.NavBarGroup navBarGroupAdministration;
         private DevExpress.XtraBars.BarLinkContainerItem barLinkContainerItem1;
         private DevExpress.XtraNavBar.NavBarItem navBarUsers;
         private DevExpress.XtraBars.BarButtonItem barBtnAdd;
@@ -493,7 +493,7 @@
         private DevExpress.XtraBars.BarButtonItem barBtnDelete;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupNavigation;
         private DevExpress.XtraBars.BarButtonItem barBtnRefresh;
-        private DevExpress.XtraLayout.LayoutControl layoutControl2;
+        private DevExpress.XtraLayout.LayoutControl layoutControlUC;
         private DevExpress.XtraLayout.LayoutControlGroup layoutControlGroupUC;
         private DevExpress.XtraBars.BarButtonItem barBtnNavDown;
         private DevExpress.XtraBars.BarStaticItem barResize;
