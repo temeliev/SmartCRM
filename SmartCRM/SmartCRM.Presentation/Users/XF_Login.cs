@@ -1,4 +1,4 @@
-﻿namespace SmartCRM.Presentation
+﻿namespace SmartCRM.Presentation.Users
 {
     using System;
     using System.Linq;

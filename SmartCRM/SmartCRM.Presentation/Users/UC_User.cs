@@ -1,4 +1,4 @@
-﻿namespace SmartCRM.Presentation
+﻿namespace SmartCRM.Presentation.Users
 {
     using System.Linq;
 
@@ -31,10 +31,16 @@
 
         public void ShowErrors(CheckResult result)
         {
-            var passwordError = result.Details.FirstOrDefault(x => x.PropertyName == "Password");
+            var passwordError = result.Details.FirstOrDefault(x => x.PropertyName == StaticReflection.GetMemberName<UserModel>(u => u.Password).ToString());
             if (passwordError != null)
             {
                 this.dxErrorProvider1.SetError(this.txtPassword, passwordError.Message);
+            }
+
+            var usernameError = result.Details.FirstOrDefault(x => x.PropertyName == StaticReflection.GetMemberName<UserModel>(u => u.Username).ToString());
+            if (usernameError != null)
+            {
+                this.dxErrorProvider1.SetError(this.txtUsername, usernameError.Message);
             }
         }
 
@@ -48,6 +54,11 @@
         public void ClearErrors()
         {
             this.dxErrorProvider1.ClearErrors();
+        }
+
+        public void SetUsernameReadOnly(bool value)
+        {
+            this.txtUsername.Properties.ReadOnly = value;
         }
     }
 }

@@ -24,6 +24,10 @@
             {
                 cfg.CreateMap<User, UserModel>();
                 cfg.CreateMap<UserModel, User>();
+                cfg.CreateMap<Employee, EmployeeModel>()
+                    .ForMember(dest => dest.Photo, opt => opt.Ignore());
+
+                cfg.CreateMap<EmployeeModel, Employee>();
                 //cfg.AddProfile<FooProfile>();
             });
         }

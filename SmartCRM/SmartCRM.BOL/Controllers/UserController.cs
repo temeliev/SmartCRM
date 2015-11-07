@@ -1,25 +1,18 @@
 ﻿namespace SmartCRM.BOL.Controllers
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel;
-    using System.Linq;
-
-    using AutoMapper;
 
     using SmartCRM.BOL.Models;
     using SmartCRM.BOL.Repositories;
     using SmartCRM.BOL.Utilities;
     using SmartCRM.BOL.Validators;
-    using SmartCRM.DAL;
 
     public class UserController
     {
-        //private List<UserModel> users;
-
         private UserController()
         {
-            this.LoadAllActiveUsers();
+            this.Users = new BindingList<UserModel>();
         }
 
         public BindingList<UserModel> Users { get; private set; }
@@ -43,7 +36,7 @@
 
         public void CreateUser()
         {
-            UserModel newUser = UserModel.CreateInstance();
+            UserModel newUser = UserModel.Create();
             this.CurrentUser = newUser;
         }
 
@@ -51,16 +44,6 @@
         {
             this.CurrentUser = user;
         }
-
-        private void LoadAllUsers(bool isActive)
-        {
-            using (var db = DbManager.CreateInstance())
-            {
-                UserRepository rep = new UserRepository();
-                this.Users = rep.LoadAllUsers(db, isActive);
-            }
-        }
-
 
         public CheckResult SaveUser()
         {
@@ -121,6 +104,15 @@
                 }
 
                 return check;
+            }
+        }
+
+        private void LoadAllUsers(bool isActive)
+        {
+            using (var db = DbManager.CreateInstance())
+            {
+                UserRepository rep = new UserRepository();
+                this.Users = rep.LoadAllUsers(db, isActive);
             }
         }
     }

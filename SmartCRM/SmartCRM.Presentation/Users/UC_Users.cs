@@ -1,5 +1,5 @@
 ﻿using System.Windows.Forms;
-namespace SmartCRM.Presentation
+namespace SmartCRM.Presentation.Users
 {
     using SmartCRM.BOL.Controllers;
 
@@ -21,7 +21,7 @@ namespace SmartCRM.Presentation
 
         void UC_Users_Load(object sender, System.EventArgs e)
         {
-            this.gridControlUsers.DataSource = this.controller.Users;
+            this.LoadUsers();
         }
 
         public void LoadUsers()

@@ -26,6 +26,15 @@
         <orm:field name="_isAdmin" property="IsAdmin" behavior="readwrite" uniqueId="1e1551a1-17cb-473b-b695-5fa7b3d45bc3" type="System.Boolean">
           <orm:column name="IsAdmin" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
         </orm:field>
+        <orm:field name="_employeeId" property="EmployeeId" behavior="readwrite" uniqueId="2ce99d0b-8b0e-44b1-bdde-b40e328bf498" type="System.UInt32">
+          <orm:column name="EmployeeId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_employee" property="Employee" behavior="readwrite" uniqueId="01837890-570e-414f-b159-6ca4cf90cadc" type="SmartCRM.DAL.Employee">
+          <orm:reference uniqueId="1db76157-8412-4a8a-a13c-17a0ddd6e95c" association-name="UserHasEmployee">
+            <orm:sharedfield name="_employeeId" target-class="SmartCRM.DAL.Employee" target-field="_id" />
+            <orm:constraint name="FK_users_employees_Id" delete-action="dbdefaultrule" destination-table="employees" />
+          </orm:reference>
+        </orm:field>
         <orm:index name="UserName" unique="true">
           <orm:columnMapping>
             <orm:column name="Username" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
@@ -169,38 +178,51 @@
       <orm:class name="Employee" uniqueId="81e5d52f-2940-4d5c-afbb-5ef33e9b0c0c">
         <orm:table name="employees" />
         <orm:identity>
-          <orm:key-generator name="autoinc">
-            <orm:key-generator-member property-name="EmployeeId" />
-          </orm:key-generator>
+          <orm:key-generator name="autoinc" />
           <orm:single-field field-name="_id" />
         </orm:identity>
         <orm:concurrency strategy="changed" />
         <orm:field name="_firstName" property="FirstName" behavior="readwrite" uniqueId="4c1a7a1b-7e5e-4563-8d01-3d67e8d4b4d3" type="System.String">
-          <orm:column name="FirstName" sql-type="nvarchar" nullable="false" length="80" scale="0" ado-type="UnicodeStringVariableLength" />
+          <orm:column name="FirstName" sql-type="nvarchar" nullable="false" length="100" scale="0" ado-type="UnicodeStringVariableLength" />
         </orm:field>
         <orm:field name="_secondName" property="SecondName" behavior="readwrite" uniqueId="d48e618f-efb1-45ed-85f6-8957451e9319" type="System.String">
-          <orm:column name="SecondName" sql-type="nvarchar" nullable="true" length="80" scale="0" ado-type="UnicodeStringVariableLength" />
+          <orm:column name="SecondName" sql-type="nvarchar" nullable="true" length="100" scale="0" ado-type="UnicodeStringVariableLength" />
         </orm:field>
         <orm:field name="_lastName" property="LastName" behavior="readwrite" uniqueId="c40ce100-acf6-40e0-8732-d5aaaa4f9068" type="System.String">
-          <orm:column name="LastName" sql-type="nvarchar" nullable="false" length="99" scale="0" ado-type="UnicodeStringVariableLength" />
+          <orm:column name="LastName" sql-type="nvarchar" nullable="false" length="100" scale="0" ado-type="UnicodeStringVariableLength" />
         </orm:field>
         <orm:field name="_phone" property="Phone" behavior="readwrite" uniqueId="b43626b7-9b0a-401a-9145-a66127f10d29" type="System.String">
-          <orm:column name="Phone" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
-        </orm:field>
-        <orm:field name="_userId" property="UserId" behavior="readwrite" uniqueId="eb683d1e-b3f0-469c-95e5-f93c1edb3130" type="System.Nullable`1[[System.UInt32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
-          <orm:column name="UserId" sql-type="integer unsigned" nullable="true" length="0" scale="0" ado-type="Int32" />
+          <orm:column name="Phone" sql-type="nvarchar" nullable="false" length="250" scale="0" ado-type="UnicodeStringVariableLength" />
         </orm:field>
         <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="a7b66f8e-4c21-445c-a80c-e2e2e78ddc6e" type="System.UInt32">
           <orm:column name="Id" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
         </orm:field>
         <orm:field name="_email" property="Email" behavior="readwrite" uniqueId="481b195c-0c60-4660-b59d-eabfd43394af" type="System.String">
-          <orm:column name="Email" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+          <orm:column name="Email" sql-type="nvarchar" nullable="true" length="150" scale="0" ado-type="UnicodeStringVariableLength" />
         </orm:field>
         <orm:field name="_address" property="Address" behavior="readwrite" uniqueId="fe87455b-9fc4-4660-b2d3-13c32abbd2a9" type="System.String">
           <orm:column name="Address" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
         </orm:field>
+        <orm:field name="_photo" property="Photo" behavior="readwrite" uniqueId="d1ea8279-8bd2-44b6-ab59-cf82a0210ce0" type="System.Byte[]">
+          <orm:column name="Photo" sql-type="blob" nullable="true" length="0" scale="0" ado-type="LongVarBinary" />
+        </orm:field>
+        <orm:field name="_isDeleted" property="IsDeleted" behavior="readwrite" uniqueId="58d7035d-9b73-46ef-834b-242b15ed9af5" type="System.Boolean">
+          <orm:column name="IsDeleted" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        </orm:field>
+        <orm:field name="_gender" property="Gender" behavior="readwrite" uniqueId="e1157ee2-4ec4-4c5b-8086-c88d0c3ba194" type="System.Nullable`1[[System.Int16, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="Gender" sql-type="tinyint" nullable="true" length="0" scale="0" ado-type="Byte" />
+        </orm:field>
+        <orm:field name="_comments" property="Comments" behavior="readwrite" uniqueId="69414059-3276-47e6-8db9-32851d2ec4ac" type="System.String">
+          <orm:column name="Comments" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        </orm:field>
+        <orm:field name="_birthday" property="Birthday" behavior="readwrite" uniqueId="59d5fba6-240a-4661-9d2f-33d5d3dc72dc" type="System.DateTime">
+          <orm:column name="Birthday" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
         <orm:field name="_companiesEmployees" property="CompaniesEmployees" behavior="readwrite" uniqueId="9fda1654-e92c-4921-b65d-e9323efa50d4" type="SmartCRM.DAL.CompaniesEmployee">
           <orm:collection element-class="SmartCRM.DAL.CompaniesEmployee" inverse-field="_employee" order-by="" uniqueId="01997126-1da6-463c-b5ef-0ad612d2a9bb" />
+        </orm:field>
+        <orm:field name="_users" property="Users" behavior="readwrite" uniqueId="0ef9b56c-7f6b-4cf6-aaef-ef63a221c14e" type="SmartCRM.DAL.User">
+          <orm:collection element-class="SmartCRM.DAL.User" inverse-field="_employee" order-by="" uniqueId="1db76157-8412-4a8a-a13c-17a0ddd6e95c" />
         </orm:field>
       </orm:class>
       <orm:class name="ContsProductsType" uniqueId="095260b3-c0a9-42d1-aa25-2c93b0c7e85e">
@@ -443,11 +465,15 @@
         <orm:column name="Password" sql-type="nvarchar" nullable="false" length="30" scale="0" ado-type="UnicodeStringVariableLength" />
         <orm:column name="IsEnabled" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
         <orm:column name="IsAdmin" sql-type="bit" nullable="false" length="0" scale="0" ado-type="Bit" />
+        <orm:column name="EmployeeId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
         <orm:index name="UserName" unique="true">
           <orm:columnMapping>
             <orm:column name="Username" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
           </orm:columnMapping>
         </orm:index>
+        <orm:constraint name="FK_users_employees_Id" delete-action="dbdefaultrule" destination-table="employees">
+          <orm:column name="EmployeeId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
       </orm:table>
       <orm:table name="reports">
         <orm:column name="ReportName" sql-type="nvarchar" nullable="false" length="200" scale="0" ado-type="UnicodeStringVariableLength" />
@@ -499,14 +525,18 @@
         <orm:column name="SettingDescription" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
       </orm:table>
       <orm:table name="employees">
-        <orm:column name="FirstName" sql-type="nvarchar" nullable="false" length="80" scale="0" ado-type="UnicodeStringVariableLength" />
-        <orm:column name="SecondName" sql-type="nvarchar" nullable="true" length="80" scale="0" ado-type="UnicodeStringVariableLength" />
-        <orm:column name="LastName" sql-type="nvarchar" nullable="false" length="99" scale="0" ado-type="UnicodeStringVariableLength" />
-        <orm:column name="Phone" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
-        <orm:column name="UserId" sql-type="integer unsigned" nullable="true" length="0" scale="0" ado-type="Int32" />
+        <orm:column name="FirstName" sql-type="nvarchar" nullable="false" length="100" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="SecondName" sql-type="nvarchar" nullable="true" length="100" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="LastName" sql-type="nvarchar" nullable="false" length="100" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="Phone" sql-type="nvarchar" nullable="false" length="250" scale="0" ado-type="UnicodeStringVariableLength" />
         <orm:column name="Id" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
-        <orm:column name="Email" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="Email" sql-type="nvarchar" nullable="true" length="150" scale="0" ado-type="UnicodeStringVariableLength" />
         <orm:column name="Address" sql-type="nvarchar" nullable="true" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="Photo" sql-type="blob" nullable="true" length="0" scale="0" ado-type="LongVarBinary" />
+        <orm:column name="IsDeleted" sql-type="bit" nullable="false" length="0" scale="0" has-default-value="true" ado-type="Bit" />
+        <orm:column name="Gender" sql-type="tinyint" nullable="true" length="0" scale="0" ado-type="Byte" />
+        <orm:column name="Comments" sql-type="text" nullable="true" length="0" scale="0" ado-type="UnicodeStringInfiniteLength" />
+        <orm:column name="Birthday" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
       </orm:table>
       <orm:table name="conts_products_types">
         <orm:column name="ProductTypeName" sql-type="nvarchar" nullable="false" length="255" scale="0" ado-type="UnicodeStringVariableLength" />
@@ -643,6 +673,27 @@
       <Property Id="409c6ee2-c27a-4379-aaad-0a2fc1268fe6" name="IsEnabled" type="Boolean" label="IsEnabled : Boolean" kind="Persistent" fieldName="_isEnabled" />
       <Property Id="3a9f8d75-4887-40c7-a0c2-12c157855bfb" name="Password" label="Password : String" kind="Persistent" fieldName="_password" />
       <Property Id="12f579f7-062e-4052-9872-ed738636e9e0" name="Username" label="Username : String" kind="Persistent" fieldName="_username" />
+      <Property Id="2ce99d0b-8b0e-44b1-bdde-b40e328bf498" name="EmployeeId" type="UInt32" label="EmployeeId : UInt32" kind="Persistent" fieldName="_employeeId" />
+      <AssociationTargets>
+        <Association Id="1db76157-8412-4a8a-a13c-17a0ddd6e95c" SourceMultiplicity="One" name="UserHasEmployee">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/Employee" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="58fe3605-cc79-41aa-ae1a-858e2ab6de55">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Employee/Users" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="cee0b02b-bf4c-458c-92be-70c43f5c5799">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/User/Employee" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="49826bc4-8e23-4f03-8bf9-4e016987b24d">
+          <NavigationalProperty Id="01837890-570e-414f-b159-6ca4cf90cadc" name="Employee" type="Employee" label="Employee : Employee" nullable="true" kind="Persistent" fieldName="_employee" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
     </DomainClass>
     <DomainClass Id="5c368d2f-4dda-4a23-b36d-d22b46d7e65b" name="Report" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ReportID">
       <Property Id="f7d8c622-3bb7-4601-a6b6-51bfb336cc57" name="ReportID" type="UInt32" label="ReportID : UInt32" kind="Persistent" identity="true" fieldName="_reportID" />
@@ -700,13 +751,20 @@
       <Property Id="c40ce100-acf6-40e0-8732-d5aaaa4f9068" name="LastName" label="LastName : String" kind="Persistent" fieldName="_lastName" />
       <Property Id="b43626b7-9b0a-401a-9145-a66127f10d29" name="Phone" label="Phone : String" kind="Persistent" fieldName="_phone" />
       <Property Id="d48e618f-efb1-45ed-85f6-8957451e9319" name="SecondName" label="SecondName : String" kind="Persistent" fieldName="_secondName" />
-      <Property Id="eb683d1e-b3f0-469c-95e5-f93c1edb3130" name="UserId" type="UInt32" label="UserId : UInt32" nullable="true" kind="Persistent" fieldName="_userId" />
       <Property Id="a7b66f8e-4c21-445c-a80c-e2e2e78ddc6e" name="Id" type="UInt32" label="Id : UInt32" kind="Persistent" identity="true" fieldName="_id" />
       <Property Id="481b195c-0c60-4660-b59d-eabfd43394af" name="Email" label="Email : String" kind="Persistent" fieldName="_email" />
       <Property Id="fe87455b-9fc4-4660-b2d3-13c32abbd2a9" name="Address" label="Address : String" kind="Persistent" fieldName="_address" />
+      <Property Id="d1ea8279-8bd2-44b6-ab59-cf82a0210ce0" name="Photo" type="Byte[]" label="Photo : Byte[]" kind="Persistent" fieldName="_photo" />
+      <Property Id="58d7035d-9b73-46ef-834b-242b15ed9af5" name="IsDeleted" type="Boolean" label="IsDeleted : Boolean" kind="Persistent" fieldName="_isDeleted" />
+      <Property Id="e1157ee2-4ec4-4c5b-8086-c88d0c3ba194" name="Gender" type="Int16" label="Gender : Int16" nullable="true" kind="Persistent" fieldName="_gender" />
+      <Property Id="69414059-3276-47e6-8db9-32851d2ec4ac" name="Comments" label="Comments : String" kind="Persistent" fieldName="_comments" />
+      <Property Id="59d5fba6-240a-4661-9d2f-33d5d3dc72dc" name="Birthday" type="DateTime" label="Birthday : DateTime" kind="Persistent" fieldName="_birthday" />
       <navigationalProperties>
         <classHasNavigationalProperties Id="4552e336-0f92-43ef-b07b-1a5940279e93">
           <NavigationalProperty Id="9fda1654-e92c-4921-b65d-e9323efa50d4" name="CompaniesEmployees" type="IList&lt;CompaniesEmployee&gt;" label="CompaniesEmployees : IList&lt;CompaniesEmployee&gt;" nullable="true" kind="Persistent" fieldName="_companiesEmployees" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="ba4ec831-8760-453a-91de-c3a3cd31a518">
+          <NavigationalProperty Id="0ef9b56c-7f6b-4cf6-aaef-ef63a221c14e" name="Users" type="IList&lt;User&gt;" label="Users : IList&lt;User&gt;" nullable="true" kind="Persistent" fieldName="_users" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>

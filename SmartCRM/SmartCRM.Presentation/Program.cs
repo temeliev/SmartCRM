@@ -5,6 +5,7 @@
     using DevExpress.LookAndFeel;
 
     using SmartCRM.BOL.Controllers;
+    using SmartCRM.Presentation.Users;
 
     static class Program
     {

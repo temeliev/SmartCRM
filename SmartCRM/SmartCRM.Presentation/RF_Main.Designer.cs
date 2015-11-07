@@ -59,6 +59,7 @@
             this.navBarControlLeftBar = new DevExpress.XtraNavBar.NavBarControl();
             this.navBarGroupAdministration = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarUsers = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarEmployees = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarGroupCustomers = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
@@ -159,6 +160,7 @@
             // barBtnNavDown
             // 
             this.barBtnNavDown.Caption = " Down";
+            this.barBtnNavDown.Enabled = false;
             this.barBtnNavDown.Glyph = global::SmartCRM.Presentation.Properties.Resources.next_16x16;
             this.barBtnNavDown.Id = 9;
             this.barBtnNavDown.Name = "barBtnNavDown";
@@ -323,13 +325,13 @@
             this.splitContainerControl1.Panel2.Controls.Add(this.layoutControlUC);
             this.splitContainerControl1.Panel2.Text = "Panel2";
             this.splitContainerControl1.Size = new System.Drawing.Size(1044, 495);
-            this.splitContainerControl1.SplitterPosition = 219;
+            this.splitContainerControl1.SplitterPosition = 197;
             this.splitContainerControl1.TabIndex = 4;
             this.splitContainerControl1.Text = "splitContainerControl1";
             // 
             // navBarControlLeftBar
             // 
-            this.navBarControlLeftBar.ActiveGroup = this.navBarGroupCustomers;
+            this.navBarControlLeftBar.ActiveGroup = this.navBarGroupAdministration;
             this.navBarControlLeftBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.navBarControlLeftBar.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navBarGroupCustomers,
@@ -337,12 +339,13 @@
             this.navBarControlLeftBar.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.navBarItem1,
             this.navBarItem2,
-            this.navBarUsers});
+            this.navBarUsers,
+            this.navBarEmployees});
             this.navBarControlLeftBar.Location = new System.Drawing.Point(0, 0);
             this.navBarControlLeftBar.Name = "navBarControlLeftBar";
-            this.navBarControlLeftBar.OptionsNavPane.ExpandedWidth = 219;
+            this.navBarControlLeftBar.OptionsNavPane.ExpandedWidth = 197;
             this.navBarControlLeftBar.PaintStyleKind = DevExpress.XtraNavBar.NavBarViewKind.NavigationPane;
-            this.navBarControlLeftBar.Size = new System.Drawing.Size(219, 495);
+            this.navBarControlLeftBar.Size = new System.Drawing.Size(197, 495);
             this.navBarControlLeftBar.TabIndex = 0;
             this.navBarControlLeftBar.Text = "navBarControl1";
             // 
@@ -351,9 +354,11 @@
             this.navBarGroupAdministration.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.navBarGroupAdministration.Appearance.Options.UseFont = true;
             this.navBarGroupAdministration.Caption = "Administration";
+            this.navBarGroupAdministration.Expanded = true;
             this.navBarGroupAdministration.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsList;
             this.navBarGroupAdministration.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarUsers)});
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarUsers),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarEmployees)});
             this.navBarGroupAdministration.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarGroupAdministration.LargeImage")));
             this.navBarGroupAdministration.Name = "navBarGroupAdministration";
             // 
@@ -364,12 +369,18 @@
             this.navBarUsers.Name = "navBarUsers";
             this.navBarUsers.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarUsers.SmallImage")));
             // 
+            // navBarEmployees
+            // 
+            this.navBarEmployees.Caption = "Employees";
+            this.navBarEmployees.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarEmployees.LargeImage")));
+            this.navBarEmployees.Name = "navBarEmployees";
+            this.navBarEmployees.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarEmployees.SmallImage")));
+            // 
             // navBarGroupCustomers
             // 
             this.navBarGroupCustomers.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.navBarGroupCustomers.Appearance.Options.UseFont = true;
             this.navBarGroupCustomers.Caption = "Customers";
-            this.navBarGroupCustomers.Expanded = true;
             this.navBarGroupCustomers.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsList;
             this.navBarGroupCustomers.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarItem1),
@@ -398,7 +409,7 @@
             this.layoutControlUC.Name = "layoutControlUC";
             this.layoutControlUC.OptionsCustomizationForm.DesignTimeCustomizationFormPositionAndSize = new System.Drawing.Rectangle(780, 415, 250, 350);
             this.layoutControlUC.Root = this.layoutControlGroupUC;
-            this.layoutControlUC.Size = new System.Drawing.Size(820, 495);
+            this.layoutControlUC.Size = new System.Drawing.Size(842, 495);
             this.layoutControlUC.TabIndex = 0;
             this.layoutControlUC.Text = "layoutControl2";
             // 
@@ -409,7 +420,7 @@
             this.layoutControlGroupUC.GroupBordersVisible = false;
             this.layoutControlGroupUC.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroupUC.Name = "layoutControlGroupUC";
-            this.layoutControlGroupUC.Size = new System.Drawing.Size(820, 495);
+            this.layoutControlGroupUC.Size = new System.Drawing.Size(842, 495);
             this.layoutControlGroupUC.Text = "layoutControlGroupUC";
             this.layoutControlGroupUC.TextVisible = false;
             // 
@@ -453,7 +464,9 @@
             this.Controls.Add(this.ribbon);
             this.Name = "RF_Main";
             this.Ribbon = this.ribbon;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StatusBar = this.ribbonStatusBar;
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
@@ -509,5 +522,6 @@
         private DevExpress.XtraBars.BarButtonGroup barButtonGroup2;
         private DevExpress.XtraBars.BarButtonItem barBtnClose;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupMain;
+        private DevExpress.XtraNavBar.NavBarItem navBarEmployees;
     }
 }

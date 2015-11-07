@@ -14,9 +14,13 @@
 
         public abstract bool IsAdmin { get; set; }
 
+        public abstract uint EmployeeId { get; set; }
+
         public static UserModel Create()
         {
-            return UserModel.CreateInstance();
+            var model = UserModel.CreateInstance();
+            model.IsEnabled = true;
+            return model;
         }
     }
 }

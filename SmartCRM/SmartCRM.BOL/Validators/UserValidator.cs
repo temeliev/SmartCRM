@@ -8,6 +8,9 @@
 
     public class UserValidator
     {
+        private const int MinimumUsernameLength = 3;
+        private const int MinimumPasswordLength = 6;
+
         public CheckResult ValidateUser(SmartCRMEntitiesModel context, UserModel model)
         {
             CheckResult result = CheckResult.Default;
@@ -22,17 +25,12 @@
                 result.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, StaticReflection.GetMemberName<UserModel>(x => x.Password), "Enter password!"));
             }
 
-            if (!result.Success)
-            {
-                return result;
-            }
-
-            if (model.Username.Length < 3)
+            if (model.Username.Length < MinimumUsernameLength)
             {
                 result.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, StaticReflection.GetMemberName<UserModel>(x => x.Username), "Minimum required length of the Username is 3 symbols!"));
             }
 
-            if (model.Password.Length < 6)
+            if (model.Password.Length < MinimumPasswordLength)
             {
                 result.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, StaticReflection.GetMemberName<UserModel>(x => x.Password), "Minimum required length of the Password is 6 symbols!"));
             }
@@ -46,7 +44,7 @@
             var userInDb = context.Users.FirstOrDefault(user => user.Username == model.Username);
             if (userInDb != null)
             {
-                result.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, StaticReflection.GetMemberName<UserModel>(x => x.Username), "This username already exist!/nPlease select another one."));
+                result.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, StaticReflection.GetMemberName<UserModel>(x => x.Username), "This username already exist! Please select another one."));
             }
 
             return result;

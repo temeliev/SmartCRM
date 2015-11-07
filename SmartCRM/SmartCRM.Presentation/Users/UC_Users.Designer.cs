@@ -1,4 +1,4 @@
-﻿namespace SmartCRM.Presentation
+﻿namespace SmartCRM.Presentation.Users
 {
     partial class UC_Users
     {

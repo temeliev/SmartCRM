@@ -19,6 +19,7 @@ using Telerik.OpenAccess.Data.Common;
 using Telerik.OpenAccess.Metadata.Fluent;
 using Telerik.OpenAccess.Metadata.Fluent.Advanced;
 using System.ComponentModel;
+using SmartCRM.DAL;
 
 namespace SmartCRM.DAL	
 {
@@ -123,6 +124,46 @@ namespace SmartCRM.DAL
 					this.OnPropertyChanging("IsAdmin");
 					this._isAdmin = value;
 					this.OnPropertyChanged("IsAdmin");
+				}
+			}
+		}
+		
+		private uint _employeeId;
+		[Column("EmployeeId", OpenAccessType = OpenAccessType.Int32, Length = 0, Scale = 0, SqlType = "integer unsigned")]
+		[Storage("_employeeId")]
+		public virtual uint EmployeeId
+		{
+			get
+			{
+				return this._employeeId;
+			}
+			set
+			{
+				if(this._employeeId != value)
+				{
+					this.OnPropertyChanging("EmployeeId");
+					this._employeeId = value;
+					this.OnPropertyChanged("EmployeeId");
+				}
+			}
+		}
+		
+		private Employee _employee;
+		[ForeignKeyAssociation(ConstraintName = "FK_users_employees_Id", SharedFields = "EmployeeId", TargetFields = "Id")]
+		[Storage("_employee")]
+		public virtual Employee Employee
+		{
+			get
+			{
+				return this._employee;
+			}
+			set
+			{
+				if(this._employee != value)
+				{
+					this.OnPropertyChanging("Employee");
+					this._employee = value;
+					this.OnPropertyChanged("Employee");
 				}
 			}
 		}

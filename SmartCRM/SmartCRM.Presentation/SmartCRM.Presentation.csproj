@@ -86,53 +86,62 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Employees\UC_Employees.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Employees\UC_Employees.Designer.cs">
+      <DependentUpon>UC_Employees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RF_Main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="RF_Main.Designer.cs">
       <DependentUpon>RF_Main.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC_User.cs">
+    <Compile Include="Users\UC_User.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_User.Designer.cs">
+    <Compile Include="Users\UC_User.Designer.cs">
       <DependentUpon>UC_User.cs</DependentUpon>
     </Compile>
-    <Compile Include="UC_Users.cs">
+    <Compile Include="Users\UC_Users.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UC_Users.Designer.cs">
+    <Compile Include="Users\UC_Users.Designer.cs">
       <DependentUpon>UC_Users.cs</DependentUpon>
     </Compile>
-    <Compile Include="XF_Login.cs">
+    <Compile Include="Users\XF_Login.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="XF_Login.Designer.cs">
+    <Compile Include="Users\XF_Login.Designer.cs">
       <DependentUpon>XF_Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Employees\UC_Employees.resx">
+      <DependentUpon>UC_Employees.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="RF_Main.resx">
       <DependentUpon>RF_Main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_User.resx">
+    <EmbeddedResource Include="Users\UC_User.resx">
       <DependentUpon>UC_User.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UC_Users.resx">
+    <EmbeddedResource Include="Users\UC_Users.resx">
       <DependentUpon>UC_Users.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="XF_Login.resx">
+    <EmbeddedResource Include="Users\XF_Login.resx">
       <DependentUpon>XF_Login.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -168,16 +177,12 @@
       <Project>{38b89508-d66c-461b-b878-d915db602574}</Project>
       <Name>SmartCRM.BOL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SmartCRM.Resources\SmartCRM.Resources.csproj">
+      <Project>{cbfe0108-1058-496c-9e2d-e6b941e7c37f}</Project>
+      <Name>SmartCRM.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\previous_16x16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\next_16x16.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\next_32x32.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

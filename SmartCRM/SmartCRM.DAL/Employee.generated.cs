@@ -29,7 +29,7 @@ namespace SmartCRM.DAL
 	public partial class Employee : INotifyPropertyChanging, INotifyPropertyChanged
 	{
 		private string _firstName;
-		[Column("FirstName", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 80, Scale = 0, SqlType = "nvarchar")]
+		[Column("FirstName", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 100, Scale = 0, SqlType = "nvarchar")]
 		[Storage("_firstName")]
 		public virtual string FirstName
 		{
@@ -49,7 +49,7 @@ namespace SmartCRM.DAL
 		}
 		
 		private string _secondName;
-		[Column("SecondName", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, IsNullable = true, Length = 80, Scale = 0, SqlType = "nvarchar")]
+		[Column("SecondName", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, IsNullable = true, Length = 100, Scale = 0, SqlType = "nvarchar")]
 		[Storage("_secondName")]
 		public virtual string SecondName
 		{
@@ -69,7 +69,7 @@ namespace SmartCRM.DAL
 		}
 		
 		private string _lastName;
-		[Column("LastName", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 99, Scale = 0, SqlType = "nvarchar")]
+		[Column("LastName", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 100, Scale = 0, SqlType = "nvarchar")]
 		[Storage("_lastName")]
 		public virtual string LastName
 		{
@@ -89,7 +89,7 @@ namespace SmartCRM.DAL
 		}
 		
 		private string _phone;
-		[Column("Phone", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 255, Scale = 0, SqlType = "nvarchar")]
+		[Column("Phone", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, Length = 250, Scale = 0, SqlType = "nvarchar")]
 		[Storage("_phone")]
 		public virtual string Phone
 		{
@@ -104,26 +104,6 @@ namespace SmartCRM.DAL
 					this.OnPropertyChanging("Phone");
 					this._phone = value;
 					this.OnPropertyChanged("Phone");
-				}
-			}
-		}
-		
-		private uint? _userId;
-		[Column("UserId", OpenAccessType = OpenAccessType.Int32, IsNullable = true, Length = 0, Scale = 0, SqlType = "integer unsigned")]
-		[Storage("_userId")]
-		public virtual uint? UserId
-		{
-			get
-			{
-				return this._userId;
-			}
-			set
-			{
-				if(this._userId != value)
-				{
-					this.OnPropertyChanging("UserId");
-					this._userId = value;
-					this.OnPropertyChanged("UserId");
 				}
 			}
 		}
@@ -149,7 +129,7 @@ namespace SmartCRM.DAL
 		}
 		
 		private string _email;
-		[Column("Email", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, IsNullable = true, Length = 255, Scale = 0, SqlType = "nvarchar")]
+		[Column("Email", OpenAccessType = OpenAccessType.UnicodeStringVariableLength, IsNullable = true, Length = 150, Scale = 0, SqlType = "nvarchar")]
 		[Storage("_email")]
 		public virtual string Email
 		{
@@ -188,6 +168,106 @@ namespace SmartCRM.DAL
 			}
 		}
 		
+		private byte[] _photo;
+		[Column("Photo", OpenAccessType = OpenAccessType.LongVarBinary, IsNullable = true, Length = 0, Scale = 0, SqlType = "blob")]
+		[Storage("_photo")]
+		public virtual byte[] Photo
+		{
+			get
+			{
+				return this._photo;
+			}
+			set
+			{
+				if(this._photo != value)
+				{
+					this.OnPropertyChanging("Photo");
+					this._photo = value;
+					this.OnPropertyChanged("Photo");
+				}
+			}
+		}
+		
+		private bool _isDeleted;
+		[Column("IsDeleted", OpenAccessType = OpenAccessType.Bit, Length = 0, Scale = 0, SqlType = "bit")]
+		[Storage("_isDeleted")]
+		public virtual bool IsDeleted
+		{
+			get
+			{
+				return this._isDeleted;
+			}
+			set
+			{
+				if(this._isDeleted != value)
+				{
+					this.OnPropertyChanging("IsDeleted");
+					this._isDeleted = value;
+					this.OnPropertyChanged("IsDeleted");
+				}
+			}
+		}
+		
+		private short? _gender;
+		[Column("Gender", OpenAccessType = OpenAccessType.Byte, IsNullable = true, Length = 0, Scale = 0, SqlType = "tinyint")]
+		[Storage("_gender")]
+		public virtual short? Gender
+		{
+			get
+			{
+				return this._gender;
+			}
+			set
+			{
+				if(this._gender != value)
+				{
+					this.OnPropertyChanging("Gender");
+					this._gender = value;
+					this.OnPropertyChanged("Gender");
+				}
+			}
+		}
+		
+		private string _comments;
+		[Column("Comments", OpenAccessType = OpenAccessType.UnicodeStringInfiniteLength, IsNullable = true, Length = 0, Scale = 0, SqlType = "text")]
+		[Storage("_comments")]
+		public virtual string Comments
+		{
+			get
+			{
+				return this._comments;
+			}
+			set
+			{
+				if(this._comments != value)
+				{
+					this.OnPropertyChanging("Comments");
+					this._comments = value;
+					this.OnPropertyChanged("Comments");
+				}
+			}
+		}
+		
+		private DateTime _birthday;
+		[Column("Birthday", OpenAccessType = OpenAccessType.DateTime, Length = 0, Scale = 0, SqlType = "datetime")]
+		[Storage("_birthday")]
+		public virtual DateTime Birthday
+		{
+			get
+			{
+				return this._birthday;
+			}
+			set
+			{
+				if(this._birthday != value)
+				{
+					this.OnPropertyChanging("Birthday");
+					this._birthday = value;
+					this.OnPropertyChanged("Birthday");
+				}
+			}
+		}
+		
 		private IList<CompaniesEmployee> _companiesEmployees = new List<CompaniesEmployee>();
 		[Collection(InverseProperty = "Employee")]
 		[Storage("_companiesEmployees")]
@@ -196,6 +276,17 @@ namespace SmartCRM.DAL
 			get
 			{
 				return this._companiesEmployees;
+			}
+		}
+		
+		private IList<User> _users = new List<User>();
+		[Collection(InverseProperty = "Employee")]
+		[Storage("_users")]
+		public virtual IList<User> Users
+		{
+			get
+			{
+				return this._users;
 			}
 		}
 		
