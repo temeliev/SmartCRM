@@ -10,13 +10,13 @@
     using SmartCRM.BOL.Models;
     using SmartCRM.BOL.Utilities;
     using SmartCRM.DAL;
+    using SmartCRM.Resources;
 
     public class UserRepository
     {
         public User GetUserByModel(SmartCRMEntitiesModel db, UserModel model)
         {
             User user = db.Users.FirstOrDefault(x => x.Username == model.Username && x.Password == model.Password && x.IsEnabled);
-
             return user;
         }
 
@@ -36,12 +36,46 @@
             foreach (var poco in pocoUsers)
             {
                 UserModel model = UserModel.Create();
-                Mapper.Map(poco, model);
+                MapHelper.Map(poco, model);
                 model.AcceptChanges();
                 modelUsers.Add(model);
             }
 
             return modelUsers;
+        }
+
+        public void SaveAccount(SmartCRMEntitiesModel db, UserModel userModel, EmployeeModel employeeModel)
+        {
+            if (userModel.IsNew)
+            {
+                this.InsertAccount(db, userModel, employeeModel);
+            }
+            else
+            {
+                this.UpdateAccount(db, userModel, employeeModel);
+            }
+        }
+
+        private void UpdateAccount(SmartCRMEntitiesModel db, UserModel userModel, EmployeeModel employeeModel)
+        {
+            var pocoUser = db.Users.FirstOrDefault(x => x.UserId.Equals(userModel.UserId));
+            if (pocoUser == null)
+            {
+                throw new NullReferenceException("Missing user!");
+            }
+
+            MapHelper.Map(userModel, pocoUser);
+            MapHelper.Map(employeeModel, pocoUser.Employee);
+        }
+
+        private void InsertAccount(SmartCRMEntitiesModel db, UserModel userModel, EmployeeModel employeeModel)
+        {
+            User pocoUser = new User();
+            MapHelper.Map(userModel, pocoUser);
+            Employee pocoEmployee = new Employee();
+            MapHelper.Map(employeeModel, pocoEmployee);
+            pocoUser.Employee = pocoEmployee;
+            db.Add(pocoUser);
         }
 
         public void SaveUser(SmartCRMEntitiesModel db, UserModel userModel)
@@ -76,13 +110,26 @@
 
         public void DeleteUser(SmartCRMEntitiesModel db, UserModel userModel)
         {
-            User pocoUser = db.Users.FirstOrDefault(x => x.UserId==userModel.UserId);
+            User pocoUser = db.Users.FirstOrDefault(x => x.UserId == userModel.UserId);
             if (pocoUser == null)
             {
                 throw new NullReferenceException("Missing user in database!");
             }
 
             db.Delete(pocoUser);
+        }
+
+        public UserModel GetUserByEmployeeId(SmartCRMEntitiesModel db, uint employeeId)
+        {
+            User pocoUser = db.Users.FirstOrDefault(x => x.EmployeeId == employeeId);
+            if (pocoUser == null)
+            {
+                return null;
+            }
+
+            UserModel model = UserModel.Create();
+            Mapper.Map(pocoUser, model);
+            return model;
         }
     }
 }

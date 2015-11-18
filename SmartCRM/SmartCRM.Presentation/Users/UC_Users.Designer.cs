@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
+            this.checkAllUsers = new DevExpress.XtraEditors.CheckEdit();
             this.gridControlUsers = new DevExpress.XtraGrid.GridControl();
             this.gridViewUsers = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColUserId = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -38,16 +39,15 @@
             this.gridColIsEnabled = new DevExpress.XtraGrid.Columns.GridColumn();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.checkAllUsers = new DevExpress.XtraEditors.CheckEdit();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
             this.emptySpaceItem1 = new DevExpress.XtraLayout.EmptySpaceItem();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkAllUsers.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewUsers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkAllUsers.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).BeginInit();
             this.SuspendLayout();
@@ -64,6 +64,15 @@
             this.layoutControl1.Size = new System.Drawing.Size(813, 605);
             this.layoutControl1.TabIndex = 0;
             this.layoutControl1.Text = "layoutControl1";
+            // 
+            // checkAllUsers
+            // 
+            this.checkAllUsers.Location = new System.Drawing.Point(5, 5);
+            this.checkAllUsers.Name = "checkAllUsers";
+            this.checkAllUsers.Properties.Caption = "All Users";
+            this.checkAllUsers.Size = new System.Drawing.Size(111, 19);
+            this.checkAllUsers.StyleController = this.layoutControl1;
+            this.checkAllUsers.TabIndex = 5;
             // 
             // gridControlUsers
             // 
@@ -95,6 +104,7 @@
             this.gridColUserId.Caption = "User Id";
             this.gridColUserId.FieldName = "UserId";
             this.gridColUserId.Name = "gridColUserId";
+            this.gridColUserId.OptionsColumn.AllowFocus = false;
             this.gridColUserId.Visible = true;
             this.gridColUserId.VisibleIndex = 0;
             this.gridColUserId.Width = 99;
@@ -104,6 +114,7 @@
             this.gridColUsername.Caption = "User Name";
             this.gridColUsername.FieldName = "Username";
             this.gridColUsername.Name = "gridColUsername";
+            this.gridColUsername.OptionsColumn.AllowFocus = false;
             this.gridColUsername.Visible = true;
             this.gridColUsername.VisibleIndex = 1;
             this.gridColUsername.Width = 374;
@@ -113,6 +124,7 @@
             this.gridColPassword.Caption = "Password";
             this.gridColPassword.FieldName = "Password";
             this.gridColPassword.Name = "gridColPassword";
+            this.gridColPassword.OptionsColumn.AllowFocus = false;
             this.gridColPassword.Visible = true;
             this.gridColPassword.VisibleIndex = 2;
             this.gridColPassword.Width = 457;
@@ -122,6 +134,7 @@
             this.gridColIsAdmin.Caption = "Admin";
             this.gridColIsAdmin.FieldName = "IsAdmin";
             this.gridColIsAdmin.Name = "gridColIsAdmin";
+            this.gridColIsAdmin.OptionsColumn.AllowFocus = false;
             this.gridColIsAdmin.Visible = true;
             this.gridColIsAdmin.VisibleIndex = 3;
             this.gridColIsAdmin.Width = 204;
@@ -131,6 +144,7 @@
             this.gridColIsEnabled.Caption = "Active";
             this.gridColIsEnabled.FieldName = "IsEnabled";
             this.gridColIsEnabled.Name = "gridColIsEnabled";
+            this.gridColIsEnabled.OptionsColumn.AllowFocus = false;
             this.gridColIsEnabled.Visible = true;
             this.gridColIsEnabled.VisibleIndex = 4;
             this.gridColIsEnabled.Width = 178;
@@ -163,15 +177,6 @@
             this.layoutControlItem1.TextToControlDistance = 0;
             this.layoutControlItem1.TextVisible = false;
             // 
-            // checkAllUsers
-            // 
-            this.checkAllUsers.Location = new System.Drawing.Point(5, 5);
-            this.checkAllUsers.Name = "checkAllUsers";
-            this.checkAllUsers.Properties.Caption = "All Users";
-            this.checkAllUsers.Size = new System.Drawing.Size(111, 19);
-            this.checkAllUsers.StyleController = this.layoutControl1;
-            this.checkAllUsers.TabIndex = 5;
-            // 
             // layoutControlItem2
             // 
             this.layoutControlItem2.Control = this.checkAllUsers;
@@ -203,11 +208,11 @@
             this.Size = new System.Drawing.Size(813, 605);
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).EndInit();
             this.layoutControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.checkAllUsers.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlUsers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewUsers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlGroup1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkAllUsers.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControlItem2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emptySpaceItem1)).EndInit();
             this.ResumeLayout(false);

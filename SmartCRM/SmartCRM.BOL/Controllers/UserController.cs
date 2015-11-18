@@ -34,12 +34,6 @@
             this.LoadAllUsers(false);
         }
 
-        public void CreateUser()
-        {
-            UserModel newUser = UserModel.Create();
-            this.CurrentUser = newUser;
-        }
-
         public void SetUser(UserModel user)
         {
             this.CurrentUser = user;
@@ -49,9 +43,8 @@
         {
             using (var db = DbManager.CreateInstance())
             {
-                CheckResult check = CheckResult.Default;
                 UserValidator validator = new UserValidator();
-                check = validator.ValidateUser(db, this.CurrentUser);
+                CheckResult check = validator.ValidateUser(db, this.CurrentUser);
                 if (!check.Success)
                 {
                     return check;
@@ -113,6 +106,16 @@
             {
                 UserRepository rep = new UserRepository();
                 this.Users = rep.LoadAllUsers(db, isActive);
+            }
+        }
+
+        public UserModel GetUserByEmployeeId(uint employeeId)
+        {
+            using (var db = DbManager.CreateInstance())
+            {
+                UserRepository rep = new UserRepository();
+                var user = rep.GetUserByEmployeeId(db, employeeId);
+                return user;
             }
         }
     }

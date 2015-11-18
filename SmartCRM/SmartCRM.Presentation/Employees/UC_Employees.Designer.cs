@@ -32,26 +32,26 @@
             this.checkAllEmployees = new DevExpress.XtraEditors.CheckEdit();
             this.gridControlEmployees = new DevExpress.XtraGrid.GridControl();
             this.advBandedGridViewEmployees = new DevExpress.XtraGrid.Views.BandedGrid.AdvBandedGridView();
+            this.gridBandPhoto = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bGridColPhoto = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.repositoryItemPictureEdit1 = new DevExpress.XtraEditors.Repository.RepositoryItemPictureEdit();
+            this.gridBandNameAndEmail = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridColEmployeeId = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridColFullName = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBandAddress = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridColAddress = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBandBirthdayAndGender = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bGridColBirthday = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.bGridGender = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBandPhoneAndEmail = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.gridColEmail = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.gridColPhone = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.gridBandUser = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
             this.bGridColComments = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
+            this.bGridColStatus = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             this.layoutControlEmployees = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.layoutControlItem2 = new DevExpress.XtraLayout.LayoutControlItem();
-            this.gridBandPhoto = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBandNameAndEmail = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBandAddress = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBandBirthdayAndGender = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBandPhoneAndEmail = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.gridBandUser = new DevExpress.XtraGrid.Views.BandedGrid.GridBand();
-            this.bGridColStatus = new DevExpress.XtraGrid.Views.BandedGrid.BandedGridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.checkAllEmployees.Properties)).BeginInit();
@@ -120,11 +120,19 @@
             this.bGridColStatus});
             this.advBandedGridViewEmployees.GridControl = this.gridControlEmployees;
             this.advBandedGridViewEmployees.Name = "advBandedGridViewEmployees";
-            this.advBandedGridViewEmployees.OptionsBehavior.Editable = false;
             this.advBandedGridViewEmployees.OptionsFind.AlwaysVisible = true;
             this.advBandedGridViewEmployees.OptionsView.ColumnAutoWidth = true;
             this.advBandedGridViewEmployees.OptionsView.ShowBands = false;
             this.advBandedGridViewEmployees.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridBandPhoto
+            // 
+            this.gridBandPhoto.Caption = "Photo";
+            this.gridBandPhoto.Columns.Add(this.bGridColPhoto);
+            this.gridBandPhoto.Name = "gridBandPhoto";
+            this.gridBandPhoto.OptionsBand.FixedWidth = true;
+            this.gridBandPhoto.VisibleIndex = 0;
+            this.gridBandPhoto.Width = 81;
             // 
             // bGridColPhoto
             // 
@@ -146,6 +154,15 @@
             // 
             this.repositoryItemPictureEdit1.Name = "repositoryItemPictureEdit1";
             // 
+            // gridBandNameAndEmail
+            // 
+            this.gridBandNameAndEmail.Caption = "NameAndId";
+            this.gridBandNameAndEmail.Columns.Add(this.gridColEmployeeId);
+            this.gridBandNameAndEmail.Columns.Add(this.gridColFullName);
+            this.gridBandNameAndEmail.Name = "gridBandNameAndEmail";
+            this.gridBandNameAndEmail.VisibleIndex = 1;
+            this.gridBandNameAndEmail.Width = 189;
+            // 
             // gridColEmployeeId
             // 
             this.gridColEmployeeId.Caption = "Employee Id";
@@ -165,6 +182,14 @@
             this.gridColFullName.Visible = true;
             this.gridColFullName.Width = 189;
             // 
+            // gridBandAddress
+            // 
+            this.gridBandAddress.Caption = "Address";
+            this.gridBandAddress.Columns.Add(this.gridColAddress);
+            this.gridBandAddress.Name = "gridBandAddress";
+            this.gridBandAddress.VisibleIndex = 2;
+            this.gridBandAddress.Width = 220;
+            // 
             // gridColAddress
             // 
             this.gridColAddress.AutoFillDown = true;
@@ -175,6 +200,15 @@
             this.gridColAddress.OptionsFilter.AutoFilterCondition = DevExpress.XtraGrid.Columns.AutoFilterCondition.Contains;
             this.gridColAddress.Visible = true;
             this.gridColAddress.Width = 220;
+            // 
+            // gridBandBirthdayAndGender
+            // 
+            this.gridBandBirthdayAndGender.Caption = "Birthday";
+            this.gridBandBirthdayAndGender.Columns.Add(this.bGridColBirthday);
+            this.gridBandBirthdayAndGender.Columns.Add(this.bGridGender);
+            this.gridBandBirthdayAndGender.Name = "gridBandBirthdayAndGender";
+            this.gridBandBirthdayAndGender.VisibleIndex = 3;
+            this.gridBandBirthdayAndGender.Width = 175;
             // 
             // bGridColBirthday
             // 
@@ -195,6 +229,14 @@
             this.bGridGender.Visible = true;
             this.bGridGender.Width = 175;
             // 
+            // gridBandPhoneAndEmail
+            // 
+            this.gridBandPhoneAndEmail.Columns.Add(this.gridColEmail);
+            this.gridBandPhoneAndEmail.Columns.Add(this.gridColPhone);
+            this.gridBandPhoneAndEmail.Name = "gridBandPhoneAndEmail";
+            this.gridBandPhoneAndEmail.VisibleIndex = 4;
+            this.gridBandPhoneAndEmail.Width = 215;
+            // 
             // gridColEmail
             // 
             this.gridColEmail.Caption = "Email";
@@ -214,6 +256,14 @@
             this.gridColPhone.Visible = true;
             this.gridColPhone.Width = 215;
             // 
+            // gridBandUser
+            // 
+            this.gridBandUser.Caption = "User";
+            this.gridBandUser.Columns.Add(this.bGridColComments);
+            this.gridBandUser.Name = "gridBandUser";
+            this.gridBandUser.VisibleIndex = 5;
+            this.gridBandUser.Width = 103;
+            // 
             // bGridColComments
             // 
             this.bGridColComments.AutoFillDown = true;
@@ -223,6 +273,12 @@
             this.bGridColComments.OptionsColumn.AllowFocus = false;
             this.bGridColComments.Visible = true;
             this.bGridColComments.Width = 103;
+            // 
+            // bGridColStatus
+            // 
+            this.bGridColStatus.Caption = "Status";
+            this.bGridColStatus.Name = "bGridColStatus";
+            this.bGridColStatus.Visible = true;
             // 
             // layoutControlEmployees
             // 
@@ -261,63 +317,6 @@
             this.layoutControlItem2.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem2.TextToControlDistance = 0;
             this.layoutControlItem2.TextVisible = false;
-            // 
-            // gridBandPhoto
-            // 
-            this.gridBandPhoto.Caption = "Photo";
-            this.gridBandPhoto.Columns.Add(this.bGridColPhoto);
-            this.gridBandPhoto.Name = "gridBandPhoto";
-            this.gridBandPhoto.OptionsBand.FixedWidth = true;
-            this.gridBandPhoto.VisibleIndex = 0;
-            this.gridBandPhoto.Width = 81;
-            // 
-            // gridBandNameAndEmail
-            // 
-            this.gridBandNameAndEmail.Caption = "NameAndId";
-            this.gridBandNameAndEmail.Columns.Add(this.gridColEmployeeId);
-            this.gridBandNameAndEmail.Columns.Add(this.gridColFullName);
-            this.gridBandNameAndEmail.Name = "gridBandNameAndEmail";
-            this.gridBandNameAndEmail.VisibleIndex = 1;
-            this.gridBandNameAndEmail.Width = 189;
-            // 
-            // gridBandAddress
-            // 
-            this.gridBandAddress.Caption = "Address";
-            this.gridBandAddress.Columns.Add(this.gridColAddress);
-            this.gridBandAddress.Name = "gridBandAddress";
-            this.gridBandAddress.VisibleIndex = 2;
-            this.gridBandAddress.Width = 220;
-            // 
-            // gridBandBirthdayAndGender
-            // 
-            this.gridBandBirthdayAndGender.Caption = "Birthday";
-            this.gridBandBirthdayAndGender.Columns.Add(this.bGridColBirthday);
-            this.gridBandBirthdayAndGender.Columns.Add(this.bGridGender);
-            this.gridBandBirthdayAndGender.Name = "gridBandBirthdayAndGender";
-            this.gridBandBirthdayAndGender.VisibleIndex = 3;
-            this.gridBandBirthdayAndGender.Width = 175;
-            // 
-            // gridBandPhoneAndEmail
-            // 
-            this.gridBandPhoneAndEmail.Columns.Add(this.gridColEmail);
-            this.gridBandPhoneAndEmail.Columns.Add(this.gridColPhone);
-            this.gridBandPhoneAndEmail.Name = "gridBandPhoneAndEmail";
-            this.gridBandPhoneAndEmail.VisibleIndex = 4;
-            this.gridBandPhoneAndEmail.Width = 215;
-            // 
-            // gridBandUser
-            // 
-            this.gridBandUser.Caption = "User";
-            this.gridBandUser.Columns.Add(this.bGridColComments);
-            this.gridBandUser.Name = "gridBandUser";
-            this.gridBandUser.VisibleIndex = 5;
-            this.gridBandUser.Width = 103;
-            // 
-            // bGridColStatus
-            // 
-            this.bGridColStatus.Caption = "Status";
-            this.bGridColStatus.Name = "bGridColStatus";
-            this.bGridColStatus.Visible = true;
             // 
             // UC_Employees
             // 

@@ -34,12 +34,6 @@
             this.LoadAllEmployees(false);
         }
 
-        public void CreateEmployee()
-        {
-            EmployeeModel newEmployee = EmployeeModel.Create();
-            this.SetEmployee(newEmployee);
-        }
-
         public void SetEmployee(EmployeeModel employee)
         {
             this.CurrentEmployee = employee;
@@ -114,6 +108,16 @@
             {
                 EmployeeRepository rep = new EmployeeRepository();
                 this.Employees = rep.LoadAllEmployees(db, isActive);
+            }
+        }
+
+        public EmployeeModel GetEmbloyeeById(uint employeeId)
+        {
+            using (var db = DbManager.CreateInstance())
+            {
+                EmployeeRepository rep = new EmployeeRepository();
+                var employee = rep.GetEmployeeById(db, employeeId);
+                return employee;
             }
         }
     }

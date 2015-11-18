@@ -8,15 +8,24 @@
     using AutoMapper;
 
     using SmartCRM.BOL.Models;
+    using SmartCRM.BOL.Models.Enums;
+    using SmartCRM.BOL.Utilities;
     using SmartCRM.DAL;
+    using SmartCRM.Resources;
 
     public class EmployeeRepository
     {
-        public Employee GetEmployeeById(SmartCRMEntitiesModel db, Employee model)
+        public EmployeeModel GetEmployeeById(SmartCRMEntitiesModel db, uint employeeId)
         {
-            Employee user = db.Employees.FirstOrDefault(x => x.Id == model.Id);
+            Employee employee = db.Employees.FirstOrDefault(x => x.Id == employeeId);
+            if (employee == null)
+            {
+                return null;
+            }
 
-            return user;
+            EmployeeModel model = EmployeeModel.Create();
+            MapHelper.Map(employee, model);
+            return model;
         }
 
         public BindingList<EmployeeModel> LoadAllEmployees(SmartCRMEntitiesModel db, bool isActive)
@@ -35,7 +44,7 @@
             foreach (var poco in pocoEmployees)
             {
                 EmployeeModel model = EmployeeModel.Create();
-                Mapper.Map(poco, model);
+                MapHelper.Map(poco, model);
                 model.AcceptChanges();
                 modelEmployees.Add(model);
             }
@@ -63,14 +72,17 @@
                 throw new NullReferenceException("Missing employee!");
             }
 
-            Mapper.Map(employeeModel, pocoEmployee);
+            MapHelper.Map(employeeModel, pocoEmployee);
         }
 
         private void InsertEmployee(SmartCRMEntitiesModel db, EmployeeModel employeeModel)
         {
             Employee pocoEmployee = new Employee();
-            Mapper.Map(employeeModel, pocoEmployee);
+            MapHelper.Map(employeeModel, pocoEmployee);
+
             db.Add(pocoEmployee);
+            db.FlushChanges();
+            employeeModel.Id = pocoEmployee.Id;
         }
 
         public void DeleteEmployee(SmartCRMEntitiesModel db, Employee employeeModel)

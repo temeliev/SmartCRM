@@ -8,7 +8,7 @@
     using SmartCRM.BOL.Validators;
     using SmartCRM.DAL;
 
-    public class LoginController : IController
+    public class LoginController //: IController
     {
         private LoginController()
         {
@@ -22,12 +22,16 @@
         {
             Mapper.Initialize(cfg =>
             {
-                cfg.CreateMap<User, UserModel>();
-                cfg.CreateMap<UserModel, User>();
+                cfg.CreateMap<User, UserModel>()
+                    .ForMember(dest => dest.Employee, opt => opt.Ignore());
+                cfg.CreateMap<UserModel, User>()
+                    .ForMember(dest => dest.Employee, opt => opt.Ignore());
                 cfg.CreateMap<Employee, EmployeeModel>()
-                    .ForMember(dest => dest.Photo, opt => opt.Ignore());
-
-                cfg.CreateMap<EmployeeModel, Employee>();
+                    .ForMember(dest => dest.Photo, opt => opt.Ignore())
+                    .ForMember(dest => dest.Gender, opt => opt.Ignore());
+                cfg.CreateMap<EmployeeModel, Employee>()
+                    .ForMember(dest => dest.Photo, opt => opt.Ignore())
+                    .ForMember(dest => dest.Gender, opt => opt.Ignore());
                 //cfg.AddProfile<FooProfile>();
             });
         }

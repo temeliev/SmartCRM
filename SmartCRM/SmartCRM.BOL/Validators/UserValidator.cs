@@ -41,7 +41,7 @@
         public CheckResult ValidateIfUserExistInDatabase(SmartCRMEntitiesModel context, UserModel model)
         {
             CheckResult result = CheckResult.Default;
-            var userInDb = context.Users.FirstOrDefault(user => user.Username == model.Username);
+            var userInDb = context.Users.FirstOrDefault(user => user.Username == model.Username && user.UserId != model.UserId);
             if (userInDb != null)
             {
                 result.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, StaticReflection.GetMemberName<UserModel>(x => x.Username), "This username already exist! Please select another one."));

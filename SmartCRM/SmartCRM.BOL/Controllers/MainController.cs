@@ -4,13 +4,10 @@
     {
         private MainController()
         {
-            this.UserController = UserController.CreateIntance();
-            this.EmployeeController = EmployeeController.CreateIntance();
+            this.AccountController = AccountController.CreateIntance();
         }
 
-        public UserController UserController { get; private set; }
-
-        public EmployeeController EmployeeController { get; private set; }
+        public AccountController AccountController { get; private set; }
 
         public static MainController CreateInstance()
         {

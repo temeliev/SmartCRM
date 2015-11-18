@@ -52,6 +52,8 @@
     <Reference Include="Telerik.OpenAccess.40.Extensions, Version=2015.1.225.1, Culture=neutral, PublicKeyToken=7ce17eeaf1d59342, processorArchitecture=MSIL" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Events\AccountChangedEventArgs.cs" />
     <Compile Include="Controllers\IController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -60,6 +62,7 @@
     <Compile Include="DBManager.cs" />
     <Compile Include="Global.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
+    <Compile Include="Models\Enums\AccountTypes.cs" />
     <Compile Include="Models\Enums\GenderType.cs" />
     <Compile Include="Models\Enums\Messages.cs" />
     <Compile Include="Models\IModel.cs" />
@@ -70,7 +73,9 @@
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Utilities\CheckResult.cs" />
     <Compile Include="Utilities\CheckResultDetail.cs" />
+    <Compile Include="Utilities\MapHelper.cs" />
     <Compile Include="Utilities\StaticRefection.cs" />
+    <Compile Include="Validators\EmployeeValidator.cs" />
     <Compile Include="Validators\IValidator.cs" />
     <Compile Include="Validators\LoginValidator.cs" />
     <Compile Include="Validators\UserValidator.cs" />
@@ -79,6 +84,10 @@
     <ProjectReference Include="..\SmartCRM.DAL\SmartCRM.DAL.csproj">
       <Project>{c50145e6-a244-4f1f-b41f-90d1925b4a00}</Project>
       <Name>SmartCRM.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SmartCRM.Resources\SmartCRM.Resources.csproj">
+      <Project>{cbfe0108-1058-496c-9e2d-e6b941e7c37f}</Project>
+      <Name>SmartCRM.Resources</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

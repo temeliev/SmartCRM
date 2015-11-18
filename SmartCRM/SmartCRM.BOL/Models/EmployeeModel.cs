@@ -28,7 +28,7 @@
         public abstract DateTime Birthday { get; set; }
 
         public abstract GenderType Gender { get; set; }
-    
+
         public Image Photo { get; set; }
 
         public abstract bool IsDeleted { get; set; }
@@ -37,13 +37,23 @@
         {
             get
             {
-                return string.Concat(this.FirstName, " ", this.LastName ?? string.Empty, " ", this.LastName);
+                return string.Concat(this.FirstName, " ", this.SecondName ?? string.Empty, " ", this.LastName);
+            }
+        }
+
+        public bool IsNew
+        {
+            get
+            {
+                return this.Id == 0;
             }
         }
 
         public static EmployeeModel Create()
         {
-            return EmployeeModel.CreateInstance();
+            var model = EmployeeModel.CreateInstance();
+            model.Birthday = DateTime.Now;
+            return model;
         }
     }
 }

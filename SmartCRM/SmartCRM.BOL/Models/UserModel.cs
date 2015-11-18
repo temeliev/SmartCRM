@@ -16,6 +16,16 @@
 
         public abstract uint EmployeeId { get; set; }
 
+        public EmployeeModel Employee { get; set; }
+
+        public bool IsNew
+        {
+            get
+            {
+                return this.UserId == 0;
+            }
+        }
+
         public static UserModel Create()
         {
             var model = UserModel.CreateInstance();

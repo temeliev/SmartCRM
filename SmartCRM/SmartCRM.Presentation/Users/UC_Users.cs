@@ -2,10 +2,11 @@
 namespace SmartCRM.Presentation.Users
 {
     using SmartCRM.BOL.Controllers;
+    using SmartCRM.BOL.Models;
 
     public partial class UC_Users : UserControl
     {
-        private UserController controller;
+        private AccountController controller;
 
         private UC_Users()
         {
@@ -38,10 +39,16 @@ namespace SmartCRM.Presentation.Users
             this.gridControlUsers.DataSource = this.controller.Users;
         }
 
-        public static UC_Users GetUserControl(UserController userController)
+        internal UserModel GetFocusedItem()
+        {
+            var focusedUser = (UserModel)this.gridViewUsers.GetFocusedRow();
+            return focusedUser;
+        }
+
+        public static UC_Users GetUserControl(AccountController accountController)
         {
             UC_Users uc = new UC_Users();
-            uc.controller = userController;
+            uc.controller = accountController;
             return uc;
         }
     }

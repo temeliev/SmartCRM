@@ -161,7 +161,7 @@
             // 
             this.barBtnNavDown.Caption = " Down";
             this.barBtnNavDown.Enabled = false;
-            this.barBtnNavDown.Glyph = global::SmartCRM.Presentation.Properties.Resources.next_16x16;
+            this.barBtnNavDown.Glyph = ((System.Drawing.Image)(resources.GetObject("barBtnNavDown.Glyph")));
             this.barBtnNavDown.Id = 9;
             this.barBtnNavDown.Name = "barBtnNavDown";
             // 
@@ -199,6 +199,7 @@
             // barBtnSave
             // 
             this.barBtnSave.Caption = "Save";
+            this.barBtnSave.Enabled = false;
             this.barBtnSave.Glyph = ((System.Drawing.Image)(resources.GetObject("barBtnSave.Glyph")));
             this.barBtnSave.Id = 14;
             this.barBtnSave.Name = "barBtnSave";
@@ -206,6 +207,7 @@
             // barBtnSaveAndClose
             // 
             this.barBtnSaveAndClose.Caption = "Save and Close";
+            this.barBtnSaveAndClose.Enabled = false;
             this.barBtnSaveAndClose.Glyph = ((System.Drawing.Image)(resources.GetObject("barBtnSaveAndClose.Glyph")));
             this.barBtnSaveAndClose.Id = 15;
             this.barBtnSaveAndClose.Name = "barBtnSaveAndClose";

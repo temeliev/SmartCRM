@@ -1,5 +1,6 @@
 ﻿namespace SmartCRM.Presentation
 {
+    using System.Linq;
     using System.Windows.Forms;
 
     using DevExpress.XtraGrid.Views.Base;
@@ -10,7 +11,9 @@
     using SmartCRM.BOL.Models;
     using SmartCRM.Presentation.Users;
     using SmartCRM.BOL.Models.Enums;
+    using SmartCRM.BOL.Utilities;
     using SmartCRM.Presentation.Employees;
+    using SmartCRM.BOL.Controllers.Events;
 
     public partial class RF_Main : DevExpress.XtraBars.Ribbon.RibbonForm
     {
@@ -18,9 +21,12 @@
 
         private UC_Users ucUsers;
 
-        private UC_User ucUser;
+        private UC_AccountInfo ucAccountInfo;
 
         private UC_Employees ucEmployees;
+
+        private int employeesLastFocusedRowHandle = 0;
+        private int usersLastFocusedRowHandle = 0;
 
         public RF_Main()
         {
@@ -29,7 +35,7 @@
             this.navBarUsers.LinkClicked += this.navBarUsers_LinkClicked;
             this.navBarEmployees.LinkClicked += this.navBarEmployees_LinkClicked;
 
-            this.layoutControlUC.Resize += this.layoutControl2_Resize;
+            this.layoutControlUC.Resize += this.layoutControlUC_Resize;
 
             this.barBtnRefresh.ItemClick += this.barBtnRefresh_ItemClick;
             this.barBtnAdd.ItemClick += this.barBtnAdd_ItemClick;
@@ -50,10 +56,34 @@
             this.ribbon.Minimized = true;
         }
 
+        void AccountController_Changed(object sender, AccountChangedEventArgs e)
+        {
+            if (e.IsDirty && !this.barBtnSave.Enabled)
+            {
+                this.barBtnSave.Enabled = true;
+                this.barBtnSaveAndClose.Enabled = true;
+            }
+            else if (!e.IsDirty && this.barBtnSave.Enabled)
+            {
+                this.barBtnSave.Enabled = false;
+                this.barBtnSaveAndClose.Enabled = false;
+            }
+        }
+
         void navBarEmployees_LinkClicked(object sender, NavBarLinkEventArgs e)
         {
-            this.ribbon.Minimized = false;
-            this.ShowEmployees();
+            if (this.ucAccountInfo != null)
+            {
+                if (this.ucAccountInfo.CheckAccountBeforeSave())
+                {
+                    this.ucAccountInfo = null;
+                    this.ShowEmployees();
+                }
+            }
+            else
+            {
+                this.ShowEmployees();
+            }
         }
 
         void navBarControlLeftBar_MouseDown(object sender, MouseEventArgs e)
@@ -78,20 +108,42 @@
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Warning))
             {
-                var focusedUser = (UserModel)this.ucUsers.gridViewUsers.GetFocusedRow();
-                if (focusedUser != null)
+                if (this.ucUsers != null)
                 {
-                    this.mainController.UserController.DeleteUser(focusedUser);
+                    var focusedUser = (UserModel)this.ucUsers.gridViewUsers.GetFocusedRow();
+                    if (focusedUser != null)
+                    {
+                        this.mainController.AccountController.DeleteUser(focusedUser);
+                    }
+                }
+                else if (this.ucEmployees != null)
+                {
+                    var focusedEmployee = (EmployeeModel)this.ucEmployees.advBandedGridViewEmployees.GetFocusedRow();
+                    if (focusedEmployee != null)
+                    {
+                        this.mainController.AccountController.DeleteEmployee(focusedEmployee);
+                    }
                 }
             }
         }
 
         void barBtnEdit_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            var focusedUser = (UserModel)this.ucUsers.gridViewUsers.GetFocusedRow();
-            if (focusedUser != null)
+            if (this.ucUsers != null)
             {
-                this.EditUser(focusedUser);
+                var focusedUser = this.ucUsers.GetFocusedItem();
+                if (focusedUser != null)
+                {
+                    this.LoadUser(focusedUser);
+                }
+            }
+            else if (this.ucEmployees != null)
+            {
+                var focusedEmployee = this.ucEmployees.GetFocusedItem();
+                if (focusedEmployee != null)
+                {
+                    this.LoadEmployee(focusedEmployee);
+                }
             }
         }
 
@@ -99,16 +151,24 @@
         {
             if (this.ucUsers != null)
             {
-                this.mainController.UserController.CreateUser();
-                this.ribbonPageGroupCRUD.Visible = false;
-                this.ribbonPageGroupNavigation.Visible = false;
-                this.LoadUCUser(false);
+                this.LoadUser(UserModel.Create(), true);
+            }
+            else if (this.ucEmployees != null)
+            {
+                this.LoadEmployee(EmployeeModel.Create());
             }
         }
 
         void barBtnRefresh_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            this.ucUsers.LoadUsers();
+            if (this.mainController.AccountController.HasUsers())
+            {
+                this.ucUsers.LoadUsers();
+            }
+            else if (this.mainController.AccountController.HasEmployees())
+            {
+                this.ucEmployees.LoadEmployees();
+            }
         }
 
         #endregion Group CRUD
@@ -117,67 +177,36 @@
 
         void barBtnClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (this.ucUser != null)
+            if (this.ucAccountInfo != null)
             {
-                if (this.UCUserCanBeClosed())
+                if (this.ucAccountInfo.CheckAccountBeforeSave())
                 {
-                    this.ucUsers.LoadUsers();
+                    this.CloseAccount();
                 }
             }
         }
 
         void barBtnSaveAndClose_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (this.ucUser != null)
+            if (this.ucAccountInfo != null)
             {
-                if (!this.SaveUser())
+                if (this.ucAccountInfo.Save())
                 {
-                    return;
+                    this.CloseAccount();
                 }
-
-                this.ucUsers.LoadUsers();
-                this.ShowUsers();
             }
         }
 
         void barBtnSave_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
         {
-            if (this.ucUser != null)
+            if (this.ucAccountInfo != null)
             {
-                if (!this.SaveUser())
+                if (this.ucAccountInfo.Save())
                 {
-                    return;
+                    this.barBtnSave.Enabled = false;
+                    this.barBtnSaveAndClose.Enabled = false;
                 }
-
-                this.ucUsers.LoadUsers();
             }
-        }
-
-        private bool SaveUser()
-        {
-            this.ucUser.ClearErrors();
-            var check = this.mainController.UserController.SaveUser();
-            if (!check.Success)
-            {
-                this.ucUser.ShowErrors(check);
-                return false;
-            }
-
-            return true;
-        }
-
-        private DialogResult CheckUCUserForChanges()
-        {
-            if (this.mainController.UserController.CurrentUser.IsDirty)
-            {
-                return MessageBox.Show(
-                    Messages.ObjectIsDirty,
-                    "Attention",
-                    MessageBoxButtons.YesNoCancel,
-                    MessageBoxIcon.Question);
-            }
-
-            return DialogResult.No;
         }
 
         #endregion Group Main
@@ -186,13 +215,16 @@
 
         void navBarUsers_LinkClicked(object sender, DevExpress.XtraNavBar.NavBarLinkEventArgs e)
         {
-            if (this.ucUsers != null && this.ucUser != null)
+            if (this.ucAccountInfo != null)
             {
-                this.UCUserCanBeClosed();
+                if (this.ucAccountInfo.CheckAccountBeforeSave())
+                {
+                    this.ucAccountInfo = null;
+                    this.ShowUsers();
+                }
             }
             else
             {
-                this.ribbon.Minimized = false;
                 this.ShowUsers();
             }
         }
@@ -207,66 +239,32 @@
         {
             if (e.Clicks == 2)
             {
-                var focusedUser = (UserModel)this.ucUsers.gridViewUsers.GetRow(e.RowHandle);
+                var focusedUser = this.ucUsers.GetFocusedItem();
                 if (focusedUser != null)
                 {
-                    this.EditUser(focusedUser);
+                    this.LoadUser(focusedUser);
                 }
             }
         }
 
-        private bool UCUserCanBeClosed()
+        private void LoadUser(UserModel model, bool isNew = false)
         {
-            bool canClose = false;
-            var changes = this.CheckUCUserForChanges();
-            if (changes == DialogResult.Yes)
+            this.mainController.AccountController.SetUser(model);
+            //this.mainController.AccountController.CurrentUser.PropertyChanged += this.CurrentEmployeeOrUser_PropertyChanged;
+            if (isNew)
             {
-                if (!this.SaveUser())
-                {
-                    return canClose;
-                }
-
-                if (this.ucUser != null)
-                {
-                    this.ucUser = null;
-                }
-
-                this.ShowUsers();
-                canClose = true;
+                this.mainController.AccountController.SetEmployee(EmployeeModel.Create());
             }
-
-            if (changes == DialogResult.No)
+            else
             {
-                this.mainController.UserController.CurrentUser.RejectChanges();
-
-                if (this.ucUser != null)
-                {
-                    this.ucUser = null;
-                }
-
-                this.ShowUsers();
-                canClose = false;
+                var employee = this.mainController.AccountController.GetEmbloyeeById(model.EmployeeId);
+                this.mainController.AccountController.SetEmployee(employee);
             }
 
-            return canClose;
-        }
-
-        private void EditUser(UserModel focusedUser)
-        {
-            this.mainController.UserController.SetUser(focusedUser);
-            this.LoadUCUser(true);
-        }
-
-        private void LoadUCUser(bool forUpdate)
-        {
-            this.ucUser = UC_User.GetUserControl(this.mainController.UserController);
-            this.layoutControlUC.Controls.Clear();
-            this.layoutControlUC.Controls.Add(this.ucUser);
-            this.ucUser.SetUsernameReadOnly(forUpdate);
-            this.ribbonPageGroupCRUD.Visible = false;
-            this.ribbonPageGroupNavigation.Visible = false;
-            this.ribbonPageGroupHome.Visible = true;
-            this.ribbonPageGroupMain.Visible = true;
+           // this.mainController.AccountController.CurrentEmployee.PropertyChanged += this.CurrentEmployeeOrUser_PropertyChanged;
+            this.usersLastFocusedRowHandle = this.ucUsers.gridViewUsers.FocusedRowHandle;
+            this.SetControlsForEdit();
+            this.ShowAccountInfo(AccountType.User);
         }
 
         private void ShowUsers()
@@ -275,10 +273,15 @@
 
             if (this.ucUsers == null)
             {
-                this.ucUsers = UC_Users.GetUserControl(this.mainController.UserController);
+                this.ucUsers = UC_Users.GetUserControl(this.mainController.AccountController);
                 this.ucUsers.Size = this.layoutControlUC.Size;
                 this.ucUsers.gridViewUsers.FocusedRowChanged += this.gridViewUsers_FocusedRowChanged;
                 this.ucUsers.gridViewUsers.RowCellClick += this.gridViewUsers_RowCellClick;
+            }
+
+            if (!this.mainController.AccountController.HasUsers())
+            {
+                this.ucUsers.LoadUsers();
             }
 
             this.layoutControlUC.Controls.Add(this.ucUsers);
@@ -292,16 +295,38 @@
 
             this.ribbonPageGroupMain.Visible = false;
 
-            if (this.mainController.UserController.Users.Count == 0)
+            if (this.mainController.AccountController.Users.Count == 0)
             {
                 this.barBtnNavUp.Enabled = false;
                 this.barBtnNavDown.Enabled = false;
             }
+
+            this.mainController.AccountController.Employees.Clear();
+            this.ribbon.Minimized = false;
+            this.ucUsers.gridViewUsers.FocusedRowHandle = this.usersLastFocusedRowHandle;
         }
 
         #endregion UC_Users
 
         #region UC_Employees
+
+        void advBandedGridViewEmployees_RowCellClick(object sender, RowCellClickEventArgs e)
+        {
+            if (e.Clicks == 2)
+            {
+                var focusedEmployee = this.ucEmployees.GetFocusedItem();
+                if (focusedEmployee != null)
+                {
+                    this.LoadEmployee(focusedEmployee);
+                }
+            }
+        }
+
+        void advBandedGridViewEmployees_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
+        {
+            int rowCount = this.ucEmployees.advBandedGridViewEmployees.RowCount;
+            this.SetNavigationBar(e.FocusedRowHandle, rowCount);
+        }
 
         private void ShowEmployees()
         {
@@ -309,10 +334,15 @@
 
             if (this.ucEmployees == null)
             {
-                this.ucEmployees = UC_Employees.GetUserControl(this.mainController.EmployeeController);
+                this.ucEmployees = UC_Employees.GetUserControl(this.mainController.AccountController);
                 this.ucEmployees.Size = this.layoutControlUC.Size;
                 this.ucEmployees.advBandedGridViewEmployees.FocusedRowChanged += this.advBandedGridViewEmployees_FocusedRowChanged;
                 this.ucEmployees.advBandedGridViewEmployees.RowCellClick += this.advBandedGridViewEmployees_RowCellClick;
+            }
+
+            if (!this.mainController.AccountController.HasEmployees())
+            {
+                this.ucEmployees.LoadEmployees();
             }
 
             this.layoutControlUC.Controls.Add(this.ucEmployees);
@@ -326,32 +356,77 @@
 
             this.ribbonPageGroupMain.Visible = false;
 
-            if (this.mainController.EmployeeController.Employees.Count == 0)
+            if (this.mainController.AccountController.Employees.Count == 0)
             {
                 this.barBtnNavUp.Enabled = false;
                 this.barBtnNavDown.Enabled = false;
             }
+
+            this.ribbon.Minimized = false;
+            this.ucEmployees.advBandedGridViewEmployees.FocusedRowHandle = this.employeesLastFocusedRowHandle;
+            this.mainController.AccountController.Users.Clear();
         }
 
-        void advBandedGridViewEmployees_RowCellClick(object sender, RowCellClickEventArgs e)
+        private void LoadEmployee(EmployeeModel model)
         {
-            if (e.Clicks == 2)
+            var user = this.mainController.AccountController.GetUserByEmployeeId(model.Id);
+            this.mainController.AccountController.SetUser(user);
+            if (user != null)
             {
-                var focusedEmployee = (EmployeeModel)this.ucUsers.gridViewUsers.GetRow(e.RowHandle);
-                if (focusedEmployee != null)
-                {
-                    // this.EditUser(focusedEmployee);
-                }
+                //this.mainController.AccountController.CurrentUser.PropertyChanged += this.CurrentEmployeeOrUser_PropertyChanged;
             }
-        }
 
-        void advBandedGridViewEmployees_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
-        {
-            int rowCount = this.ucEmployees.advBandedGridViewEmployees.RowCount;
-            this.SetNavigationBar(e.FocusedRowHandle, rowCount);
+            this.mainController.AccountController.SetEmployee(model);
+           // this.mainController.AccountController.CurrentEmployee.PropertyChanged += this.CurrentEmployeeOrUser_PropertyChanged;
+            this.employeesLastFocusedRowHandle = this.ucEmployees.advBandedGridViewEmployees.FocusedRowHandle;
+            this.SetControlsForEdit();
+            this.ShowAccountInfo(AccountType.Employee);
         }
 
         #endregion UC_Employees
+
+        #region UC_AccountInfo
+
+        private void CloseAccount()
+        {
+            if (this.mainController.AccountController.HasUsers())
+            {
+                this.ucAccountInfo = null;
+                this.ShowUsers();
+            }
+            else if (this.mainController.AccountController.HasEmployees())
+            {
+                this.ucAccountInfo = null;
+                this.ShowEmployees();
+            }
+        }
+
+        private void ShowAccountInfo(AccountType type)
+        {
+            this.ucAccountInfo = UC_AccountInfo.GetUserControl(this.mainController.AccountController);
+            this.ucAccountInfo.Size = this.layoutControlUC.Size;
+            this.ucAccountInfo.SetSelectedTabPage(type);
+            this.layoutControlUC.Controls.Clear();
+            this.layoutControlUC.Controls.Add(this.ucAccountInfo);
+
+            this.mainController.AccountController.Changed += this.AccountController_Changed;
+        }
+
+        //private void CurrentEmployeeOrUser_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        //{
+        //    if (this.mainController.AccountController.CurentUserIsDirty() || this.mainController.AccountController.CurentEmployeeIsDirty())
+        //    {
+        //        this.barBtnSave.Enabled = true;
+        //        this.barBtnSaveAndClose.Enabled = true;
+        //    }
+        //    else
+        //    {
+        //        this.barBtnSave.Enabled = false;
+        //        this.barBtnSaveAndClose.Enabled = false;
+        //    }
+        //}
+
+        #endregion UC_AccountInfo
 
         #region Navigation
 
@@ -410,40 +485,29 @@
 
         #endregion Navigation
 
-        void barBtnList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        private void SetControlsForEdit()
         {
-            if (this.ucUsers != null)
+            this.ribbonPageGroupCRUD.Visible = false;
+            this.ribbonPageGroupNavigation.Visible = false;
+            this.ribbonPageGroupHome.Visible = true;
+            this.ribbonPageGroupMain.Visible = true;
+            if (this.mainController.AccountController.CurentEmployeeIsDirty()
+                || this.mainController.AccountController.CurentUserIsDirty())
             {
-                var changes = this.CheckUCUserForChanges();
-                if (changes == DialogResult.Yes)
-                {
-                    if (!this.SaveUser())
-                    {
-                        return;
-                    }
-
-                    if (this.ucUser != null)
-                    {
-                        this.ucUser = null;
-                    }
-
-                    this.ShowUsers();
-                }
-                else if (changes == DialogResult.No)
-                {
-                    this.mainController.UserController.CurrentUser.RejectChanges();
-
-                    if (this.ucUser != null)
-                    {
-                        this.ucUser = null;
-                    }
-
-                    this.ShowUsers();
-                }
+                this.barBtnSave.Enabled = true;
+                this.barBtnSaveAndClose.Enabled = true;
             }
         }
 
-        void layoutControl2_Resize(object sender, System.EventArgs e)
+        void barBtnList_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            if (this.ucAccountInfo.CheckAccountBeforeSave())
+            {
+                this.CloseAccount();
+            }
+        }
+
+        void layoutControlUC_Resize(object sender, System.EventArgs e)
         {
             if (this.ucUsers != null)
             {
