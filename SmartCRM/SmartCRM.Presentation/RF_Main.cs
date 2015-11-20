@@ -108,20 +108,41 @@
                     MessageBoxButtons.OKCancel,
                     MessageBoxIcon.Warning))
             {
-                if (this.ucUsers != null)
+                if (this.mainController.AccountController.HasUsers())
                 {
                     var focusedUser = (UserModel)this.ucUsers.gridViewUsers.GetFocusedRow();
                     if (focusedUser != null)
                     {
-                        this.mainController.AccountController.DeleteUser(focusedUser);
+                        var result = this.mainController.AccountController.DeleteUser(focusedUser);
+                        if (!result.Success)
+                        {
+                            var error = result.Details.FirstOrDefault();
+                            if (error != null)
+                            {
+                                MessageBox.Show(
+                                error.Message,
+                                "Error",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                            }
+                        }
                     }
                 }
-                else if (this.ucEmployees != null)
+                else if (this.mainController.AccountController.HasEmployees())
                 {
                     var focusedEmployee = (EmployeeModel)this.ucEmployees.advBandedGridViewEmployees.GetFocusedRow();
                     if (focusedEmployee != null)
                     {
-                        this.mainController.AccountController.DeleteEmployee(focusedEmployee);
+                        var result = this.mainController.AccountController.DeleteEmployee(focusedEmployee);
+                        if (!result.Success)
+                        {
+                            var error = result.Details.FirstOrDefault();
+                            if (error != null)
+                            {
+                                MessageBox.Show(error.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+
                     }
                 }
             }
@@ -250,7 +271,7 @@
         private void LoadUser(UserModel model, bool isNew = false)
         {
             this.mainController.AccountController.SetUser(model);
-            //this.mainController.AccountController.CurrentUser.PropertyChanged += this.CurrentEmployeeOrUser_PropertyChanged;
+
             if (isNew)
             {
                 this.mainController.AccountController.SetEmployee(EmployeeModel.Create());
@@ -261,9 +282,9 @@
                 this.mainController.AccountController.SetEmployee(employee);
             }
 
-           // this.mainController.AccountController.CurrentEmployee.PropertyChanged += this.CurrentEmployeeOrUser_PropertyChanged;
             this.usersLastFocusedRowHandle = this.ucUsers.gridViewUsers.FocusedRowHandle;
             this.SetControlsForEdit();
+            this.barBtnList.Caption = "Users List";
             this.ShowAccountInfo(AccountType.User);
         }
 
@@ -371,15 +392,10 @@
         {
             var user = this.mainController.AccountController.GetUserByEmployeeId(model.Id);
             this.mainController.AccountController.SetUser(user);
-            if (user != null)
-            {
-                //this.mainController.AccountController.CurrentUser.PropertyChanged += this.CurrentEmployeeOrUser_PropertyChanged;
-            }
-
             this.mainController.AccountController.SetEmployee(model);
-           // this.mainController.AccountController.CurrentEmployee.PropertyChanged += this.CurrentEmployeeOrUser_PropertyChanged;
             this.employeesLastFocusedRowHandle = this.ucEmployees.advBandedGridViewEmployees.FocusedRowHandle;
             this.SetControlsForEdit();
+            this.barBtnList.Caption = "Employees List";
             this.ShowAccountInfo(AccountType.Employee);
         }
 
@@ -411,20 +427,6 @@
 
             this.mainController.AccountController.Changed += this.AccountController_Changed;
         }
-
-        //private void CurrentEmployeeOrUser_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    if (this.mainController.AccountController.CurentUserIsDirty() || this.mainController.AccountController.CurentEmployeeIsDirty())
-        //    {
-        //        this.barBtnSave.Enabled = true;
-        //        this.barBtnSaveAndClose.Enabled = true;
-        //    }
-        //    else
-        //    {
-        //        this.barBtnSave.Enabled = false;
-        //        this.barBtnSaveAndClose.Enabled = false;
-        //    }
-        //}
 
         #endregion UC_AccountInfo
 
@@ -496,6 +498,11 @@
             {
                 this.barBtnSave.Enabled = true;
                 this.barBtnSaveAndClose.Enabled = true;
+            }
+            else
+            {
+                this.barBtnSave.Enabled = false;
+                this.barBtnSaveAndClose.Enabled = false;
             }
         }
 

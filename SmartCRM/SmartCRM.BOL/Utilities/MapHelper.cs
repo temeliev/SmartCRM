@@ -13,14 +13,15 @@
         {
             Mapper.Map(source, destination);
             destination.Gender = (short)source.Gender;
-            destination.Photo = ImagesHelper.ImageToByteArray(source.Photo);
+           // destination.Photo = source.Photo; //ImagesHelper.ImageToByteArray(source.PhotoImage);
         }
 
         public static void Map(Employee source, EmployeeModel destination)
         {
             Mapper.Map(source, destination);
             destination.Gender = (GenderType)source.Gender;
-            destination.Photo = ImagesHelper.ByteArrayToImage(source.Photo);
+           // destination.Photo = source.Photo;
+           // destination.PhotoImage = ImagesHelper.ByteArrayToImage(source.Photo);
         }
 
         public static void Map(User source, UserModel destination)

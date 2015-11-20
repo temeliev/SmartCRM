@@ -1,6 +1,8 @@
 ﻿namespace SmartCRM.Presentation.Employees
 {
     using System;
+    using System.Drawing;
+    using System.IO;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -20,6 +22,25 @@
         {
             this.InitializeComponent();
             this.Load += this.UC_Employee_Load;
+            this.btnLoadImage.Click += this.btnLoadImage_Click;
+            this.btnClearImage.Click += this.btnClearImage_Click;
+        }
+
+        void btnClearImage_Click(object sender, EventArgs e)
+        {
+            this.pictureEditPhoto.EditValue = null;
+        }
+
+        void btnLoadImage_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                this.pictureEditPhoto.LoadImage();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error: Could not read file from disk.");
+            }
         }
 
         void UC_Employee_Load(object sender, System.EventArgs e)

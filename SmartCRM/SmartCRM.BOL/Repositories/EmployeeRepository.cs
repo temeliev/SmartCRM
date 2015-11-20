@@ -85,12 +85,12 @@
             employeeModel.Id = pocoEmployee.Id;
         }
 
-        public void DeleteEmployee(SmartCRMEntitiesModel db, Employee employeeModel)
+        public void DeleteEmployee(SmartCRMEntitiesModel db, EmployeeModel employeeModel)
         {
             Employee pocoEmployee = db.Employees.FirstOrDefault(x => x.Id == employeeModel.Id);
             if (pocoEmployee == null)
             {
-                throw new NullReferenceException("Missing user in database!");
+                throw new NullReferenceException("Missing employee in database!");
             }
 
             db.Delete(pocoEmployee);

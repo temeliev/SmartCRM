@@ -169,10 +169,6 @@
             this.tabPageUserInfo.Text = "User Info";
             this.tabPageUserInfo.Image = null;
             this.tabPageUserInfo.Tooltip = "Login";
-            //if (this.UCEmployee == null)
-            //{
-            //    this.LoadEmployee();
-            //}
         }
 
         private void LoadEmployee()
@@ -224,8 +220,16 @@
 
         private bool SaveAccount()
         {
-            this.UCUser.ClearErrors();
-            this.UCEmployee.ClearErrors();
+            if (this.UCUser != null)
+            {
+                this.UCUser.ClearErrors();
+            }
+
+            if (this.UCEmployee != null)
+            {
+                this.UCEmployee.ClearErrors();
+            }
+
             this.SetTabPageErrorIcon(AccountType.Employee, false);
             this.SetTabPageErrorIcon(AccountType.User, false);
             var check = this.controller.SaveAccount();

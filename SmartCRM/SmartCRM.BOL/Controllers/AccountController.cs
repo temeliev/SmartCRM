@@ -5,9 +5,12 @@
 
     using SmartCRM.BOL.Controllers.Events;
     using SmartCRM.BOL.Models;
+    using SmartCRM.BOL.Models.Enums;
     using SmartCRM.BOL.Repositories;
     using SmartCRM.BOL.Utilities;
     using SmartCRM.BOL.Validators;
+
+    using Telerik.OpenAccess.Exceptions;
 
     public class AccountController
     {
@@ -67,7 +70,8 @@
         {
             if (this.Changed != null)
             {
-                AccountChangedEventArgs accArgs = new AccountChangedEventArgs(this.CurentEmployeeIsDirty() || this.CurentUserIsDirty());
+                bool isDirty = this.CurentEmployeeIsDirty() || this.CurentUserIsDirty();
+                AccountChangedEventArgs accArgs = new AccountChangedEventArgs(isDirty);
                 this.Changed(this, accArgs);
             }
         }
@@ -123,9 +127,29 @@
                     db.SaveChanges();
                     this.Users.Remove(focusedUser);
                 }
-                catch (Exception ex)
+                catch (NullReferenceException nREx)
                 {
-                    check.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, "InvalidDeletion", "Cannot delete this user!"));
+                    //TODO Log
+                    check.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, "", nREx.Message));
+                    return check;
+                }
+                catch (DataStoreException)
+                {
+                    check.Details.Add(
+                        new CheckResultDetail(
+                            CheckResultDetail.ErrorType.Error,
+                            "InvalidDeletion",
+                            Messages.CannotDeleteLinkedItem));
+                    return check;
+                }
+                catch (Exception)
+                {
+                    //TODO Log
+                    check.Details.Add(
+                        new CheckResultDetail(
+                            CheckResultDetail.ErrorType.Error,
+                            "InvalidDeletion",
+                            "Deletion failed!"));
                     return check;
                 }
 
@@ -227,7 +251,7 @@
                 return false;
             }
 
-            return this.CurrentEmployee.IsDirty;
+            return this.CurrentEmployee.IsDirty || this.CurrentEmployee.IsPhotoDirty;
         }
 
         public CheckResult SaveEmployee()
@@ -260,27 +284,46 @@
             }
         }
 
-        public CheckResult DeleteEmployee(EmployeeModel focusedUser)
+        public CheckResult DeleteEmployee(EmployeeModel focusedEmployee)
         {
             CheckResult check = CheckResult.Default;
-            //using (var db = DbManager.CreateInstance())
-            //{
-            //    try
-            //    {
-            //        UserRepository rep = new UserRepository();
-            //        rep.DeleteUser(db, focusedUser);
-            //        db.SaveChanges();
-            //        this.Users.Remove(focusedUser);
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        check.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, "InvalidDeletion", "Cannot delete this user!"));
-            //        return check;
-            //    }
+            using (var db = DbManager.CreateInstance())
+            {
+                try
+                {
+                    EmployeeRepository rep = new EmployeeRepository();
+                    rep.DeleteEmployee(db, focusedEmployee);
+                    db.SaveChanges();
+                    this.Employees.Remove(focusedEmployee);
+                }
+                catch (NullReferenceException nREx)
+                {
+                    //TODO Log
+                    check.Details.Add(new CheckResultDetail(CheckResultDetail.ErrorType.Error, "", nREx.Message));
+                    return check;
+                }
+                catch (DataStoreException)
+                {
+                    check.Details.Add(
+                        new CheckResultDetail(
+                            CheckResultDetail.ErrorType.Error,
+                            "InvalidDeletion",
+                            Messages.CannotDeleteLinkedItem));
+                    return check;
+                }
+                catch (Exception)
+                {
+                    //TODO Log
+                    check.Details.Add(
+                        new CheckResultDetail(
+                            CheckResultDetail.ErrorType.Error,
+                            "InvalidDeletion",
+                            "Deletion failed!"));
+                    return check;
+                }
 
-            //    return check;
-            //}
-            return check;
+                return check;
+            }
         }
 
         private void LoadAllEmployees(bool isActive)
@@ -320,7 +363,7 @@
             {
                 try
                 {
-                    if (this.CurrentEmployee.IsDirty)
+                    if (this.CurentEmployeeIsDirty())
                     {
                         EmployeeValidator employeeValidator = new EmployeeValidator();
                         var checkEmployee = employeeValidator.ValidateEmployee(db, this.CurrentEmployee);
@@ -337,7 +380,7 @@
                         }
                     }
 
-                    if (this.CurrentUser.IsDirty)
+                    if (this.CurentUserIsDirty())
                     {
                         UserValidator userValidator = new UserValidator();
                         var checkUser = userValidator.ValidateUser(db, this.CurrentUser);
@@ -384,6 +427,16 @@
 
 
             return result;
+        }
+
+        public void RemoveUser(UserModel focusedUser)
+        {
+            this.Users.Remove(focusedUser);
+        }
+
+        public void RemoveEmployee(EmployeeModel focusedEmployee)
+        {
+            this.Employees.Remove(focusedEmployee);
         }
     }
 }

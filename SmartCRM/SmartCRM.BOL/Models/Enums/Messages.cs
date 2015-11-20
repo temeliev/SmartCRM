@@ -17,5 +17,13 @@
                 return "Are You sure that you want to delete this record?";
             }
         }
+
+        public static string CannotDeleteLinkedItem
+        {
+            get
+            {
+                return "Cannot delete this record because is linked to activity!";
+            }
+        }
     }
 }
