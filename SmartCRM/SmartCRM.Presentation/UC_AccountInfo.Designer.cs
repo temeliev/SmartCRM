@@ -66,10 +66,10 @@
             // 
             // tabControlAccountInfo
             // 
-            this.tabControlAccountInfo.Location = new System.Drawing.Point(12, 12);
+            this.tabControlAccountInfo.Location = new System.Drawing.Point(2, 2);
             this.tabControlAccountInfo.Name = "tabControlAccountInfo";
             this.tabControlAccountInfo.SelectedTabPage = this.tabPageEmployeeInfo;
-            this.tabControlAccountInfo.Size = new System.Drawing.Size(632, 417);
+            this.tabControlAccountInfo.Size = new System.Drawing.Size(652, 437);
             this.tabControlAccountInfo.TabIndex = 4;
             this.tabControlAccountInfo.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
             this.tabPageEmployeeInfo,
@@ -79,7 +79,7 @@
             // 
             this.tabPageEmployeeInfo.Controls.Add(this.layoutControlEmployeeInfo);
             this.tabPageEmployeeInfo.Name = "tabPageEmployeeInfo";
-            this.tabPageEmployeeInfo.Size = new System.Drawing.Size(626, 389);
+            this.tabPageEmployeeInfo.Size = new System.Drawing.Size(646, 409);
             this.tabPageEmployeeInfo.Text = "Employee Info";
             // 
             // layoutControlEmployeeInfo
@@ -88,7 +88,7 @@
             this.layoutControlEmployeeInfo.Location = new System.Drawing.Point(0, 0);
             this.layoutControlEmployeeInfo.Name = "layoutControlEmployeeInfo";
             this.layoutControlEmployeeInfo.Root = this.layoutControlGroupEmployeeInfo;
-            this.layoutControlEmployeeInfo.Size = new System.Drawing.Size(626, 389);
+            this.layoutControlEmployeeInfo.Size = new System.Drawing.Size(646, 409);
             this.layoutControlEmployeeInfo.TabIndex = 0;
             this.layoutControlEmployeeInfo.Text = "layoutControl1";
             // 
@@ -99,7 +99,7 @@
             this.layoutControlGroupEmployeeInfo.GroupBordersVisible = false;
             this.layoutControlGroupEmployeeInfo.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroupEmployeeInfo.Name = "layoutControlGroupEmployeeInfo";
-            this.layoutControlGroupEmployeeInfo.Size = new System.Drawing.Size(626, 389);
+            this.layoutControlGroupEmployeeInfo.Size = new System.Drawing.Size(646, 409);
             this.layoutControlGroupEmployeeInfo.Text = "layoutControlGroupEmployeeInfo";
             this.layoutControlGroupEmployeeInfo.TextVisible = false;
             // 
@@ -140,6 +140,7 @@
             this.layoutControlItem1});
             this.layoutControlGroupAccountInfo.Location = new System.Drawing.Point(0, 0);
             this.layoutControlGroupAccountInfo.Name = "Root";
+            this.layoutControlGroupAccountInfo.Padding = new DevExpress.XtraLayout.Utils.Padding(0, 0, 0, 0);
             this.layoutControlGroupAccountInfo.Size = new System.Drawing.Size(656, 441);
             this.layoutControlGroupAccountInfo.Text = "Root";
             this.layoutControlGroupAccountInfo.TextVisible = false;
@@ -150,7 +151,7 @@
             this.layoutControlItem1.CustomizationFormText = "layoutControlItem1";
             this.layoutControlItem1.Location = new System.Drawing.Point(0, 0);
             this.layoutControlItem1.Name = "layoutControlItem1";
-            this.layoutControlItem1.Size = new System.Drawing.Size(636, 421);
+            this.layoutControlItem1.Size = new System.Drawing.Size(656, 441);
             this.layoutControlItem1.Text = "layoutControlItem1";
             this.layoutControlItem1.TextSize = new System.Drawing.Size(0, 0);
             this.layoutControlItem1.TextToControlDistance = 0;

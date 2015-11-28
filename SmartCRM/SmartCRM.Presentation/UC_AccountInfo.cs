@@ -1,6 +1,7 @@
 ﻿namespace SmartCRM.Presentation
 {
     using System;
+    using System.Drawing;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -266,6 +267,11 @@
             }
 
             return true;
+        }
+
+        internal void SetSize(Size size)
+        {
+            this.tabControlAccountInfo.Size = new Size(size.Width, size.Height);
         }
 
         public static UC_AccountInfo GetUserControl(AccountController accountController)

@@ -51,7 +51,9 @@
                 var result = validator.ValidateLogin(this.CurrentLogin, db);
                 if (result.Success)
                 {
-                    Global.CurrentUser = this.CurrentLogin;
+                    UserRepository rep = new UserRepository();
+                    var userModel = rep.GetUserByModel(db, this.CurrentLogin);
+                    Global.CurrentUser = userModel;
                 }
 
                 return result;

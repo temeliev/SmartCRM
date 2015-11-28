@@ -1,5 +1,6 @@
 ﻿namespace SmartCRM.Presentation
 {
+    using System;
     using System.Linq;
     using System.Windows.Forms;
 
@@ -7,6 +8,7 @@
     using DevExpress.XtraGrid.Views.Grid;
     using DevExpress.XtraNavBar;
 
+    using SmartCRM.BOL;
     using SmartCRM.BOL.Controllers;
     using SmartCRM.BOL.Models;
     using SmartCRM.Presentation.Users;
@@ -14,6 +16,7 @@
     using SmartCRM.BOL.Utilities;
     using SmartCRM.Presentation.Employees;
     using SmartCRM.BOL.Controllers.Events;
+    using SmartCRM.Presentation.EmployeeAccount;
 
     public partial class RF_Main : DevExpress.XtraBars.Ribbon.RibbonForm
     {
@@ -54,6 +57,21 @@
             this.navBarControlLeftBar.MouseDown += this.navBarControlLeftBar_MouseDown;
 
             this.ribbon.Minimized = true;
+
+            this.barBtnAccountInfo.ItemClick += this.barBtnAccountInfo_ItemClick;
+        }
+
+        void barBtnAccountInfo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
+        {
+            var employee = this.mainController.AccountController.GetEmbloyeeById(Global.CurrentUser.EmployeeId);
+            if (employee == null)
+            {
+                throw new NullReferenceException("Missing Employee!");
+            }
+
+            this.mainController.AccountController.SetEmployee(employee);
+            this.mainController.AccountController.SetUser(Global.CurrentUser);
+            XF_AccountInfo.ShowForm(this.mainController.AccountController);
         }
 
         void AccountController_Changed(object sender, AccountChangedEventArgs e)

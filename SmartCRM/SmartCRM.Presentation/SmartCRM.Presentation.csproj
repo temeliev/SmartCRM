@@ -86,11 +86,17 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Employees\UC_Employee.cs">
+    <Compile Include="EmployeeAccount\UC_Employee.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Employees\UC_Employee.Designer.cs">
+    <Compile Include="EmployeeAccount\UC_Employee.Designer.cs">
       <DependentUpon>UC_Employee.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeAccount\XF_AccountInfo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="EmployeeAccount\XF_AccountInfo.Designer.cs">
+      <DependentUpon>XF_AccountInfo.cs</DependentUpon>
     </Compile>
     <Compile Include="Employees\UC_Employees.cs">
       <SubType>UserControl</SubType>
@@ -115,10 +121,10 @@
     <Compile Include="UC_AccountInfo.Designer.cs">
       <DependentUpon>UC_AccountInfo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Users\UC_User.cs">
+    <Compile Include="EmployeeAccount\UC_User.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Users\UC_User.Designer.cs">
+    <Compile Include="EmployeeAccount\UC_User.Designer.cs">
       <DependentUpon>UC_User.cs</DependentUpon>
     </Compile>
     <Compile Include="Users\UC_Users.cs">
@@ -135,8 +141,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Employees\UC_Employee.resx">
+    <EmbeddedResource Include="EmployeeAccount\UC_Employee.resx">
       <DependentUpon>UC_Employee.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="EmployeeAccount\XF_AccountInfo.resx">
+      <DependentUpon>XF_AccountInfo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Employees\UC_Employees.resx">
       <DependentUpon>UC_Employees.cs</DependentUpon>
@@ -152,7 +161,7 @@
     <EmbeddedResource Include="UC_AccountInfo.resx">
       <DependentUpon>UC_AccountInfo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Users\UC_User.resx">
+    <EmbeddedResource Include="EmployeeAccount\UC_User.resx">
       <DependentUpon>UC_User.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Users\UC_Users.resx">

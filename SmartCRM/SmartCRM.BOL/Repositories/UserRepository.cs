@@ -14,10 +14,18 @@
 
     public class UserRepository
     {
-        public User GetUserByModel(SmartCRMEntitiesModel db, UserModel model)
+        public UserModel GetUserByModel(SmartCRMEntitiesModel db, UserModel model)
         {
             User user = db.Users.FirstOrDefault(x => x.Username == model.Username && x.Password == model.Password && x.IsEnabled);
-            return user;
+
+            if (user != null)
+            {
+                UserModel userModel = UserModel.Create();
+                MapHelper.Map(user, userModel);
+                return userModel;
+            }
+
+            return null;
         }
 
         public BindingList<UserModel> LoadAllUsers(SmartCRMEntitiesModel db, bool isActive)
