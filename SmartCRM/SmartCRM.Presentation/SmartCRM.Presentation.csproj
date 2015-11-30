@@ -104,6 +104,12 @@
     <Compile Include="Employees\UC_Employees.Designer.cs">
       <DependentUpon>UC_Employees.cs</DependentUpon>
     </Compile>
+    <Compile Include="Projects\UC_ProjectCategories.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Projects\UC_ProjectCategories.Designer.cs">
+      <DependentUpon>UC_ProjectCategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Projects\UC_Projects.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -155,6 +161,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Employees\UC_Employees.resx">
       <DependentUpon>UC_Employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Projects\UC_ProjectCategories.resx">
+      <DependentUpon>UC_ProjectCategories.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Projects\UC_Projects.resx">
       <DependentUpon>UC_Projects.cs</DependentUpon>

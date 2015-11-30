@@ -67,14 +67,18 @@
 
         void navBarProjectCategories_LinkClicked(object sender, NavBarLinkEventArgs e)
         {
-            //this.layoutControlUC.Controls.Clear();
-            //this.layoutControlUC.Controls.Add(UC_Projects.GetUserControl(this.mainController.ProjectDataController));
+            var uc = (UC_ProjectCategories.GetUserControl(this.mainController.ProjectDataController));
+            uc.Size = this.layoutControlUC.Size;
+            this.layoutControlUC.Controls.Clear();
+            this.layoutControlUC.Controls.Add(uc);
         }
 
         void navBarProjects_LinkClicked(object sender, NavBarLinkEventArgs e)
         {
             this.layoutControlUC.Controls.Clear();
-            this.layoutControlUC.Controls.Add(UC_Projects.GetUserControl(this.mainController.ProjectDataController));
+            var uc = UC_Projects.GetUserControl(this.mainController.ProjectDataController);
+            uc.Size = this.layoutControlUC.Size;
+            this.layoutControlUC.Controls.Add(uc);
         }
 
         void barBtnAccountInfo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)
