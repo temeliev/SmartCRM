@@ -58,6 +58,7 @@
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\MainController.cs" />
+    <Compile Include="Controllers\ProjectDataController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="DBManager.cs" />
     <Compile Include="Global.cs" />
@@ -65,11 +66,14 @@
     <Compile Include="Models\Enums\AccountTypes.cs" />
     <Compile Include="Models\Enums\GenderType.cs" />
     <Compile Include="Models\Enums\Messages.cs" />
-    <Compile Include="Models\IModel.cs" />
+    <Compile Include="Models\Enums\ProjectStatus.cs" />
+    <Compile Include="Models\ProjectCategoryModel.cs" />
+    <Compile Include="Models\ProjectModel.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\EmployeeRepository.cs" />
     <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\ProjectRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Utilities\CheckResult.cs" />
     <Compile Include="Utilities\CheckResultDetail.cs" />
@@ -78,6 +82,7 @@
     <Compile Include="Validators\EmployeeValidator.cs" />
     <Compile Include="Validators\IValidator.cs" />
     <Compile Include="Validators\LoginValidator.cs" />
+    <Compile Include="Validators\ProjectValidator.cs" />
     <Compile Include="Validators\UserValidator.cs" />
   </ItemGroup>
   <ItemGroup>

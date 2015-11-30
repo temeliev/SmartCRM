@@ -290,6 +290,17 @@ namespace SmartCRM.DAL
 			}
 		}
 		
+		private IList<Project> _projects = new List<Project>();
+		[Collection(InverseProperty = "Employees")]
+		[Storage("_projects")]
+		public virtual IList<Project> Projects
+		{
+			get
+			{
+				return this._projects;
+			}
+		}
+		
 		#region INotifyPropertyChanging members
 		
 		public event PropertyChangingEventHandler PropertyChanging;

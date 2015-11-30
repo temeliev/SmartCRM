@@ -15,25 +15,7 @@
             this.CurrentLogin = UserModel.CreateInstance();
             this.CurrentLogin.Username = "admin";
             this.CurrentLogin.Password = "admin";
-            this.InitializeMapper();
-        }
-
-        private void InitializeMapper()
-        {
-            Mapper.Initialize(cfg =>
-            {
-                cfg.CreateMap<User, UserModel>()
-                    .ForMember(dest => dest.Employee, opt => opt.Ignore());
-                cfg.CreateMap<UserModel, User>()
-                    .ForMember(dest => dest.Employee, opt => opt.Ignore());
-                cfg.CreateMap<Employee, EmployeeModel>()
-                    //.ForMember(dest => dest.Photo, opt => opt.Ignore())
-                    .ForMember(dest => dest.Gender, opt => opt.Ignore());
-                cfg.CreateMap<EmployeeModel, Employee>()
-                    //.ForMember(dest => dest.Photo, opt => opt.Ignore())
-                    .ForMember(dest => dest.Gender, opt => opt.Ignore());
-                //cfg.AddProfile<FooProfile>();
-            });
+            MapHelper.Initialize();
         }
 
         public UserModel CurrentLogin { get; set; }

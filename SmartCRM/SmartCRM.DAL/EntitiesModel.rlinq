@@ -224,6 +224,9 @@
         <orm:field name="_users" property="Users" behavior="readwrite" uniqueId="0ef9b56c-7f6b-4cf6-aaef-ef63a221c14e" type="SmartCRM.DAL.User">
           <orm:collection element-class="SmartCRM.DAL.User" inverse-field="_employee" order-by="" uniqueId="1db76157-8412-4a8a-a13c-17a0ddd6e95c" />
         </orm:field>
+        <orm:field name="_projects" property="Projects" behavior="readwrite" uniqueId="88505ac1-747a-4771-bc14-cdbc375d0c06" type="SmartCRM.DAL.Project">
+          <orm:collection element-class="SmartCRM.DAL.Project" inverse-field="_employees" order-by="" uniqueId="e1406892-342b-4645-975b-0e0fac435e96" />
+        </orm:field>
       </orm:class>
       <orm:class name="ContsProductsType" uniqueId="095260b3-c0a9-42d1-aa25-2c93b0c7e85e">
         <orm:table name="conts_products_types" />
@@ -457,6 +460,74 @@
           </orm:columnMapping>
         </orm:index>
       </orm:class>
+      <orm:class name="Project" uniqueId="718c59cd-7c20-48fd-ac1b-1a41f5b9b2d9">
+        <orm:table name="projects" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="b8a4b0af-7d39-4459-ba5e-974948a2dd02" type="System.UInt32">
+          <orm:column name="Id" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="7e2d5ea1-ea73-4d9e-bb66-03bbeb177e3b" type="System.String">
+          <orm:column name="Name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_startDate" property="StartDate" behavior="readwrite" uniqueId="a70cd57d-5fe1-465d-9ccd-7d4ce593e7fe" type="System.DateTime">
+          <orm:column name="StartDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_endDate" property="EndDate" behavior="readwrite" uniqueId="36438937-fd78-49d6-831a-bbcfdf854960" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]">
+          <orm:column name="EndDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        </orm:field>
+        <orm:field name="_status" property="Status" behavior="readwrite" uniqueId="db87149e-f2e5-4e44-a0d9-4c824a02fa8e" type="System.Int16">
+          <orm:column name="Status" sql-type="smallint" nullable="false" length="0" scale="0" ado-type="Int16" />
+        </orm:field>
+        <orm:field name="_projectCategoryId" property="ProjectCategoryId" behavior="readwrite" uniqueId="5e385f37-e847-4e4b-a454-0c88047e70cb" type="System.UInt32">
+          <orm:column name="ProjectCategoryId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_constProjectCategory" property="ConstProjectCategory" behavior="readwrite" uniqueId="467cc35e-146f-4b21-8107-77d7f3b8a0a9" type="SmartCRM.DAL.ConstProjectCategory">
+          <orm:reference uniqueId="bd5cdf87-7e1e-4dc7-9d21-64a793ba4c79" association-name="ProjectHasConstProjectCategory">
+            <orm:sharedfield name="_projectCategoryId" target-class="SmartCRM.DAL.ConstProjectCategory" target-field="_id" />
+            <orm:constraint name="FK_projects_const_project_categories_Id" delete-action="dbdefaultrule" destination-table="const_project_categories" />
+          </orm:reference>
+        </orm:field>
+        <orm:field name="_employees" property="Employees" behavior="readwrite" uniqueId="3c245b38-c3ff-4813-8a6a-6285644fb1db" type="SmartCRM.DAL.Employee">
+          <orm:join-table uniqueId="e1406892-342b-4645-975b-0e0fac435e96" association-name="ProjectsHaveEmployees">
+            <orm:table name="projects_employees" join-table="true" />
+            <orm:owner>
+              <orm:constraint name="FK_projects_employees_projects_Id" delete-action="dbdefaultrule" destination-table="projects">
+                <orm:column name="ProjectId" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="SmartCRM.DAL.Project" target-field="_id" />
+              </orm:constraint>
+            </orm:owner>
+            <orm:value>
+              <orm:constraint name="FK_projects_employees_employees_Id" delete-action="dbdefaultrule" destination-table="employees">
+                <orm:column name="EmployeeId" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" target-class="SmartCRM.DAL.Employee" target-field="_id" />
+              </orm:constraint>
+            </orm:value>
+          </orm:join-table>
+        </orm:field>
+      </orm:class>
+      <orm:class name="ConstProjectCategory" uniqueId="c77289b8-222c-4a2a-bbe1-cc5161b656fc">
+        <orm:table name="const_project_categories" />
+        <orm:identity>
+          <orm:key-generator name="autoinc">
+            <orm:key-generator-member property-name="Id" />
+          </orm:key-generator>
+          <orm:single-field field-name="_id" />
+        </orm:identity>
+        <orm:concurrency strategy="changed" />
+        <orm:field name="_id" property="Id" behavior="readwrite" uniqueId="363fc075-c482-4d3f-b075-0915363bad58" type="System.UInt32">
+          <orm:column name="Id" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        </orm:field>
+        <orm:field name="_name" property="Name" behavior="readwrite" uniqueId="a45de416-5feb-4d35-81d6-0bcf288d5684" type="System.String">
+          <orm:column name="Name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        </orm:field>
+        <orm:field name="_projects" property="Projects" behavior="readwrite" uniqueId="ce4e4855-36cf-4ffb-b1c0-33ee1fe3031a" type="SmartCRM.DAL.Project">
+          <orm:collection element-class="SmartCRM.DAL.Project" inverse-field="_constProjectCategory" order-by="" uniqueId="bd5cdf87-7e1e-4dc7-9d21-64a793ba4c79" />
+        </orm:field>
+      </orm:class>
     </orm:namespace>
     <orm:schema schema="">
       <orm:table name="users">
@@ -626,6 +697,31 @@
           </orm:columnMapping>
         </orm:index>
       </orm:table>
+      <orm:table name="projects_employees" join-table="true">
+        <orm:column name="ProjectId" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:column name="EmployeeId" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        <orm:constraint name="FK_projects_employees_projects_Id" delete-action="dbdefaultrule" destination-table="projects">
+          <orm:column name="ProjectId" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+        <orm:constraint name="FK_projects_employees_employees_Id" delete-action="dbdefaultrule" destination-table="employees">
+          <orm:column name="EmployeeId" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="projects">
+        <orm:column name="Id" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+        <orm:column name="StartDate" sql-type="datetime" nullable="false" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="EndDate" sql-type="datetime" nullable="true" length="0" scale="0" ado-type="DateTime" />
+        <orm:column name="Status" sql-type="smallint" nullable="false" length="0" scale="0" ado-type="Int16" />
+        <orm:column name="ProjectCategoryId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        <orm:constraint name="FK_projects_const_project_categories_Id" delete-action="dbdefaultrule" destination-table="const_project_categories">
+          <orm:column name="ProjectCategoryId" sql-type="integer unsigned" nullable="false" length="0" scale="0" ado-type="Int32" />
+        </orm:constraint>
+      </orm:table>
+      <orm:table name="const_project_categories">
+        <orm:column name="Id" sql-type="integer unsigned" nullable="false" length="0" scale="0" primary-key="true" backend-calculated="true" ado-type="Int32" />
+        <orm:column name="Name" sql-type="nvarchar" nullable="false" length="50" scale="0" ado-type="UnicodeStringVariableLength" />
+      </orm:table>
     </orm:schema>
     <orm:relational-naming-settings>
       <orm:source-strategy>Property</orm:source-strategy>
@@ -766,6 +862,9 @@
         <classHasNavigationalProperties Id="ba4ec831-8760-453a-91de-c3a3cd31a518">
           <NavigationalProperty Id="0ef9b56c-7f6b-4cf6-aaef-ef63a221c14e" name="Users" type="IList&lt;User&gt;" label="Users : IList&lt;User&gt;" nullable="true" kind="Persistent" fieldName="_users" isDependent="false" isManaged="false" />
         </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="5642b652-4530-4a5d-9d3d-c3f65dfeeb49">
+          <NavigationalProperty Id="88505ac1-747a-4771-bc14-cdbc375d0c06" name="Projects" type="IList&lt;Project&gt;" label="Projects : IList&lt;Project&gt;" nullable="true" kind="Persistent" fieldName="_projects" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
       </navigationalProperties>
     </DomainClass>
     <DomainClass Id="095260b3-c0a9-42d1-aa25-2c93b0c7e85e" name="ContsProductsType" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="ProductTypeID">
@@ -870,6 +969,59 @@
       <Property Id="0b17e5be-1610-4df7-8196-05f78f0f7a24" name="LastUpdateTime" type="DateTime" label="LastUpdateTime : DateTime" kind="Persistent" fieldName="_lastUpdateTime" />
       <Property Id="f99c9043-ef90-4e9d-839f-50f8db97be62" name="UserID" type="UInt32" label="UserID : UInt32" kind="Persistent" fieldName="_userID" />
     </DomainClass>
+    <DomainClass Id="718c59cd-7c20-48fd-ac1b-1a41f5b9b2d9" name="Project" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="b8a4b0af-7d39-4459-ba5e-974948a2dd02" name="Id" type="UInt32" label="Id : UInt32" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="36438937-fd78-49d6-831a-bbcfdf854960" name="EndDate" type="DateTime" label="EndDate : DateTime" nullable="true" kind="Persistent" fieldName="_endDate" />
+      <Property Id="7e2d5ea1-ea73-4d9e-bb66-03bbeb177e3b" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+      <Property Id="5e385f37-e847-4e4b-a454-0c88047e70cb" name="ProjectCategoryId" type="UInt32" label="ProjectCategoryId : UInt32" kind="Persistent" fieldName="_projectCategoryId" />
+      <Property Id="a70cd57d-5fe1-465d-9ccd-7d4ce593e7fe" name="StartDate" type="DateTime" label="StartDate : DateTime" kind="Persistent" fieldName="_startDate" />
+      <Property Id="db87149e-f2e5-4e44-a0d9-4c824a02fa8e" name="Status" type="Int16" label="Status : Int16" kind="Persistent" fieldName="_status" />
+      <AssociationTargets>
+        <Association Id="bd5cdf87-7e1e-4dc7-9d21-64a793ba4c79" SourceMultiplicity="One" name="ProjectHasConstProjectCategory">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/ConstProjectCategory" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="a39262c6-c34b-4f1c-b239-8612fb52d2da">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/ConstProjectCategory/Projects" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="77ef4454-2fdc-4300-a97f-34c811cb9723">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Project/ConstProjectCategory" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+        <Association Id="e1406892-342b-4645-975b-0e0fac435e96" name="ProjectsHaveEmployees">
+          <DomainClassMoniker name="/SmartCRMEntitiesModel/Employee" />
+          <targetNavigationalProperty>
+            <associationDefinesTargetProperty Id="413ff2bd-1467-4b72-937f-0bf2f4c8de05">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Employee/Projects" />
+            </associationDefinesTargetProperty>
+          </targetNavigationalProperty>
+          <sourceNavigationalProperty>
+            <associationDefinesSourceProperty Id="cb24dafd-a59c-4a57-9229-49a3879b955b">
+              <NavigationalPropertyMoniker name="/SmartCRMEntitiesModel/Project/Employees" />
+            </associationDefinesSourceProperty>
+          </sourceNavigationalProperty>
+        </Association>
+      </AssociationTargets>
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="170f3eb9-05a7-4e2a-afa3-090542f927f0">
+          <NavigationalProperty Id="467cc35e-146f-4b21-8107-77d7f3b8a0a9" name="ConstProjectCategory" type="ConstProjectCategory" label="ConstProjectCategory : ConstProjectCategory" nullable="true" kind="Persistent" fieldName="_constProjectCategory" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+        <classHasNavigationalProperties Id="7543af1e-558c-401e-a991-44dc83941fdb">
+          <NavigationalProperty Id="3c245b38-c3ff-4813-8a6a-6285644fb1db" name="Employees" type="IList&lt;Employee&gt;" label="Employees : IList&lt;Employee&gt;" nullable="true" kind="Persistent" fieldName="_employees" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
+    <DomainClass Id="c77289b8-222c-4a2a-bbe1-cc5161b656fc" name="ConstProjectCategory" namespace="SmartCRM.DAL" showPropertiesCompartment="true" identityMechanism="DatabaseServerCalculated" concurrencyMode="Changed" showNavigationCompartment="true" showImplementationCompartment="true" identityMechanismMember="Id">
+      <Property Id="363fc075-c482-4d3f-b075-0915363bad58" name="Id" type="UInt32" label="Id : UInt32" kind="Persistent" identity="true" fieldName="_id" />
+      <Property Id="a45de416-5feb-4d35-81d6-0bcf288d5684" name="Name" label="Name : String" kind="Persistent" fieldName="_name" />
+      <navigationalProperties>
+        <classHasNavigationalProperties Id="3958482f-3708-4cf1-9f43-a4e57bbe0360">
+          <NavigationalProperty Id="ce4e4855-36cf-4ffb-b1c0-33ee1fe3031a" name="Projects" type="IList&lt;Project&gt;" label="Projects : IList&lt;Project&gt;" nullable="true" kind="Persistent" fieldName="_projects" isDependent="false" isManaged="false" />
+        </classHasNavigationalProperties>
+      </navigationalProperties>
+    </DomainClass>
   </Types>
   <domainContext>
     <domainModelHasDomainContext Id="b09cccf0-2c9a-49bc-877a-150f9c8a6d70">
@@ -888,6 +1040,8 @@
         <entitySetProperty name="CompaniesValues" namespace="SmartCRM.DAL" type="CompaniesValue" label="CompaniesValues : IQueryable&lt;SmartCRM.DAL.CompaniesValue&gt;" />
         <entitySetProperty name="CompaniesEmployees" namespace="SmartCRM.DAL" type="CompaniesEmployee" label="CompaniesEmployees : IQueryable&lt;SmartCRM.DAL.CompaniesEmployee&gt;" />
         <entitySetProperty name="Companies" namespace="SmartCRM.DAL" type="Company" label="Companies : IQueryable&lt;SmartCRM.DAL.Company&gt;" />
+        <entitySetProperty name="Projects" namespace="SmartCRM.DAL" type="Project" label="Projects : IQueryable&lt;SmartCRM.DAL.Project&gt;" />
+        <entitySetProperty name="ConstProjectCategories" namespace="SmartCRM.DAL" type="ConstProjectCategory" label="ConstProjectCategories : IQueryable&lt;SmartCRM.DAL.ConstProjectCategory&gt;" />
       </domainContainer>
     </domainModelHasDomainContext>
   </domainContext>

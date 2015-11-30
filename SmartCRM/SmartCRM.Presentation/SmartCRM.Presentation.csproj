@@ -104,6 +104,12 @@
     <Compile Include="Employees\UC_Employees.Designer.cs">
       <DependentUpon>UC_Employees.cs</DependentUpon>
     </Compile>
+    <Compile Include="Projects\UC_Projects.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Projects\UC_Projects.Designer.cs">
+      <DependentUpon>UC_Projects.cs</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,6 +155,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Employees\UC_Employees.resx">
       <DependentUpon>UC_Employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Projects\UC_Projects.resx">
+      <DependentUpon>UC_Projects.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">

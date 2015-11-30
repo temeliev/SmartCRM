@@ -17,6 +17,7 @@
     using SmartCRM.Presentation.Employees;
     using SmartCRM.BOL.Controllers.Events;
     using SmartCRM.Presentation.EmployeeAccount;
+    using SmartCRM.Presentation.Projects;
 
     public partial class RF_Main : DevExpress.XtraBars.Ribbon.RibbonForm
     {
@@ -59,6 +60,21 @@
             this.ribbon.Minimized = true;
 
             this.barBtnAccountInfo.ItemClick += this.barBtnAccountInfo_ItemClick;
+
+            this.navBarProjects.LinkClicked += this.navBarProjects_LinkClicked;
+            this.navBarProjectCategories.LinkClicked += this.navBarProjectCategories_LinkClicked;
+        }
+
+        void navBarProjectCategories_LinkClicked(object sender, NavBarLinkEventArgs e)
+        {
+            //this.layoutControlUC.Controls.Clear();
+            //this.layoutControlUC.Controls.Add(UC_Projects.GetUserControl(this.mainController.ProjectDataController));
+        }
+
+        void navBarProjects_LinkClicked(object sender, NavBarLinkEventArgs e)
+        {
+            this.layoutControlUC.Controls.Clear();
+            this.layoutControlUC.Controls.Add(UC_Projects.GetUserControl(this.mainController.ProjectDataController));
         }
 
         void barBtnAccountInfo_ItemClick(object sender, DevExpress.XtraBars.ItemClickEventArgs e)

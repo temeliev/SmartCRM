@@ -32,7 +32,7 @@
 
         public delegate void AccountHandler(object sender, AccountChangedEventArgs e);
 
-        public static AccountController CreateIntance()
+        public static AccountController Create()
         {
             return new AccountController();
         }

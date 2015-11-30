@@ -163,6 +163,22 @@ namespace SmartCRM.DAL
 			}
 		}
 		
+		public IQueryable<Project> Projects 
+		{
+			get
+			{
+				return this.GetAll<Project>();
+			}
+		}
+		
+		public IQueryable<ConstProjectCategory> ConstProjectCategories 
+		{
+			get
+			{
+				return this.GetAll<ConstProjectCategory>();
+			}
+		}
+		
 		public static BackendConfiguration GetBackendConfiguration()
 		{
 			BackendConfiguration backend = new BackendConfiguration();
@@ -237,6 +253,14 @@ namespace SmartCRM.DAL
 			get;
 		}
 		IQueryable<Company> Companies
+		{
+			get;
+		}
+		IQueryable<Project> Projects
+		{
+			get;
+		}
+		IQueryable<ConstProjectCategory> ConstProjectCategories
 		{
 			get;
 		}

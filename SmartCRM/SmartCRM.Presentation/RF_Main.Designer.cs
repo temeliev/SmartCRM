@@ -68,6 +68,9 @@
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
+            this.navBarGroupProjects = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarProjects = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarProjectCategories = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -333,16 +336,19 @@
             // 
             // navBarControlLeftBar
             // 
-            this.navBarControlLeftBar.ActiveGroup = this.navBarGroupAdministration;
+            this.navBarControlLeftBar.ActiveGroup = this.navBarGroupProjects;
             this.navBarControlLeftBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.navBarControlLeftBar.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navBarGroupCustomers,
-            this.navBarGroupAdministration});
+            this.navBarGroupAdministration,
+            this.navBarGroupProjects});
             this.navBarControlLeftBar.Items.AddRange(new DevExpress.XtraNavBar.NavBarItem[] {
             this.navBarItem1,
             this.navBarItem2,
             this.navBarUsers,
-            this.navBarEmployees});
+            this.navBarEmployees,
+            this.navBarProjects,
+            this.navBarProjectCategories});
             this.navBarControlLeftBar.Location = new System.Drawing.Point(0, 0);
             this.navBarControlLeftBar.Name = "navBarControlLeftBar";
             this.navBarControlLeftBar.OptionsNavPane.ExpandedWidth = 197;
@@ -356,7 +362,6 @@
             this.navBarGroupAdministration.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.navBarGroupAdministration.Appearance.Options.UseFont = true;
             this.navBarGroupAdministration.Caption = "Administration";
-            this.navBarGroupAdministration.Expanded = true;
             this.navBarGroupAdministration.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsList;
             this.navBarGroupAdministration.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
             new DevExpress.XtraNavBar.NavBarItemLink(this.navBarUsers),
@@ -456,6 +461,33 @@
             this.ribbonPageCategory1.Name = "ribbonPageCategory1";
             this.ribbonPageCategory1.Text = "ribbonPageCategory1";
             // 
+            // navBarGroupProjects
+            // 
+            this.navBarGroupProjects.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.navBarGroupProjects.Appearance.Options.UseFont = true;
+            this.navBarGroupProjects.Caption = "Project Data";
+            this.navBarGroupProjects.Expanded = true;
+            this.navBarGroupProjects.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.navBarGroupProjects.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarProjects),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarProjectCategories)});
+            this.navBarGroupProjects.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarGroupProjects.LargeImage")));
+            this.navBarGroupProjects.Name = "navBarGroupProjects";
+            // 
+            // navBarProjects
+            // 
+            this.navBarProjects.Caption = "Projects";
+            this.navBarProjects.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarProjects.LargeImage")));
+            this.navBarProjects.Name = "navBarProjects";
+            this.navBarProjects.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarProjects.SmallImage")));
+            // 
+            // navBarProjectCategories
+            // 
+            this.navBarProjectCategories.Caption = "Categories";
+            this.navBarProjectCategories.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarProjectCategories.LargeImage")));
+            this.navBarProjectCategories.Name = "navBarProjectCategories";
+            this.navBarProjectCategories.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarProjectCategories.SmallImage")));
+            // 
             // RF_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -525,5 +557,8 @@
         private DevExpress.XtraBars.BarButtonItem barBtnClose;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroupMain;
         private DevExpress.XtraNavBar.NavBarItem navBarEmployees;
+        private DevExpress.XtraNavBar.NavBarGroup navBarGroupProjects;
+        private DevExpress.XtraNavBar.NavBarItem navBarProjects;
+        private DevExpress.XtraNavBar.NavBarItem navBarProjectCategories;
     }
 }

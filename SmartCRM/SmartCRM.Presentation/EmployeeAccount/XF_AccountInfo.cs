@@ -1,11 +1,6 @@
 ﻿namespace SmartCRM.Presentation.EmployeeAccount
 {
-    using System.Drawing;
-    using System.Linq;
     using System.Windows.Forms;
-
-    using DevExpress.XtraEditors;
-    using DevExpress.XtraLayout;
 
     using SmartCRM.BOL.Controllers;
 
