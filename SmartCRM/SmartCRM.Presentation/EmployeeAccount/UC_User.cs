@@ -6,6 +6,7 @@
 
     using SmartCRM.BOL.Models;
     using SmartCRM.BOL.Utilities;
+    using SmartCRM.Presentation.EmployeeAccount;
 
     public partial class UC_User : UserControl
     {

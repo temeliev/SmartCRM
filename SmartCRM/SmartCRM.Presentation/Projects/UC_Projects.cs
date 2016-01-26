@@ -1,11 +1,13 @@
 ﻿namespace SmartCRM.Presentation.Projects
 {
+    using System;
+    using System.Reflection;
     using System.Windows.Forms;
 
     using SmartCRM.BOL.Controllers;
     using SmartCRM.BOL.Models;
 
-    public partial class UC_Projects : UserControl
+    public partial class UC_Projects : UserControl, INavigateable
     {
         private ProjectDataController controller;
 
@@ -25,8 +27,36 @@
                 {
                     this.LoadEmployees(project.Employees);
                 }
+
+                var form = this.FindForm() as RF_Main;
+                if (form != null)
+                {
+                    form.SetNavigationBar(e.FocusedRowHandle, this.gridViewProjects.DataRowCount);
+                }
             }
         }
+
+        //private static void Test(int rowHandle, int rowCount)
+        //{
+        //    var type = typeof(RF_Main);
+        //    MethodInfo methodInfo = type.GetMethod("SetNavigationBar");
+        //    if (methodInfo != null)
+        //    {
+        //        object result = null;
+        //        ParameterInfo[] parameters = methodInfo.GetParameters();
+        //        object classInstance = Activator.CreateInstance(type, null);
+        //        if (parameters.Length == 0)
+        //        {
+        //            //This works fine
+        //            result = methodInfo.Invoke(classInstance, null);
+        //        }
+        //        else
+        //        {
+        //            object[] parametersArray = new object[] { rowHandle, rowCount };
+        //            result = methodInfo.Invoke(classInstance, parametersArray);
+        //        }
+        //    }
+        //}
 
         private void LoadEmployees(System.ComponentModel.BindingList<EmployeeModel> bindingList)
         {
@@ -39,6 +69,16 @@
             this.controller.SetProjects();
             this.gridControlProjects.DataSource = this.controller.Projects;
             this.gridViewProjects.FocusedRowHandle = 0;
+        }
+
+        public void IncreaseRow()
+        {
+            this.gridViewProjects.FocusedRowHandle++;
+        }
+
+        public void DecreaseRow()
+        {
+            this.gridViewProjects.FocusedRowHandle--;
         }
 
         public static UC_Projects GetUserControl(ProjectDataController projectController)

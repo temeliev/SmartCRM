@@ -28,7 +28,7 @@
 
         public EmployeeModel CurrentEmployee { get; private set; }
 
-        public event AccountHandler Changed;
+        public event AccountHandler AccountChanged;
 
         public delegate void AccountHandler(object sender, AccountChangedEventArgs e);
 
@@ -68,11 +68,11 @@
 
         private void InvokeAccountChangedEvent()
         {
-            if (this.Changed != null)
+            if (this.AccountChanged != null)
             {
                 bool isDirty = this.CurentEmployeeIsDirty() || this.CurentUserIsDirty();
                 AccountChangedEventArgs accArgs = new AccountChangedEventArgs(isDirty);
-                this.Changed(this, accArgs);
+                this.AccountChanged(this, accArgs);
             }
         }
 
@@ -437,6 +437,17 @@
         public void RemoveEmployee(EmployeeModel focusedEmployee)
         {
             this.Employees.Remove(focusedEmployee);
+        }
+
+        public bool AccountIsDirty()
+        {
+            return this.CurentUserIsDirty() && this.CurentEmployeeIsDirty();
+        }
+
+        public void ClearAccount()
+        {
+            this.SetUser(null);
+            this.SetEmployee(null);
         }
     }
 }

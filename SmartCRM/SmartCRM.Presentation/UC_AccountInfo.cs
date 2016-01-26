@@ -13,7 +13,7 @@
     using SmartCRM.Presentation.Employees;
     using SmartCRM.Presentation.Users;
 
-    public partial class UC_AccountInfo : UserControl
+    public partial class UC_AccountInfo : UserControl, ISavable
     {
         private AccountController controller;
 
@@ -27,6 +27,15 @@
             this.Load += this.UC_AccountInfo_Load;
             this.tabControlAccountInfo.SelectedPageChanged += this.tabControlAccountInfo_SelectedPageChanged;
             this.layoutControlEmployeeInfo.Resize += this.layoutControlEmployeeInfo_Resize;
+        }
+
+        void controller_AccountChanged(object sender, BOL.Controllers.Events.AccountChangedEventArgs e)
+        {
+            var control = this.FindForm() as RF_Main;
+            if (control != null)
+            {
+                control.SetSaveButtons(e.IsDirty);
+            }
         }
 
         void layoutControlEmployeeInfo_Resize(object sender, EventArgs e)
@@ -47,13 +56,15 @@
             {
                 this.tabPageUserInfo.Text = "User Info";
             }
+
+            this.controller.AccountChanged += this.controller_AccountChanged;
         }
 
         void tabControlAccountInfo_SelectedPageChanged(object sender, TabPageChangedEventArgs e)
         {
             if (e.Page == this.tabPageEmployeeInfo)
             {
-                if (this.UCEmployee == null)
+                if (this.UCEmployee == null && this.controller.CurrentEmployee != null)
                 {
                     this.LoadEmployee();
                 }
@@ -98,7 +109,7 @@
             }
         }
 
-        public bool CheckAccountBeforeSave()
+        public bool CheckBeforeSave()
         {
             var changes = this.CheckAccountForChanges();
             if (changes == DialogResult.Yes)
@@ -148,18 +159,21 @@
         public void SetSelectedTabPage(AccountType type)
         {
             this.tabControlAccountInfo.SelectedTabPage = this.tabControlAccountInfo.TabPages[(int)type];
-
-            switch (type)
+            if (AccountType.Employee == type)
             {
-                case AccountType.Employee:
-                    this.LoadEmployee();
-                    break;
-                case AccountType.User:
-                    this.LoadUser();
-                    break;
-                default:
-                    throw new InvalidOperationException("Invalid tab page");
+                this.LoadEmployee();
             }
+            //switch (type)
+            //{
+            //    case AccountType.Employee:
+            //        this.LoadEmployee();
+            //        break;
+            //    case AccountType.User:
+            //        this.LoadUser();
+            //        break;
+            //    default:
+            //        throw new InvalidOperationException("Invalid tab page");
+            //}
         }
 
         private void LoadUser()

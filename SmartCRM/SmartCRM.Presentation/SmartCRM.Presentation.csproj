@@ -104,6 +104,10 @@
     <Compile Include="Employees\UC_Employees.Designer.cs">
       <DependentUpon>UC_Employees.cs</DependentUpon>
     </Compile>
+    <Compile Include="IMainView.cs" />
+    <Compile Include="IGridInfo.cs" />
+    <Compile Include="INavigateable.cs" />
+    <Compile Include="ISavable.cs" />
     <Compile Include="Projects\UC_ProjectCategories.cs">
       <SubType>UserControl</SubType>
     </Compile>

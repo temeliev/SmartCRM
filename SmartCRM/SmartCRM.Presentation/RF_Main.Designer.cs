@@ -57,20 +57,20 @@
             this.layoutControl1 = new DevExpress.XtraLayout.LayoutControl();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.navBarControlLeftBar = new DevExpress.XtraNavBar.NavBarControl();
-            this.navBarGroupAdministration = new DevExpress.XtraNavBar.NavBarGroup();
-            this.navBarUsers = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarEmployees = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarGroupProjects = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarProjects = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarProjectCategories = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarGroupCustomers = new DevExpress.XtraNavBar.NavBarGroup();
             this.navBarItem1 = new DevExpress.XtraNavBar.NavBarItem();
             this.navBarItem2 = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarGroupAdministration = new DevExpress.XtraNavBar.NavBarGroup();
+            this.navBarUsers = new DevExpress.XtraNavBar.NavBarItem();
+            this.navBarEmployees = new DevExpress.XtraNavBar.NavBarItem();
             this.layoutControlUC = new DevExpress.XtraLayout.LayoutControl();
             this.layoutControlGroupUC = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlGroup1 = new DevExpress.XtraLayout.LayoutControlGroup();
             this.layoutControlItem1 = new DevExpress.XtraLayout.LayoutControlItem();
             this.ribbonPageCategory1 = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
-            this.navBarGroupProjects = new DevExpress.XtraNavBar.NavBarGroup();
-            this.navBarProjects = new DevExpress.XtraNavBar.NavBarItem();
-            this.navBarProjectCategories = new DevExpress.XtraNavBar.NavBarItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.layoutControl1)).BeginInit();
             this.layoutControl1.SuspendLayout();
@@ -336,7 +336,7 @@
             // 
             // navBarControlLeftBar
             // 
-            this.navBarControlLeftBar.ActiveGroup = this.navBarGroupProjects;
+            this.navBarControlLeftBar.ActiveGroup = this.navBarGroupAdministration;
             this.navBarControlLeftBar.Dock = System.Windows.Forms.DockStyle.Fill;
             this.navBarControlLeftBar.Groups.AddRange(new DevExpress.XtraNavBar.NavBarGroup[] {
             this.navBarGroupCustomers,
@@ -357,31 +357,31 @@
             this.navBarControlLeftBar.TabIndex = 0;
             this.navBarControlLeftBar.Text = "navBarControl1";
             // 
-            // navBarGroupAdministration
+            // navBarGroupProjects
             // 
-            this.navBarGroupAdministration.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.navBarGroupAdministration.Appearance.Options.UseFont = true;
-            this.navBarGroupAdministration.Caption = "Administration";
-            this.navBarGroupAdministration.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsList;
-            this.navBarGroupAdministration.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarUsers),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarEmployees)});
-            this.navBarGroupAdministration.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarGroupAdministration.LargeImage")));
-            this.navBarGroupAdministration.Name = "navBarGroupAdministration";
+            this.navBarGroupProjects.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.navBarGroupProjects.Appearance.Options.UseFont = true;
+            this.navBarGroupProjects.Caption = "Project Data";
+            this.navBarGroupProjects.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
+            this.navBarGroupProjects.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarProjects),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarProjectCategories)});
+            this.navBarGroupProjects.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarGroupProjects.LargeImage")));
+            this.navBarGroupProjects.Name = "navBarGroupProjects";
             // 
-            // navBarUsers
+            // navBarProjects
             // 
-            this.navBarUsers.Caption = "Users";
-            this.navBarUsers.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarUsers.LargeImage")));
-            this.navBarUsers.Name = "navBarUsers";
-            this.navBarUsers.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarUsers.SmallImage")));
+            this.navBarProjects.Caption = "Projects";
+            this.navBarProjects.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarProjects.LargeImage")));
+            this.navBarProjects.Name = "navBarProjects";
+            this.navBarProjects.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarProjects.SmallImage")));
             // 
-            // navBarEmployees
+            // navBarProjectCategories
             // 
-            this.navBarEmployees.Caption = "Employees";
-            this.navBarEmployees.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarEmployees.LargeImage")));
-            this.navBarEmployees.Name = "navBarEmployees";
-            this.navBarEmployees.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarEmployees.SmallImage")));
+            this.navBarProjectCategories.Caption = "Categories";
+            this.navBarProjectCategories.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarProjectCategories.LargeImage")));
+            this.navBarProjectCategories.Name = "navBarProjectCategories";
+            this.navBarProjectCategories.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarProjectCategories.SmallImage")));
             // 
             // navBarGroupCustomers
             // 
@@ -408,6 +408,33 @@
             this.navBarItem2.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarItem2.LargeImage")));
             this.navBarItem2.Name = "navBarItem2";
             this.navBarItem2.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarItem2.SmallImage")));
+            // 
+            // navBarGroupAdministration
+            // 
+            this.navBarGroupAdministration.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.navBarGroupAdministration.Appearance.Options.UseFont = true;
+            this.navBarGroupAdministration.Caption = "Administration";
+            this.navBarGroupAdministration.Expanded = true;
+            this.navBarGroupAdministration.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsList;
+            this.navBarGroupAdministration.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarUsers),
+            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarEmployees)});
+            this.navBarGroupAdministration.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarGroupAdministration.LargeImage")));
+            this.navBarGroupAdministration.Name = "navBarGroupAdministration";
+            // 
+            // navBarUsers
+            // 
+            this.navBarUsers.Caption = "Users";
+            this.navBarUsers.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarUsers.LargeImage")));
+            this.navBarUsers.Name = "navBarUsers";
+            this.navBarUsers.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarUsers.SmallImage")));
+            // 
+            // navBarEmployees
+            // 
+            this.navBarEmployees.Caption = "Employees";
+            this.navBarEmployees.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarEmployees.LargeImage")));
+            this.navBarEmployees.Name = "navBarEmployees";
+            this.navBarEmployees.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarEmployees.SmallImage")));
             // 
             // layoutControlUC
             // 
@@ -460,33 +487,6 @@
             // 
             this.ribbonPageCategory1.Name = "ribbonPageCategory1";
             this.ribbonPageCategory1.Text = "ribbonPageCategory1";
-            // 
-            // navBarGroupProjects
-            // 
-            this.navBarGroupProjects.Appearance.Font = new System.Drawing.Font("Tahoma", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.navBarGroupProjects.Appearance.Options.UseFont = true;
-            this.navBarGroupProjects.Caption = "Project Data";
-            this.navBarGroupProjects.Expanded = true;
-            this.navBarGroupProjects.GroupStyle = DevExpress.XtraNavBar.NavBarGroupStyle.LargeIconsText;
-            this.navBarGroupProjects.ItemLinks.AddRange(new DevExpress.XtraNavBar.NavBarItemLink[] {
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarProjects),
-            new DevExpress.XtraNavBar.NavBarItemLink(this.navBarProjectCategories)});
-            this.navBarGroupProjects.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarGroupProjects.LargeImage")));
-            this.navBarGroupProjects.Name = "navBarGroupProjects";
-            // 
-            // navBarProjects
-            // 
-            this.navBarProjects.Caption = "Projects";
-            this.navBarProjects.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarProjects.LargeImage")));
-            this.navBarProjects.Name = "navBarProjects";
-            this.navBarProjects.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarProjects.SmallImage")));
-            // 
-            // navBarProjectCategories
-            // 
-            this.navBarProjectCategories.Caption = "Categories";
-            this.navBarProjectCategories.LargeImage = ((System.Drawing.Image)(resources.GetObject("navBarProjectCategories.LargeImage")));
-            this.navBarProjectCategories.Name = "navBarProjectCategories";
-            this.navBarProjectCategories.SmallImage = ((System.Drawing.Image)(resources.GetObject("navBarProjectCategories.SmallImage")));
             // 
             // RF_Main
             // 

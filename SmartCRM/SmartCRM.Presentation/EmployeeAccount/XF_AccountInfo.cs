@@ -25,7 +25,7 @@
             this.ucAccountInfo.SetSelectedTabPage(BOL.Models.Enums.AccountType.User);
             this.ucAccountInfo.Size = this.panelControl.Size;
             this.panelControl.Controls.Add(this.ucAccountInfo);
-            this.controller.Changed += this.controller_Changed;
+            this.controller.AccountChanged += this.controller_Changed;
         }
 
         void controller_Changed(object sender, BOL.Controllers.Events.AccountChangedEventArgs e)
@@ -44,7 +44,7 @@
 
         void XF_AccountInfo_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (!this.ucAccountInfo.CheckAccountBeforeSave())
+            if (!this.ucAccountInfo.CheckBeforeSave())
             {
                 e.Cancel = true;
             }
